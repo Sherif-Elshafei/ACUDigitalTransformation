@@ -1,0 +1,1718 @@
+<odoo>
+  <data>
+        <!-- finance_bylaws List View  -->
+<record model='ir.ui.view' id='view_emails_log_list'>
+     <field name='name'>emails_log</field>
+     <field name='model'>emails_log</field>
+     <field name='arch' type='xml'>
+         <tree>
+             <field name="to"/>
+             <field name="sender" />
+             <field name="date"/>
+
+         </tree>
+     </field >
+</record>
+
+        <!-- finance_bylaws List View  -->
+<record model='ir.ui.view' id='view_finance_bylaws_list'>
+     <field name='name'>finance_bylaws</field>
+     <field name='model'>finance_bylaws</field>
+     <field name='arch' type='xml'>
+         <tree>
+             <field name="code"/>
+             <field name="name_ar" />
+             <field name="faculty"/>
+             <field name="year"/>
+             <field name="type"/>
+             <field name="study_language"/>
+         </tree>
+     </field >
+</record>
+
+<!-- finance_bylaws Search View  -->
+<record model='ir.ui.view' id='view_finance_bylaws_search'>
+     <field name='name'>finance_bylaws.search</field>
+     <field name='model'>finance_bylaws</field>
+     <field name='arch' type='xml'>
+         <search string='finance_bylaws'>
+<field name='id' string=''/>
+         <separator/>
+         <searchpanel>
+             <field name="faculty"/>
+             <field name="type"/>
+             <field name="year"/>
+         </searchpanel>
+
+         </search>
+     </field >
+</record>
+
+<!-- finance_bylaws Form View  -->
+<record model='ir.ui.view' id='view_finance_bylaws_form'>
+     <field name='name'>finance_bylaws</field>
+     <field name='model'>finance_bylaws</field>
+     <field name='arch' type='xml'>
+         <form>
+
+             <sheet>
+
+                    <group>
+                      <group>
+                          <field name="code"/>
+                          <field name="faculty"/>
+                          <field name="name_ar"/>
+                      </group>
+                      <group>
+                          <field name="year"/>
+                          <field name="type"/>
+                          <field name="study_language"/>
+                          <field name="is_current"  string="Is Current ?"/>
+                      </group>
+                      </group>
+                        <group>
+                          <field name="debts"  widget="one2many_tags">
+                              <tree editable="top">
+                                  <field name="code"/>
+                                  <field name="debt_type"/>
+                                  <field name="name_ar"/>
+                                  <field name="amount"/>
+                                  <field name="currency"/>
+                                  <field name="loading_date"/>
+                                  <field name="status"/>
+                              </tree>
+                           </field>
+                        </group>
+                    <group>
+                      <field name="students"  widget="one2many_tags">
+                                          <tree editable="top">
+                                              <field name="student_id"/>
+                                              <field name="faculty"/>
+                                              <field name="nationality"/>
+                                              <field name="academic_semester"/>
+                                          </tree>
+                      </field>
+                 </group>
+
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- finance_bylaws Window Action  -->
+<record model='ir.actions.act_window' id='acums.finance_bylaws_action_window'>
+     <field name='name'>Financial bylaws</field>
+     <field name='res_model'>finance_bylaws</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- debts_types List View  -->
+<record model='ir.ui.view' id='view_debts_types_list'>
+     <field name='name'>debts_types</field>
+     <field name='model'>debts_types</field>
+     <field name='arch' type='xml'>
+         <tree>
+                         <field name="code" />
+                         <field name="name_ar" />
+                         <field name="name_en" />
+                         <field name="type" />
+         </tree>
+     </field >
+</record>
+
+<!-- debts_types Search View  -->
+<record model='ir.ui.view' id='view_debts_types_search'>
+     <field name='name'>debts_types.search</field>
+     <field name='model'>debts_types</field>
+     <field name='arch' type='xml'>
+         <search string='debts_types'>
+                         <field name="code" />
+                         <field name="name_ar" />
+                         <field name="name_en" />
+
+         <separator/>
+         <searchpanel>
+             <field name="type" />
+         </searchpanel>
+
+         </search>
+     </field >
+</record>
+
+<!-- debts_types Form View  -->
+<record model='ir.ui.view' id='view_debts_types_form'>
+     <field name='name'>debts_types</field>
+     <field name='model'>debts_types</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="code" />
+                         <field name="name_ar" />
+                         <field name="name_en" />
+                         <field name="type" />
+                     </group>
+                     <group>
+                     </group>
+               </group>
+                 <field name="debts" widget="one2many_tags">
+                     <tree>
+                         <field name="code" />
+                         <field name="name_ar" />
+                         <field name="bylaw" />
+                     </tree>
+
+                 </field>
+
+                 <field name="students_debts" widget="one2many_tags">
+                     <tree>
+                         <field name="account" />
+                         <field name="debt" />
+                         <field name="debt_name" />
+                         <field name="bylaw" />
+                     </tree>
+
+                 </field>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- debts_types Window Action  -->
+<record model='ir.actions.act_window' id='acums.debts_types_action_window'>
+     <field name='name'>Debts Types</field>
+     <field name='res_model'>debts_types</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- bylaws_debts List View  -->
+<record model='ir.ui.view' id='view_bylaws_debts_list'>
+     <field name='name'>bylaws_debts</field>
+     <field name='model'>bylaws_debts</field>
+     <field name='arch' type='xml'>
+         <tree>
+                <field name="debt_type"/>
+                <field name="code"/>
+                <field name="name_ar"/>
+                <field name="amount"/>
+                <field name="currency"/>
+                <field name="bylaw"/>
+                <field name="faculty"/>
+                <field name="status"/>
+                <field name="year"/>
+         </tree>
+     </field >
+</record>
+
+<!-- bylaws_debts Search View  -->
+<record model='ir.ui.view' id='view_bylaws_debts_search'>
+     <field name='name'>bylaws_debts.search</field>
+     <field name='model'>bylaws_debts</field>
+     <field name='arch' type='xml'>
+         <search string='bylaws_debts'>
+<field name='id' string=''/>
+         <separator/>
+                <field name="debt_type"/>
+                <field name="code"/>
+                <field name="name_ar"/>
+                <field name="amount"/>
+                <field name="currency"/>
+                <field name="bylaw"/>
+                <field name="faculty"/>
+                <filter name="id" string="اخر مصروف" domain="[('bylaw.is_current', '=', True)]" />
+
+            <searchpanel>
+                <field name="faculty" icon="fa-users"/>
+                <field name="debt_type" icon="fa-users"/>
+            </searchpanel>
+
+         </search>
+
+     </field >
+</record>
+
+<!-- bylaws_debts Form View  -->
+<record model='ir.ui.view' id='view_bylaws_debts_form'>
+     <field name='name'>bylaws_debts</field>
+     <field name='model'>bylaws_debts</field>
+     <field name='arch' type='xml'>
+         <form>
+                <header>
+                      <field name="status"  widget="statusbar" />
+                  </header>
+             <sheet>
+        <group>
+                            <group>
+                                <field name="debt_type" />
+                                <field name="code" />
+                                <field name="name_ar"/>
+                                <field name="bylaw" />
+                                <field name="faculty" />
+                                <field name="currency"/>
+                                <field name="is_discountable"/>
+                                <field name="partial_payments"/>
+                                <field name="priority"/>
+                                <field name="status"/>
+                            </group>
+                            <group>
+                                <field name="semester" />
+                                <field name="actual_amount" />
+                                <field name="increase_rate" />
+                                <field name="amount" />
+                                <field name="fines_by" />
+                                <field name="fines_every" />
+                                <field name="loading_date" />
+                                <field name="is_mandatory" />
+                            </group>
+                        </group>
+                 <field name="students_debts" widget="one2many_tags">
+                     <tree>
+                         <field name="account" />
+                         <field name="semester" />
+                         <field name="receipt" />
+                     </tree>
+                 </field>
+
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- bylaws_debts Window Action  -->
+<record model='ir.actions.act_window' id='acums.bylaws_debts_action_window'>
+     <field name='name'>Bylaws Debts</field>
+     <field name='res_model'>bylaws_debts</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- students_finance_accounts List View  -->
+<record model='ir.ui.view' id='view_students_finance_accounts_list'>
+     <field name='name'>students_finance_accounts</field>
+     <field name='model'>students_finance_accounts</field>
+     <field name='arch' type='xml'>
+         <tree>
+             <field name="student"/>
+             <field name="name_ar"/>
+             <field name="academic_email"/>
+             <field name="status" />
+             <field name="total_debts" string="إجمالي الاستحقاقات" sum="total"/>
+             <field name="total_semester_debts" string="استحقاقات الفصل الحالي" sum="total"/>
+             <field name="total_reductions" string="إجمالي التخفيضات"/>
+             <field name="total_payments" string="مدفوعات العام الحالي"/>
+             <field name="dont_send"/>
+<!--             <field name="total_debts" sum="total"/>-->
+<!--             <field name="total_reductions" sum="total"/>-->
+<!--             <field name="total_payments" sum="total"/>-->
+<!--             <field name="total_unpaid_debts" sum="total"/>-->
+<!--             <field name="account_balance" sum="total"/>-->
+
+
+         </tree>
+     </field >
+</record>
+
+<!-- students_finance_accounts Search View  -->
+<record model='ir.ui.view' id='view_students_finance_accounts_search'>
+     <field name='name'>students_finance_accounts.search</field>
+     <field name='model'>students_finance_accounts</field>
+     <field name='arch' type='xml'>
+  <search string="Students Accounts">
+                    <field name="student" string="رقم الطالب"/>
+                    <field name="file_number" string="رقم الملف"/>
+                    <field name="application_number" string="رقم التقديم"/>
+                    <field name="name_ar" string="الاسم بالعربية"/>
+                    <field name="name_en" string="الاسم بالانجليزية"/>
+
+                    <filter name="id" string="الحسابات المغلقة" domain="[('active', '=', False)]" />
+
+                    <separator/>
+                    <separator/>
+                    <separator/>
+
+                    <searchpanel>
+                        <field name="faculty" icon="fa-users"/>
+                        <field name="status" icon="fa-users"/>
+                        <field name="enrollment_status" icon="fa-users"/>
+                        <field name="citizenship" icon="fa-users"/>
+                        <field name="account_status" icon="fa-users"/>
+                        <field name="academic_year" icon="fa-users"/>
+                        <field name="study_language" icon="fa-users"/>
+                    </searchpanel>
+
+                </search>
+     </field >
+</record>
+
+<!-- students_finance_accounts Form View  -->
+<record model='ir.ui.view' id='view_students_finance_accounts_form'>
+     <field name='name'>students_finance_accounts</field>
+     <field name='model'>students_finance_accounts</field>
+     <field name='arch' type='xml'>
+        <form>
+            <field name="student_active" invisible="1"/>
+            <field name="active" invisible="1"/>
+                  <header>
+                      <field name="status"  widget="statusbar" statusbar_colors='{"student":"green",}' />
+                      <field name="account_status"  widget="statusbar" statusbar_colors='{"balanced":"#05a438","debit":"red",,"credit":"blue"}' />
+                      <field name="citizenship"  widget="statusbar" statusbar_colors='{"balanced":"#05a438","debit":"red",,"credit":"blue"}' />
+                      <field name="enrollment_status"  widget="statusbar"  />
+                  </header>
+                  <sheet>
+                      <widget name="web_ribbon" title="الحساب مغلق" bg_color="bg-danger" attrs="{'invisible': [('student_active', '=', True)]}"/>
+                      <widget name="web_ribbon" title="حساب الطالب مغلق في الحسابات" bg_color="bg-info" attrs="{'invisible': [('active', '=', True)]}"/>
+                       <div name="button_box" class="oe_button_box">
+                            <button name="return_action_to_open"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-money"
+                                context="{'xml_id':'students_payments_action_window'}">
+                                <field name="payments" widget="statinfo" string="Payments"/>
+                            </button>
+                           <button name="return_action_to_open"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-minus-square"
+                                context="{'xml_id':'students_debts_action_window'}">
+                                <field name="debts" widget="statinfo" string="Debts"/>
+                            </button>
+                           <button name="return_action_to_open"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-cut"
+                                context="{'xml_id':'students_reductions_action_window'}">
+                                <field name="reductions" widget="statinfo" string="Reductions"/>
+                            </button>
+
+                            <button name="return_action_to_open"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-exchange"
+                                context="{'xml_id':'students_payments_transfers_action_window'}">
+                                <field name="transferes" widget="statinfo" string="Transfers"/>
+                            </button>
+                            <button name="return_action_to_open"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-rotate-left"
+                                context="{'xml_id':'students_refunds_action_window'}">
+                                <field name="refunds" widget="statinfo" string="Refunds"/>
+                            </button>
+                            <button name="return_action_to_open"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-clock-o"
+                                context="{'xml_id':'payments_delays_action_window'}">
+                                <field name="delays" widget="statinfo" string="Delays"/>
+                            </button>
+                        </div>
+
+                      <field name="image_1920" widget='image' class="oe_avatar"/>
+                      <div class="oe_title">
+                            <h1>
+                                <field name="student" readonly=""/>
+                            </h1>
+                            <h2>
+                                <field name="name_ar" placeholder="Student's Name English" />
+                            </h2>
+                           <h3>
+                                <field name="name_en" placeholder="Student's Name Arabic" />
+                            </h3>
+                          <field name="category_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
+                        </div>
+
+                      <group col="2">
+                            <group string="Basic Information">
+                                <field name="faculty"/>
+                                <field name="nationality" />
+                                <field name="study_language" />
+                                <field name="file_number" />
+                                <field name="bylaw" />
+                            </group>
+                            <group string="Account Information">
+                                <field name="total_debts" string="Total Debts" />
+                                <field name="total_unpaid_debts" string="Total Unpaid Debts" />
+                                <field name="total_reductions" string="إجمالي التخفيضات" />
+                                <field name="total_payments" string="مدفوعات العام الحالي" />
+                                <field name="balance" string="الرصيد" />
+                            </group>
+                      </group>
+
+<!--            <group>-->
+
+<!--                         <field name="debts" string="الاستحقاقات" widget="one2many_tags" domain="[('receipt', '=', False)]">-->
+<!--                                     <tree editable="bottom">-->
+<!--                                         <field name="semester" />-->
+<!--                                         <field name="debt_type_name" />-->
+<!--                                         <field name="debt_name" readonly="1"/>-->
+<!--                                         <field name="debt_amount" readonly="1"/>-->
+<!--                                         <field name="actual_amount" readonly="1"/>-->
+<!--                                         <field name="to_pay_amount" readonly="1"/>-->
+<!--                                     </tree>-->
+
+<!--                 </field>-->
+<!--            </group>-->
+
+               <field name="notes" string="Notes" widget="one2many_tags" >
+                                     <tree editable="bottom">
+                                         <field name="note" />
+                                         <field name="by" readonly="1"/>
+                                         <field name="date" readonly="1"/>
+                                     </tree>
+
+               </field>
+
+                  </sheet>
+              </form>
+
+     </field >
+</record>
+
+<!-- students_finance_accounts Window Action  -->
+<record model='ir.actions.act_window' id='acums.students_finance_accounts_action_window'>
+     <field name='name'>Students Accounts</field>
+     <field name='res_model'>students_finance_accounts</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+<!-- students_debts List View  -->
+<record model='ir.ui.view' id='view_students_debts_list'>
+     <field name='name'>students_debts</field>
+     <field name='model'>students_debts</field>
+     <field name='arch' type='xml'>
+         <tree>
+                    <field name="account"/>
+                    <field name="student_name"/>
+                    <field name="semester"/>
+                    <field name="debt_type_name"/>
+                    <field name="debt_name"/>
+                    <field name="debt_amount" sum="Total"/>
+<!--                    <field name="actual_amount" sum="Total"/>-->
+                    <field name="total_reductions_value" string ="قيمة الخصم" sum="Total"/>
+                    <field name="to_pay_amount" sum="Total"/>
+                    <field name="debt_currency" />
+                    <field name="payed" sum="Total"/>
+                    <field name="receipt" />
+                    <field name="date" />
+
+         </tree>
+     </field >
+</record>
+
+<!-- students_debts Search View  -->
+<record model='ir.ui.view' id='view_students_debts_search'>
+     <field name='name'>students_debts.search</field>
+     <field name='model'>students_debts</field>
+     <field name='arch' type='xml'>
+         <search string="Students Debts">
+                    <field name="account" string="رقم الطالب"/>
+                    <field name="student_name" string="اسم الطالب"/>
+                    <field name="imported_id" />
+
+                    <separator/>
+             <filter name="payment_status" string="الغير مدفوع" domain="[('receipt', '=', False)]" />
+              <filter name="is_rest" string="باقي" domain="[('is_rest', '=', True)]" />
+              <filter name="id" string="الفصل الدراسي الحالي" domain="[('semester.is_current', '=', True)]" />
+              <filter name="debt_type" string="مصروفات دراسية" domain="[('debt.debt_type', '=', '2')]" />
+
+
+                    <separator/>
+              <group expand="0" string="Group by">
+                  <filter name="semester" string="الفصل الداسي" domain="[]" context="{'group_by':'semester'}" />
+              </group>
+
+                    <searchpanel>
+                        <field name="faculty" icon="fa-users"/>
+                        <field name="debt_type" icon="fa-users"/>
+                        <field name="currency" icon="fa-users"/>
+                        <field name="method" icon="fa-users"/>
+                        <field name="academic_year" icon="fa-users"/>
+
+                    </searchpanel>
+
+         </search>
+     </field >
+</record>
+
+<!-- students_debts Form View  -->
+<record model='ir.ui.view' id='view_students_debts_form'>
+     <field name='name'>students_debts</field>
+     <field name='model'>students_debts</field>
+     <field name='arch' type='xml'>
+                    <form>
+                      <header>
+                      <field name="payment_status"  widget="statusbar" statusbar_colors='{"none":"red","partial":"blue","totally":"green"}'/>
+                  </header>
+                  <sheet>
+                      <group>
+
+                      <group string="Account Information">
+                          <field name="account"/>
+                          <field name="student_name"/>
+                          <field name="faculty"/>
+                          <field name="bylaw"/>
+
+                      </group>
+                      <group string="Debt Information">
+                          <field name="semester"/>
+                          <field name="debt_type"/>
+                          <field name="debt_type_name"/>
+                          <field name="debt"/>
+                          <field name="debt_name"/>
+                          <field name="debt_amount" />
+                          <field name="reduced_amount" />
+<!--                          <field name="actual_amount" />-->
+                          <field name="is_mandatory" />
+                          <field name="is_rest" />
+                      </group>
+                      </group>
+                            <group>
+
+                      <group string="Reductions and Delays">
+                          <field name="debt_reduction" />
+<!--                          <field name="debt_reductions" widget="one2many_tags" attrs="{'invisible': [('debt_reductions','!=', True )]}"/>-->
+                          <field name="debt_reduction_value" />
+                          <field name="total_reductions_value" />
+                          <field name="dead_line"/>
+                          <field name="debt_delay" />
+                          <field name="number_of_units" />
+                          <field name="to_pay_amount" />
+
+
+                      </group>
+                      <group string="Payment Information">
+                          <field name="payed_amount" />
+                          <field name="receipt_value" />
+                          <field name="payed" />
+<!--                          <field name="remaining_amount" />-->
+                          <field name="receipt" />
+                          <field name="date" />
+                          <field name="debt_currency" />
+                          <field name="method" />
+                          <field name="user" />
+
+                      </group>
+
+                      </group>
+
+<!--                         <field name="payment" readonly="1" widget="one2many_tags" >-->
+<!--                                        <tree>-->
+<!--                                            <field name="payment" />-->
+<!--                                            <field name="payment_amount" />-->
+<!--                                        </tree>-->
+<!--                         </field>-->
+                  </sheet>
+              </form>
+     </field >
+</record>
+
+<record id="view_students_debts_pivot" model="ir.ui.view">
+            <field name="name">pivot</field>
+            <field name="model">students_debts</field>
+            <field name="arch" type="xml">
+             <pivot string="Pivot View">
+                 <field name="faculty" type="row"/>
+            </pivot>
+            </field>
+</record>
+
+<record model="ir.ui.view" id="view_students_debts_graph">
+   <field name="name">students_debts</field>
+   <field name="model">students_debts</field>
+   <field name="type">graph</field>
+   <field name="arch" type="xml">
+         <graph string="">
+              <field name="faculty" />
+         </graph>
+    </field>
+</record>
+
+
+<!-- students_debts Window Action  -->
+<record model='ir.actions.act_window' id='acums.students_debts_action_window'>
+     <field name='name'>Students Debts</field>
+     <field name='res_model'>students_debts</field>
+     <field name='view_mode'>tree,form,pivot,graph</field>
+</record>
+
+<!-- reductions_types List View  -->
+<record model='ir.ui.view' id='view_reductions_types_list'>
+     <field name='name'>reductions_types</field>
+     <field name='model'>reductions_types</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='type'/>
+                     <field name='code'/>
+                     <field name='bylaw'/>
+                     <field name='name_ar'/>
+                     <field name='value'/>
+                     <field name='percentage'/>
+                     <field name='currency'/>
+                     <field name='status'/>
+         </tree>
+     </field >
+</record>
+
+<!-- reductions_types Search View  -->
+<record model='ir.ui.view' id='view_reductions_types_search'>
+     <field name='name'>reductions_types.search</field>
+     <field name='model'>reductions_types</field>
+     <field name='arch' type='xml'>
+         <search string='reductions_types'>
+<field name='code' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- reductions_types Form View  -->
+<record model='ir.ui.view' id='view_reductions_types_form'>
+     <field name='name'>reductions_types</field>
+     <field name='model'>reductions_types</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="type"/>
+                         <field name="code"/>
+                         <field name="name_ar"/>
+                         <field name="name_en"/>
+                     </group>
+
+                     <group>
+                         <field name='bylaw'/>
+                         <field name='value'/>
+                         <field name='currency'/>
+                         <field name='status'/>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- reductions_types Window Action  -->
+<record model='ir.actions.act_window' id='acums.reductions_types_action_window'>
+     <field name='name'>Reductions Types</field>
+     <field name='res_model'>reductions_types</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- students_reductions List View  -->
+<record model='ir.ui.view' id='view_students_reductions_list'>
+     <field name='name'>students_reductions</field>
+     <field name='model'>students_reductions</field>
+     <field name='arch' type='xml'>
+         <tree>
+             <field name="account" />
+             <field name="name_ar" />
+             <field name="name_en" />
+             <field name="reduction" />
+             <field name="reduction_name" />
+             <field name="semester" string="semester"/>
+             <field name="amount" />
+             <field name="imported_value" />
+             <field name="user" />
+             </tree>
+     </field >
+</record>
+
+<!-- students_reductions Search View  -->
+<record model='ir.ui.view' id='view_students_reductions_search'>
+     <field name='name'>students_reductions.search</field>
+     <field name='model'>students_reductions</field>
+     <field name='arch' type='xml'>
+         <search string='students_reductions'>
+                <field name="account" />
+         <separator/>
+        <searchpanel>
+            <field name="faculty" />
+            <field name="status" />
+         </searchpanel>
+
+         </search>
+     </field >
+</record>
+
+<!-- students_reductions Form View  -->
+<record model='ir.ui.view' id='view_students_reductions_form'>
+     <field name='name'>students_reductions</field>
+     <field name='model'>students_reductions</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="account" />
+                         <field name="bylaw" />
+                         <field name="name_ar" string=""/>
+                         <field name="name_en" string=""/>
+                         <field name="nationality"/>
+                         <field name="semester" string="semester"/>
+
+                     </group>
+
+                     <group>
+
+                         <field name="type" />
+                         <field name="reduction" domain="[('type', '=', type),('bylaw','=',bylaw)]"/>
+                         <field name="reduction_name" />
+                         <field name="amount" />
+                         <field name="imported_value" />
+                         <field name="debt" />
+                         <field name="user" />
+                         <field name="imported_code" />
+
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- students_reductions Window Action  -->
+<record model='ir.actions.act_window' id='acums.students_reductions_action_window'>
+     <field name='name'>Students Reductions</field>
+     <field name='res_model'>students_reductions</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- payments_delays List View  -->
+<record model='ir.ui.view' id='view_payments_delays_list'>
+     <field name='name'>payments_delays</field>
+     <field name='model'>payments_delays</field>
+     <field name='arch' type='xml'>
+          <tree string="Delays">
+                    <field name="number"/>
+                    <field name="account"/>
+                    <field name="semester"/>
+                    <field name="to_date" />
+                    <field name="by" />
+          </tree>
+     </field >
+</record>
+
+<!-- payments_delays Search View  -->
+<record model='ir.ui.view' id='view_payments_delays_search'>
+     <field name='name'>payments_delays.search</field>
+     <field name='model'>payments_delays</field>
+     <field name='arch' type='xml'>
+         <search string='payments_delays'>
+             <field name='account' string='account'/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- payments_delays Form View  -->
+<record model='ir.ui.view' id='view_payments_delays_form'>
+     <field name='name'>payments_delays</field>
+     <field name='model'>payments_delays</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- payments_delays Window Action  -->
+<record model='ir.actions.act_window' id='acums.payments_delays_action_window'>
+     <field name='name'>paymentsdelays</field>
+     <field name='res_model'>payments_delays</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- students_refunds List View  -->
+<record model='ir.ui.view' id='view_students_refunds_list'>
+     <field name='name'>students_refunds</field>
+     <field name='model'>students_refunds</field>
+     <field name='arch' type='xml'>
+         <tree>
+             <field name="account"/>
+             <field name="receipt_number"/>
+             <field name="date" />
+             <field name="semester" />
+             <field name="amount"/>
+             <field name="by"/>
+             <field name="currency"/>
+         </tree>
+     </field >
+</record>
+
+<!-- students_refunds Search View  -->
+<record model='ir.ui.view' id='view_students_refunds_search'>
+     <field name='name'>students_refunds.search</field>
+     <field name='model'>students_refunds</field>
+     <field name='arch' type='xml'>
+         <search string='students_refunds'>
+                    <field name='account' string='account'/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- students_refunds Form View  -->
+<record model='ir.ui.view' id='view_students_refunds_form'>
+     <field name='name'>students_refunds</field>
+     <field name='model'>students_refunds</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                      <group>
+                                <field name="account" />
+                                <field name="name_ar"/>
+                                <field name="faculty" />
+                                <field name="file_number"/>
+                                <field name="nationality"/>
+
+                            </group>
+                            <group>
+                                <field name="semester" />
+                                <field name="amount" />
+                                <field name="currency" />
+                                <field name="payments" widget="many2many_tags"/>
+                                <field name="by" />
+                                <field name="date" />
+                                <field name="receipt_number" readonly="1"/>
+
+                            </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- students_refunds Window Action  -->
+<record model='ir.actions.act_window' id='acums.students_refunds_action_window'>
+     <field name='name'>Students Refunds</field>
+     <field name='res_model'>students_refunds</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- students_payments_transfers List View  -->
+<record model='ir.ui.view' id='view_students_payments_transfers_list'>
+     <field name='name'>students_payments_transfers</field>
+     <field name='model'>students_payments_transfers</field>
+     <field name='arch' type='xml'>
+         <tree>
+             <field name="account"/>
+             <field name="receipt_number"/>
+             <field name="date" />
+             <field name="semester" />
+             <field name="type" />
+             <field name="by"/>
+         </tree>
+     </field >
+</record>
+
+<!-- students_payments_transfers Search View  -->
+<record model='ir.ui.view' id='view_students_payments_transfers_search'>
+     <field name='name'>students_payments_transfers.search</field>
+     <field name='model'>students_payments_transfers</field>
+     <field name='arch' type='xml'>
+         <search string='students_payments_transfers'>
+                    <field name='account' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- students_payments_transfers Form View  -->
+<record model='ir.ui.view' id='view_students_payments_transfers_form'>
+     <field name='name'>students_payments_transfers</field>
+     <field name='model'>students_payments_transfers</field>
+     <field name='arch' type='xml'>
+         <form>
+             <header>
+                      <field name="citizenship"  widget="statusbar" statusbar_colors='{"balanced":"#05a438","debit":"red",,"credit":"blue"}' />
+                      <field name="faculty"  widget="statusbar" statusbar_colors='{"balanced":"#05a438","debit":"red",,"credit":"blue"}' />
+                  </header>
+             <sheet>
+
+               <group>
+                     <group >
+                         <field name="semester" />
+                         <field name="account" />
+                         <field name="bylaw" />
+                         <field name="name_ar" />
+                     </group>
+
+                     <group>
+                             <field name="by" />
+                             <field name="date" />
+                             <field name="type" />
+
+                     </group>
+               </group>
+                 <group>
+                     <group col="4">
+                     <field name="receipt_number" />
+                     <field name="debt_type" />
+                      <field name="debt_type_name" />
+
+                     </group>
+                     <field name="receipt_details" widget="one2many_tags">
+                                <tree>
+                                  <field name="debt_type"/>
+                                  <field name="debt_type_name"/>
+                                  <field name="debt"/>
+                                  <field name="debt_name"/>
+                              </tree>
+                     </field>
+
+
+                            <field name="debt" />
+                          <field name="debt_name" />
+
+                 </group>
+
+                <group>
+                     <group>
+                         <field name="to_semester" />
+                         <field name="to_debt_type" />
+                         <field name="to_debt_type_name" />
+                         <field name="to_debt" />
+                         <field name="to_debt_name" />
+                     </group>
+
+                     <group>
+
+                     </group>
+               </group>
+
+
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- students_payments_transfers Window Action  -->
+<record model='ir.actions.act_window' id='acums.students_payments_transfers_action_window'>
+     <field name='name'>Transfers</field>
+     <field name='res_model'>students_payments_transfers</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- students_payments List View  -->
+<record model='ir.ui.view' id='view_students_payments_list'>
+     <field name='name'>students_payments</field>
+     <field name='model'>students_payments</field>
+     <field name='arch' type='xml'>
+         <tree>
+             <field name="receipt_number" />
+             <field name="account" />
+             <field name="name_ar" />
+             <field name="status" />
+             <field name="semester" />
+             <field name="date" />
+             <field name="amount" sum="Total"/>
+             <field name="currency" />
+             <field name="method" />
+             <field name="user" />
+         </tree>
+     </field >
+</record>
+
+<!-- students_payments Search View  -->
+<record model='ir.ui.view' id='view_students_payments_search'>
+     <field name='name'>students_payments.search</field>
+     <field name='model'>students_payments</field>
+     <field name='arch' type='xml'>
+         <search string='students_payments'>
+            <field name='account' string='رقم الطالب'/>
+            <field name='receipt_number' string='رقم الايصال'/>
+            <field name='file_number' string='رقم الملف'/>
+            <field name='name_ar' string=' اسم الطالب'/>
+            <field name='date' string='التاريخ'/>
+            <field name='user' string='اسم المستلم'/>
+             <group expand="0" string="Group by">
+                  <filter name="user" string="المستخدم" domain="[]" context="{'group_by':'user'}" />
+                 <filter name="faculty" string="علوم الحاسب" domain="[('faculty','=','علوم الحاسب و تكنولوجيا المعلومات')]"  />
+                 <filter name="faculty" string="الصيدلة" domain="[('faculty','=','الصيدلة')]"  />
+                 <filter name="faculty" string="إدارة الأعمال" domain="[('faculty','=','إدارة الأعمال')]"  />
+                 <filter name="faculty" string="الاعلام" domain="[('faculty','=','الاعلام')]"  />
+                 <filter name="faculty" string="الهندسة" domain="[('faculty','=','الهندسة')]"  />
+                 <filter name="faculty" string="طب الفم و الأسنان" domain="[('faculty','=','طب الفم و الأسنان')]"  />
+                 <filter name="faculty" string="العلاج الطبيعي" domain="[('faculty','=','العلاج الطبيعي')]"  />
+                 <filter name="faculty" string="التصميم والفنون الابداعية" domain="[('faculty','=','التصميم والفنون الابداعية')]"  />
+                 <filter name="faculty" string="اللغات و الترجمة" domain="[('faculty','=','اللغات و الترجمة')]"  />
+                 <filter name="id" string="الفصل الدراسي الحالي" domain="[('semester.is_current', '=', True)]" />
+              </group>
+         <separator/>
+            <searchpanel>
+                <field name="faculty" />
+                <field name="user" />
+                <field name="currency" />
+           </searchpanel>
+
+         </search>
+     </field >
+</record>
+
+<!-- students_payments Form View  -->
+<record model='ir.ui.view' id='view_students_payments_form'>
+     <field name='name'>students_payments</field>
+     <field name='model'>students_payments</field>
+     <field name='arch' type='xml'>
+         <form>
+             <field name="student_active" invisible="1"/>
+                  <header>
+                      <field name="status"  widget="statusbar"  />
+                      <field name="enrollment_status"  widget="statusbar"  />
+                      <field name="type"  widget="statusbar"  />
+                  </header>
+                  <sheet>
+                      <widget name="web_ribbon" title="الحساب مغلق" bg_color="bg-danger" attrs="{'invisible': [('student_active', '=', True)]}"/>
+                           <field name="image" widget='image' class="oe_avatar" />
+                      <div class="oe_title">
+                            <h3>
+                                <field name="account" placeholder="حساب الطالب" required="1"/>
+                            </h3>
+
+                            <h1>
+                                 <field name="name_ar" placeholder="Student's Name Arabic" required="True" readonly=""/>
+                            </h1>
+                           <h1>
+                                <field name="total_debts" string="إجمالي الأستحقاقات" />
+                            </h1>
+                        </div>
+                      <group col="3">
+                          <group>
+                              <field name="faculty" string="الكلية"/>
+                              <field name="nationality" string="الجنسية"/>
+
+                          </group>
+                          <group>
+                              <field name="file_number" string="رقم الملف"/>
+                              <field name="file_number_temp" string="ادخال رقم الملف" attrs="{'invisible': [('file_number', '!=', 0)]}"/>
+                              <field name="application_number" string="رقم التقديم"/>
+                          </group>
+
+                          <group>
+
+
+                              <field name="study_language" string="لغة الدراسة"/>
+                              <field name="user" string="المستلم" />
+                          </group>
+                      </group>
+                        <hr/>
+                      <group>
+                      <group >
+                          <field name="semester"  string="الفصل الدراسي" required="1" style="width:50%%"/>
+                          <field name="amount" string="المبلغ المدفوع" required="1" style="width:50%%"/>
+                          <field name="receipt_number" string="رقم الايصال" required="1" style="width:50%%"/>
+
+
+                      </group>
+                      <group>
+                          <field name="date" string="تاريخ الايصال" required="1" style="width:50%%"/>
+                          <field name="currency" string="العملة" required="1" style="width:50%%"/>
+                          <field name="method" string="طريقة الدفع" required="1" style="width:50%%"/>
+                          <field name="method_code" invisible="1" />
+                      </group>
+                      </group>
+
+                      <notebook>
+                          <page string="معلومات الدفع" >
+                                    <field name="cash_payments_details" widget="one2many_tags" attrs="{'invisible': [('method_code','!=', 1 )], 'required': [('method','=', 1 )] }" >
+                                        <tree editable="top" style="text-align:center;">
+                                          <field name="payment_200" string="200"  style="color:green;text-align: center;"></field>
+                                          <field name="payment_100" string="100"  style="color:green;text-align: center;"></field>
+                                          <field name="payment_50" string="50"  style="color:green;text-align: center;"></field>
+                                          <field name="payment_20" string="20"  style="color:green;text-align: center;"></field>
+                                          <field name="payment_10" string="10"  style="color:green;text-align: center;"></field>
+                                          <field name="payment_5" string="5"  style="color:green;text-align: center;"></field>
+                                          <field name="payment_total" string="المدفوع" style="color:green;text-align: center;font-weight: bold;" ></field>
+                                          <field name="remaning_200" string="200"  style="text-align: center;"></field>
+                                          <field name="remaning_100" string="100"  style="text-align: center;"></field>
+                                          <field name="remaning_50" string="50"  style="text-align: center;"></field>
+                                          <field name="remaning_20" string="20"  style="text-align: center;"></field>
+                                          <field name="remaning_10" string="10"  style="text-align: center;"></field>
+                                          <field name="remaning_5" string="5"  style="text-align: center;"></field>
+                                          <field name="remaning_total" string="الباقي"  style="text-align: center;font-weight: bold;" ></field>
+                                        </tree>
+                                    </field>
+                            <field name="bank_notice" widget="one2many_tags" attrs="{'invisible': [('method_code','&lt;', 2 )], 'required': [('method','&gt;', 1 )] }" >
+                                        <tree editable="top" style="text-align:center;">
+                                          <field name="bank" string="البنك"  style="color:green;text-align: center;"  ></field>
+                                          <field name="bank_name" string="اسم البنك"  style="color:green;text-align: center;"></field>
+                                          <field name="account_number" string="رقم الحساب"  style="color:green;text-align: center;" ></field>
+                                          <field name="numbering" string="رقم النمارة"  style="color:green;text-align: center;"></field>
+                                          <field name="date" string="التاريخ"  style="color:green;text-align: center;"></field>
+                                          <field name="type" string="نوع الاشعار" style="color:green;text-align: center;font-weight: bold;" ></field>
+
+
+                                        </tree>
+                                    </field>
+                          </page>
+
+
+                           <page string="الاستحقاقات الغير مدفوعة">
+                                 <field name="debts"  widget="one2many_tags"  editable="top">
+                              <tree>
+                                   <field name="account" string="الحساب" invisible="1" readonly="1"/>
+                                   <field name="bylaw" string="اللائحة" invisible="1"/>
+                                  <field name="debt_type" string="النوع"/>
+                                  <field name="debt" string="الكود"/>
+                                  <field name="debt_name" string="الاسم"/>
+                                  <field name="debt_amount" string="ا[لق]يمة في اللائحة"/>
+                                  <field name="actual_amount" string="القيمةالفعلية"/>
+                                  <field name="number_of_units" string="العدد"/>
+                                  <field name="to_pay_amount" string="المطلوب"/>
+                                  <field name="payed" string="المدفوع" required="1"/>
+                                  <field name="receipt" string="الايصال" required="1"/>
+                              </tree>
+                           </field>
+                          </page>
+
+
+                           <page string="استحقاقات الايصال">
+                                 <field name="payment_debts"  widget="one2many_tags" context="{'default_account':account}">
+                              <tree editable="top">
+                                   <field name="account" string="الحساب" invisible="1" readonly="1"/>
+                                   <field name="bylaw" string="اللائحة" invisible="1"/>
+                                  <field name="debt_type" string="النوع"/>
+                                  <field name="debt" string="الكود"/>
+                                  <field name="debt_name" string="الاسم"/>
+                                  <field name="debt_amount" string="القيمة في اللائحة"/>
+                                  <field name="actual_amount" string="القيمةالفعلية"/>
+                                  <field name="number_of_units" string="العدد"/>
+                                  <field name="to_pay_amount" string="المطلوب"/>
+                                  <field name="payed" string="المدفوع" required="1"/>
+                              </tree>
+                           </field>
+                          </page>
+
+                        <page string="ملاحظات">
+
+                                   <field name="notes" string="ملاحظات" />
+
+                          </page>
+
+
+
+<!--                          <page string="تفاصيل الايصال">-->
+<!--                              <field name="payment_details" widget="one2many_tags">-->
+<!--                                  <tree editable="top">-->
+<!--                                      <field name="debt" widget="one2many_tags">-->
+<!--                                           <tree editable="top">-->
+<!--                                                <field name="debt_type" />-->
+<!--                                                <field name="debt_name" />-->
+<!--                                                <field name="debt_amount" />-->
+<!--                                           </tree>-->
+<!--                                      </field>-->
+
+<!--                                      <field name="debt_type" string="النوع"/>-->
+<!--                                      <field name="debt_name" string="اسم المصروفات"/>-->
+<!--                                      <field name="debt_amount" string="القيمة"/>-->
+<!--                                      <field name="number_of_units" string="العدد"/>-->
+<!--                                      <field name="debt_to_pay" string="المطلوب"/>-->
+<!--                                      <field name="payment_amount" string="المدفوع"/>-->
+<!--                                  </tree>-->
+<!--                              </field>-->
+<!--                          </page>-->
+                      </notebook>
+
+
+
+                  </sheet>
+              </form>
+     </field>
+</record>
+
+<!-- students_payments Window Action  -->
+<record model='ir.actions.act_window' id='acums.students_payments_action_window'>
+     <field name='name'>Students Payments</field>
+     <field name='res_model'>students_payments</field>
+     <field name='view_mode'>tree,form,pivot</field>
+</record>
+
+<!-- bank_notices List View  -->
+<record model='ir.ui.view' id='view_bank_notices_list'>
+     <field name='name'>bank_notices</field>
+     <field name='model'>bank_notices</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- bank_notices Search View  -->
+<record model='ir.ui.view' id='view_bank_notices_search'>
+     <field name='name'>bank_notices.search</field>
+     <field name='model'>bank_notices</field>
+     <field name='arch' type='xml'>
+         <search string='bank_notices'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- bank_notices Form View  -->
+<record model='ir.ui.view' id='view_bank_notices_form'>
+     <field name='name'>bank_notices</field>
+     <field name='model'>bank_notices</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- bank_notices Window Action  -->
+<record model='ir.actions.act_window' id='acums.bank_notices_action_window'>
+     <field name='name'>banknotices</field>
+     <field name='res_model'>bank_notices</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- bank_accounts List View  -->
+<record model='ir.ui.view' id='view_bank_accounts_list'>
+     <field name='name'>bank_accounts</field>
+     <field name='model'>bank_accounts</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='account_old_id'/>
+                     <field name='account_number'/>
+                     <field name='bank_name_ar'/>
+                     <field name='currency'/>
+                     <field name='branch'/>
+         </tree>
+     </field >
+</record>
+
+<!-- bank_accounts Search View  -->
+<record model='ir.ui.view' id='view_bank_accounts_search'>
+     <field name='name'>bank_accounts.search</field>
+     <field name='model'>bank_accounts</field>
+     <field name='arch' type='xml'>
+         <search string='bank_accounts'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- bank_accounts Form View  -->
+<record model='ir.ui.view' id='view_bank_accounts_form'>
+     <field name='name'>bank_accounts</field>
+     <field name='model'>bank_accounts</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                            <field name='account_old_id'/>
+                            <field name='account_number'/>
+                            <field name='bank_name_ar'/>
+                     </group>
+
+                     <group>
+                            <field name='currency'/>
+                            <field name='branch'/>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- bank_accounts Window Action  -->
+<record model='ir.actions.act_window' id='acums.graduation_party_info_action_window'>
+     <field name='name'>Graduation Party Info</field>
+     <field name='res_model'>graduation_party_info</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.bank_accounts_action_window'>
+     <field name='name'>bank_accounts</field>
+     <field name='res_model'>bank_accounts</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- payments_methods List View  -->
+<record model='ir.ui.view' id='view_payments_methods_list'>
+     <field name='name'>payments_methods</field>
+     <field name='model'>payments_methods</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='code'/>
+                     <field name='name_en'/>
+                     <field name='name_ar'/>
+         </tree>
+     </field >
+</record>
+
+<!-- payments_methods Search View  -->
+<record model='ir.ui.view' id='view_payments_methods_search'>
+     <field name='name'>payments_methods.search</field>
+     <field name='model'>payments_methods</field>
+     <field name='arch' type='xml'>
+         <search string='payments_methods'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- payments_methods Form View  -->
+<record model='ir.ui.view' id='view_payments_methods_form'>
+     <field name='name'>payments_methods</field>
+     <field name='model'>payments_methods</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="code" />
+                         <field name="name_en" />
+                         <field name="name_ar"/>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- payments_methods Window Action  -->
+<record model='ir.actions.act_window' id='acums.payments_methods_action_window'>
+     <field name='name'>Payments Methods</field>
+     <field name='res_model'>payments_methods</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- payments_details List View  -->
+<record model='ir.ui.view' id='view_payments_details_list'>
+     <field name='name'>payments_details</field>
+     <field name='model'>payments_details</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='debt'/>
+                     <field name='account'/>
+                     <field name='name'/>
+                     <field name='debt_type_name'/>
+                     <field name='debt_name'/>
+                     <field name='payment'/>
+                     <field name='payment_amount'/>
+                     <field name='method'/>
+                     <field name='semester'/>
+                     <field name='date'/>
+         </tree>
+     </field >
+</record>
+
+<!-- payments_details Search View  -->
+<record model='ir.ui.view' id='view_payments_details_search'>
+     <field name='name'>payments_details.search</field>
+     <field name='model'>payments_details</field>
+     <field name='arch' type='xml'>
+         <search string='payments_details'>
+        <field name='id' string=''/>
+         <separator/>
+             <filter name="date" string="Today Payments"  domain="[('date','&gt;', context_today().strftime('%Y-%m-%d'))]" />
+            <searchpanel>
+                <field name="faculty" />
+                <field name="debt_type" />
+                <field name="currency" />
+            </searchpanel>
+
+         </search>
+     </field >
+</record>
+
+<!-- payments_details Form View  -->
+<record model='ir.ui.view' id='view_payments_details_form'>
+     <field name='name'>payments_details</field>
+     <field name='model'>payments_details</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="account" />
+                         <field name="debt" />
+                         <field name="debt_type_name" />
+                         <field name="debt_name" />
+                     </group>
+
+                     <group>
+                         <field name="payment" />
+                         <field name="semester" />
+                         <field name="date" />
+                         <field name="payment_amount" />
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+ <record id="view_payments_details_pivot" model="ir.ui.view">
+            <field name="name">pivot</field>
+            <field name="model">payments_details</field>
+            <field name="arch" type="xml">
+             <pivot string="Pivot View">
+                <field name="faculty" type="row"/>
+            </pivot>
+            </field>
+</record>
+
+<record model="ir.ui.view" id="view_payments_details_graph">
+   <field name="name">payments_details</field>
+   <field name="model">payments_details</field>
+   <field name="type">graph</field>
+   <field name="arch" type="xml">
+         <graph string="">
+              <field name="faculty" />
+         </graph>
+    </field>
+</record>
+
+<!-- payments_details Window Action  -->
+<record model='ir.actions.act_window' id='acums.payments_details_action_window'>
+     <field name='name'>Payments Details</field>
+     <field name='res_model'>payments_details</field>
+     <field name='view_mode'>tree,form,pivot,graph</field>
+</record>
+
+<!-- cash_payments_details List View  -->
+<record model='ir.ui.view' id='view_cash_payments_details_list'>
+     <field name='name'>cash_payments_details</field>
+     <field name='model'>cash_payments_details</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='payment'/>
+                     <field name='payment_amount' string="Value"/>
+                     <field name='payment_200' string="+200"/>
+                     <field name='payment_100' string="+100"/>
+                     <field name='payment_50' string="+50"/>
+                     <field name='payment_20' string="+20"/>
+                     <field name='payment_10' string="+10"/>
+                     <field name='payment_5' string="+5"/>
+                     <field name='remaning_200' string="-200"/>
+                     <field name='remaning_100' string="-100"/>
+                     <field name='remaning_50' string="-50"/>
+                     <field name='remaning_20' string="-20"/>
+                     <field name='remaning_10' string="-10"/>
+                     <field name='remaning_5' string="-5"/>
+
+
+
+         </tree>
+     </field >
+</record>
+
+<!-- cash_payments_details Search View  -->
+<record model='ir.ui.view' id='view_cash_payments_details_search'>
+     <field name='name'>cash_payments_details.search</field>
+     <field name='model'>cash_payments_details</field>
+     <field name='arch' type='xml'>
+         <search string='cash_payments_details'>
+                <field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- cash_payments_details Form View  -->
+<record model='ir.ui.view' id='view_cash_payments_details_form'>
+     <field name='name'>cash_payments_details</field>
+     <field name='model'>cash_payments_details</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+
+
+<!-- students_unenrollments List View  -->
+<record model='ir.ui.view' id='view_students_unenrollments_list'>
+     <field name='name'>ايقافات القيد</field>
+     <field name='model'>students_unenrollments</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='student'/>
+                     <field name='student_name'/>
+                     <field name='semester'/>
+                     <field name='type'/>
+                     <field name='date'/>
+                     <field name='user'/>
+
+
+
+         </tree>
+     </field >
+</record>
+
+
+<!-- cash_payments_details Form View  -->
+<record model='ir.ui.view' id='view_students_unenrollments_form'>
+     <field name='name'>ايقافات القيد</field>
+     <field name='model'>students_unenrollments</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="student"/>
+                         <field name="student_name"/>
+                         <field name="semester"/>
+                         <field name="type"/>
+                     </group>
+
+                     <group>
+                         <field name="date"/>
+                         <field name="user" readonly="True"/>
+                         <field name="notes"/>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+
+<record id="view_students_payments_pivot" model="ir.ui.view">
+            <field name="name">pivot</field>
+            <field name="model">students_payments</field>
+            <field name="arch" type="xml">
+             <pivot string="Pivot View">
+                 <field name="faculty" type="row"/>
+                 <field name="user" type="row"/>
+                 <field name="date" type="row"/>
+            </pivot>
+            </field>
+</record>
+
+
+<!-- cash_payments_details Window Action  -->
+<record model='ir.actions.act_window' id='acums.cash_payments_details_action_window'>
+     <field name='name'>Cash Details</field>
+     <field name='res_model'>cash_payments_details</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- cash_payments_details Window Action  -->
+<record model='ir.actions.act_window' id='acums.students_unenrollments_action_window'>
+     <field name='name'>ايقافات القيد</field>
+     <field name='res_model'>students_unenrollments</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- cash_payments_details Window Action-->
+<record model='ir.actions.act_window' id='acums.payments_dates_action_window'>
+     <field name='name'>payments_update_date</field>
+     <field name='res_model'>payments_dates</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+<!-- cash_payments_details Window Action-->
+<record model='ir.actions.act_window' id='acums.emails_log_action_window'>
+     <field name='name'>Emails log</field>
+     <field name='res_model'>emails_log</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.accounts_category_action_window'>
+     <field name='name'>Accounts Category</field>
+     <field name='res_model'>accounts_category</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<menuitem name='Accounting' parent='acums.menu_root' sequence='1' id='acums.menu_accounting' groups="group_billing_user"/>
+<menuitem name ='Financial Bylaws' id ='acums.menu_finance_bylaws' parent ='acums.menu_accounting' action ='acums.finance_bylaws_action_window' />
+<menuitem name ='Debts Types' id ='acums.menu_debts_types' parent ='acums.menu_accounting' action ='acums.debts_types_action_window' />
+<menuitem name ='Bylaws Debts' id ='acums.menu_bylaws_debts' parent ='acums.menu_accounting' action ='acums.bylaws_debts_action_window' />
+<menuitem name ='Students Accounts' id ='acums.menu_students_finance_accounts' parent ='acums.menu_accounting' action ='acums.students_finance_accounts_action_window' />
+<menuitem name ='Students Debts' id ='acums.menu_students_debts' parent ='acums.menu_accounting' action ='acums.students_debts_action_window' />
+<menuitem name ='Reductions Types' id ='acums.menu_reductions_types' parent ='acums.menu_accounting' action ='acums.reductions_types_action_window' />
+<menuitem name ='Students Reductions' id ='acums.menu_students_reductions' parent ='acums.menu_accounting' action ='acums.students_reductions_action_window' />
+<menuitem name ='Payments Delays' id ='acums.menu_payments_delays' parent ='acums.menu_accounting' action ='acums.payments_delays_action_window' />
+<menuitem name ='Students Refunds' id ='acums.menu_students_refunds' parent ='acums.menu_accounting' action ='acums.students_refunds_action_window' />
+<menuitem name ='Payments Transfers' id ='acums.menu_students_payments_transfers' parent ='acums.menu_accounting' action ='acums.students_payments_transfers_action_window' />
+<menuitem name ='Payments' id ='acums.menu_students_payments' parent ='acums.menu_accounting' action ='acums.students_payments_action_window' />
+<menuitem name ='Bank Notices' id ='acums.menu_bank_notices' parent ='acums.menu_accounting' action ='acums.bank_notices_action_window' />
+<menuitem name ='Bank Accounts' id ='acums.menu_bank_accounts' parent ='acums.menu_accounting' action ='acums.bank_accounts_action_window' />
+<menuitem name ='Payments Methods' id ='acums.menu_payments_methods' parent ='acums.menu_accounting' action ='acums.payments_methods_action_window' />
+<menuitem name ='Payments Details' id ='acums.menu_payments_details' parent ='acums.menu_accounting' action ='acums.payments_details_action_window' />
+<menuitem name ='Cash Details' id ='acums.menu_cash_payments_details' parent ='acums.menu_accounting' action ='acums.cash_payments_details_action_window' />
+<menuitem name ='payments_dates' id ='acums.menu_payments_dates' parent ='acums.menu_accounting' action ='acums.payments_dates_action_window' />
+<menuitem name ='Emails log' id ='acums.menu_emails_log' parent ='acums.menu_accounting' action ='acums.emails_log_action_window' />
+<menuitem name ='Accounts Category' id ='acums.menu_accounts_category' parent ='acums.menu_accounting' action ='acums.accounts_category_action_window'/>
+<menuitem name ='ايقافات القيد' id ='acums.menu_students_unenrollments' parent ='acums.menu_accounting' action ='acums.students_unenrollments_action_window'/>
+
+
+
+
+  </data>
+</odoo>

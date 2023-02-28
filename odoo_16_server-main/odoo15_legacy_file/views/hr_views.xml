@@ -1,0 +1,77 @@
+<odoo>
+  <data>
+
+
+<!--      <record id="view_study_degress_tree" model="ir.ui.view">-->
+<!--            <field name="name">acums.study_degress.tree</field>-->
+<!--            <field name="model">study_degress</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree>-->
+<!--                       <field name="name_ar" />-->
+<!--                       <field name="name_en" />-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+<!--      &lt;!&ndash; improved idea categories list &ndash;&gt;-->
+<!--    <record id="acu_hr_employee" model="ir.ui.view">-->
+<!--        <field name="name">id.hr_employee.form2</field>-->
+<!--        <field name="model">hr.employee</field>-->
+<!--        <field name="inherit_id" ref="hr.view_employee_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--        &lt;!&ndash; find field description and add the field-->
+<!--             idea_ids after it &ndash;&gt;-->
+<!--                <xpath expr="//field[@name='certificate']" position="after">-->
+<!--                  <field name="job_class" string="Job Type"/>-->
+<!--                </xpath>-->
+<!--            <xpath expr="//field[@name='passport_id']" position="after">-->
+<!--                  <field name="insurance_number" string="Insurance Number"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='marital']" position="after">-->
+<!--                  <field name="religion" string="Religion"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+
+<!--      &lt;!&ndash; improved idea categories list &ndash;&gt;-->
+<!--    <record id="acu_hr_employee_filter" model="ir.ui.view">-->
+<!--        <field name="name">id.hr_employee.filter2</field>-->
+<!--        <field name="model">hr.employee</field>-->
+<!--        <field name="inherit_id" ref="hr.view_employee_filter"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--        &lt;!&ndash; find field description and add the field-->
+<!--             idea_ids after it &ndash;&gt;-->
+<!--                <xpath expr="//field[@name='job_id']" position="after">-->
+<!--                  <field name="country_of_birth" string="بلد الميلاد"/>-->
+<!--                  <field name="identification_id" string="National ID"/>-->
+<!--                  <field name="insurance_number" string="Insurance Number"/>-->
+<!--                  <field name="mobile_phone" string="Mobile Number"/>-->
+<!--               </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+
+
+
+<!--      <record model="ir.actions.act_window" id="acums.study_degress_action_window">-->
+<!--        <field name="name">Study Degress</field>-->
+<!--        <field name="res_model">study_degress</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--      </record>-->
+
+
+<!--    &lt;!&ndash; Top menu item &ndash;&gt;-->
+
+<!--    <menuitem name="ACU ERP" sequence="1" id="acums.menu_root"/>-->
+
+<!--    &lt;!&ndash; menu categories &ndash;&gt;-->
+
+<!--    <menuitem name="ACU HR" id="acums.menu_hr" parent="acums.menu_root"/>-->
+<!--        <menuitem name="Study Degress" id="acums.menu_study_degree" parent="acums.menu_hr" action='acums.study_degress_action_window'/>-->
+
+  </data>
+</odoo>

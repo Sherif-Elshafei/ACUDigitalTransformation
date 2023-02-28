@@ -1,0 +1,1177 @@
+<odoo>
+    <data>
+<!-- purchase_requisitions List View  -->
+<record model='ir.ui.view' id='view_purchase_requisitions_list'>
+     <field name='name'>purchase_requisitions</field>
+     <field name='model'>purchase_requisitions</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='number'/>
+                     <field name='date'/>
+                     <field name='requisition'/>
+                     <field name='status'/>
+                     <field name='by'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- purchase_requisitions Search View  -->
+<record model='ir.ui.view' id='view_purchase_requisitions_search'>
+     <field name='name'>purchase_requisitions.search</field>
+     <field name='model'>purchase_requisitions</field>
+     <field name='arch' type='xml'>
+         <search string='purchase_requisitions'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- purchase_requisitions Form View  -->
+<record model='ir.ui.view' id='view_purchase_requisitions_form'>
+     <field name='name'>purchase_requisitions</field>
+     <field name='model'>purchase_requisitions</field>
+     <field name='arch' type='xml'>
+         <form>
+             <header>
+                      <field name="status"  widget="statusbar" />
+             </header>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="number" />
+                         <field name="date" />
+                         <field name="by" readonly="1"/>
+                     </group>
+
+                     <group>
+                         <field name="requisition" />
+                     </group>
+                   <h3>Requisition Items</h3>
+                     <field name="items"  widget="one2many_tags">
+                            <tree editable="bottom">
+                                <field name="item"/>
+                                <field name="quantity"/>
+                            </tree>
+                      </field>
+
+                   <h3>Requisition Quotations</h3>
+                    <field name="quotations"  widget="one2many_tags" >
+                            <tree editable="bottom">
+                                <field name="id"/>
+                            </tree>
+                      </field>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- purchase_requisitions Window Action  -->
+<record model='ir.actions.act_window' id='acums.purchase_requisitions_action_window'>
+     <field name='name'>Purchase Requisitions</field>
+     <field name='res_model'>purchase_requisitions</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- purchase_requisitions_items List View  -->
+<record model='ir.ui.view' id='view_purchase_requisitions_items_list'>
+     <field name='name'>purchase_requisitions_items</field>
+     <field name='model'>purchase_requisitions_items</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- purchase_requisitions_items Search View  -->
+<record model='ir.ui.view' id='view_purchase_requisitions_items_search'>
+     <field name='name'>purchase_requisitions_items.search</field>
+     <field name='model'>purchase_requisitions_items</field>
+     <field name='arch' type='xml'>
+         <search string='purchase_requisitions_items'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- purchase_requisitions_items Form View  -->
+<record model='ir.ui.view' id='view_purchase_requisitions_items_form'>
+     <field name='name'>purchase_requisitions_items</field>
+     <field name='model'>purchase_requisitions_items</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+
+                         <field name="requisition"/>
+                         <field name="item"/>
+                         <field name="quantity"/>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- purchase_requisitions Window Action  -->
+<record model='ir.actions.act_window' id='acums.purchase_requisitions_items_action_window'>
+     <field name='name'>Purchase Requisitions Items</field>
+     <field name='res_model'>purchase_requisitions_items</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- quotations List View  -->
+<record model='ir.ui.view' id='view_quotations_list'>
+     <field name='name'>quotations</field>
+     <field name='model'>quotations</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- quotations Search View  -->
+<record model='ir.ui.view' id='view_quotations_search'>
+     <field name='name'>quotations.search</field>
+     <field name='model'>quotations</field>
+     <field name='arch' type='xml'>
+         <search string='quotations'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- quotations Form View  -->
+<record model='ir.ui.view' id='view_quotations_form'>
+     <field name='name'>quotations</field>
+     <field name='model'>quotations</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- quotations Window Action  -->
+<record model='ir.actions.act_window' id='acums.quotations_action_window'>
+     <field name='name'>quotations</field>
+     <field name='res_model'>quotations</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- purchase_orders List View  -->
+<record model='ir.ui.view' id='view_purchase_orders_list'>
+     <field name='name'>purchase_orders</field>
+     <field name='model'>purchase_orders</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- purchase_orders Search View  -->
+<record model='ir.ui.view' id='view_purchase_orders_search'>
+     <field name='name'>purchase_orders.search</field>
+     <field name='model'>purchase_orders</field>
+     <field name='arch' type='xml'>
+         <search string='purchase_orders'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- purchase_orders Form View  -->
+<record model='ir.ui.view' id='view_purchase_orders_form'>
+     <field name='name'>purchase_orders</field>
+     <field name='model'>purchase_orders</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- purchase_orders Window Action  -->
+<record model='ir.actions.act_window' id='acums.purchase_orders_action_window'>
+     <field name='name'>purchaseorders</field>
+     <field name='res_model'>purchase_orders</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- suppliers List View  -->
+<record model='ir.ui.view' id='view_suppliers_list'>
+     <field name='name'>suppliers</field>
+     <field name='model'>suppliers</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- suppliers Search View  -->
+<record model='ir.ui.view' id='view_suppliers_search'>
+     <field name='name'>suppliers.search</field>
+     <field name='model'>suppliers</field>
+     <field name='arch' type='xml'>
+         <search string='suppliers'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- suppliers Form View  -->
+<record model='ir.ui.view' id='view_suppliers_form'>
+     <field name='name'>suppliers</field>
+     <field name='model'>suppliers</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- suppliers Window Action  -->
+<record model='ir.actions.act_window' id='acums.suppliers_action_window'>
+     <field name='name'>suppliers</field>
+     <field name='res_model'>suppliers</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- purchase_invoices List View  -->
+<record model='ir.ui.view' id='view_purchase_invoices_list'>
+     <field name='name'>purchase_invoices</field>
+     <field name='model'>purchase_invoices</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- purchase_invoices Search View  -->
+<record model='ir.ui.view' id='view_purchase_invoices_search'>
+     <field name='name'>purchase_invoices.search</field>
+     <field name='model'>purchase_invoices</field>
+     <field name='arch' type='xml'>
+         <search string='purchase_invoices'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- purchase_invoices Form View  -->
+<record model='ir.ui.view' id='view_purchase_invoices_form'>
+     <field name='name'>purchase_invoices</field>
+     <field name='model'>purchase_invoices</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- purchase_invoices Window Action  -->
+<record model='ir.actions.act_window' id='acums.purchase_invoices_action_window'>
+     <field name='name'>purchaseinvoices</field>
+     <field name='res_model'>purchase_invoices</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- purchase_payments List View  -->
+<record model='ir.ui.view' id='view_purchase_payments_list'>
+     <field name='name'>purchase_payments</field>
+     <field name='model'>purchase_payments</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- purchase_payments Search View  -->
+<record model='ir.ui.view' id='view_purchase_payments_search'>
+     <field name='name'>purchase_payments.search</field>
+     <field name='model'>purchase_payments</field>
+     <field name='arch' type='xml'>
+         <search string='purchase_payments'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- purchase_payments Form View  -->
+<record model='ir.ui.view' id='view_purchase_payments_form'>
+     <field name='name'>purchase_payments</field>
+     <field name='model'>purchase_payments</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- purchase_payments Window Action  -->
+<record model='ir.actions.act_window' id='acums.purchase_payments_action_window'>
+     <field name='name'>purchasepayments</field>
+     <field name='res_model'>purchase_payments</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- items_tests List View  -->
+<record model='ir.ui.view' id='view_items_tests_list'>
+     <field name='name'>items_tests</field>
+     <field name='model'>items_tests</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- items_tests Search View  -->
+<record model='ir.ui.view' id='view_items_tests_search'>
+     <field name='name'>items_tests.search</field>
+     <field name='model'>items_tests</field>
+     <field name='arch' type='xml'>
+         <search string='items_tests'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- items_tests Form View  -->
+<record model='ir.ui.view' id='view_items_tests_form'>
+     <field name='name'>items_tests</field>
+     <field name='model'>items_tests</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- items_tests Window Action  -->
+<record model='ir.actions.act_window' id='acums.items_tests_action_window'>
+     <field name='name'>itemstests</field>
+     <field name='res_model'>items_tests</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- supply_orders List View  -->
+<record model='ir.ui.view' id='view_supply_orders_list'>
+     <field name='name'>supply_orders</field>
+     <field name='model'>supply_orders</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- supply_orders Search View  -->
+<record model='ir.ui.view' id='view_supply_orders_search'>
+     <field name='name'>supply_orders.search</field>
+     <field name='model'>supply_orders</field>
+     <field name='arch' type='xml'>
+         <search string='supply_orders'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- supply_orders Form View  -->
+<record model='ir.ui.view' id='view_supply_orders_form'>
+     <field name='name'>supply_orders</field>
+     <field name='model'>supply_orders</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- supply_orders Window Action  -->
+<record model='ir.actions.act_window' id='acums.supply_orders_action_window'>
+     <field name='name'>supplyorders</field>
+     <field name='res_model'>supply_orders</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- stock_requisitions List View  -->
+<record model='ir.ui.view' id='view_stock_requisitions_list'>
+     <field name='name'>stock_requisitions</field>
+     <field name='model'>stock_requisitions</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- stock_requisitions Search View  -->
+<record model='ir.ui.view' id='view_stock_requisitions_search'>
+     <field name='name'>stock_requisitions.search</field>
+     <field name='model'>stock_requisitions</field>
+     <field name='arch' type='xml'>
+         <search string='stock_requisitions'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- stock_requisitions Form View  -->
+<record model='ir.ui.view' id='view_stock_requisitions_form'>
+     <field name='name'>stock_requisitions</field>
+     <field name='model'>stock_requisitions</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- stock_requisitions Window Action  -->
+<record model='ir.actions.act_window' id='acums.stock_requisitions_action_window'>
+     <field name='name'>stockrequisitions</field>
+     <field name='res_model'>stock_requisitions</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- warehouses List View  -->
+<record model='ir.ui.view' id='view_warehouses_list'>
+     <field name='name'>warehouses</field>
+     <field name='model'>warehouses</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- warehouses Search View  -->
+<record model='ir.ui.view' id='view_warehouses_search'>
+     <field name='name'>warehouses.search</field>
+     <field name='model'>warehouses</field>
+     <field name='arch' type='xml'>
+         <search string='warehouses'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- warehouses Form View  -->
+<record model='ir.ui.view' id='view_warehouses_form'>
+     <field name='name'>warehouses</field>
+     <field name='model'>warehouses</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- warehouses Window Action  -->
+<record model='ir.actions.act_window' id='acums.warehouses_action_window'>
+     <field name='name'>warehouses</field>
+     <field name='res_model'>warehouses</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- warehouses_stocks List View  -->
+<record model='ir.ui.view' id='view_warehouses_stocks_list'>
+     <field name='name'>warehouses_stocks</field>
+     <field name='model'>warehouses_stocks</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- warehouses_stocks Search View  -->
+<record model='ir.ui.view' id='view_warehouses_stocks_search'>
+     <field name='name'>warehouses_stocks.search</field>
+     <field name='model'>warehouses_stocks</field>
+     <field name='arch' type='xml'>
+         <search string='warehouses_stocks'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- warehouses_stocks Form View  -->
+<record model='ir.ui.view' id='view_warehouses_stocks_form'>
+     <field name='name'>warehouses_stocks</field>
+     <field name='model'>warehouses_stocks</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- warehouses_stocks Window Action  -->
+<record model='ir.actions.act_window' id='acums.warehouses_stocks_action_window'>
+     <field name='name'>warehousesstocks</field>
+     <field name='res_model'>warehouses_stocks</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- warehouses_transactions_types List View  -->
+<record model='ir.ui.view' id='view_warehouses_transactions_types_list'>
+     <field name='name'>warehouses_transactions_types</field>
+     <field name='model'>warehouses_transactions_types</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- warehouses_transactions_types Search View  -->
+<record model='ir.ui.view' id='view_warehouses_transactions_types_search'>
+     <field name='name'>warehouses_transactions_types.search</field>
+     <field name='model'>warehouses_transactions_types</field>
+     <field name='arch' type='xml'>
+         <search string='warehouses_transactions_types'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- warehouses_transactions_types Form View  -->
+<record model='ir.ui.view' id='view_warehouses_transactions_types_form'>
+     <field name='name'>warehouses_transactions_types</field>
+     <field name='model'>warehouses_transactions_types</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- warehouses_transactions_types Window Action  -->
+<record model='ir.actions.act_window' id='acums.warehouses_transactions_types_action_window'>
+     <field name='name'>warehousestransactionstypes</field>
+     <field name='res_model'>warehouses_transactions_types</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- warehouses_transactions List View  -->
+<record model='ir.ui.view' id='view_warehouses_transactions_list'>
+     <field name='name'>warehouses_transactions</field>
+     <field name='model'>warehouses_transactions</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- warehouses_transactions Search View  -->
+<record model='ir.ui.view' id='view_warehouses_transactions_search'>
+     <field name='name'>warehouses_transactions.search</field>
+     <field name='model'>warehouses_transactions</field>
+     <field name='arch' type='xml'>
+         <search string='warehouses_transactions'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- warehouses_transactions Form View  -->
+<record model='ir.ui.view' id='view_warehouses_transactions_form'>
+     <field name='name'>warehouses_transactions</field>
+     <field name='model'>warehouses_transactions</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- warehouses_transactions Window Action  -->
+<record model='ir.actions.act_window' id='acums.warehouses_transactions_action_window'>
+     <field name='name'>warehousestransactions</field>
+     <field name='res_model'>warehouses_transactions</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- warehouses_issues_details List View  -->
+<record model='ir.ui.view' id='view_warehouses_issues_details_list'>
+     <field name='name'>warehouses_issues_details</field>
+     <field name='model'>warehouses_issues_details</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- warehouses_issues_details Search View  -->
+<record model='ir.ui.view' id='view_warehouses_issues_details_search'>
+     <field name='name'>warehouses_issues_details.search</field>
+     <field name='model'>warehouses_issues_details</field>
+     <field name='arch' type='xml'>
+         <search string='warehouses_issues_details'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- warehouses_issues_details Form View  -->
+<record model='ir.ui.view' id='view_warehouses_issues_details_form'>
+     <field name='name'>warehouses_issues_details</field>
+     <field name='model'>warehouses_issues_details</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- warehouses_issues_details Window Action  -->
+<record model='ir.actions.act_window' id='acums.warehouses_issues_details_action_window'>
+     <field name='name'>warehousesissuesdetails</field>
+     <field name='res_model'>warehouses_issues_details</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- warehouses_received_details List View  -->
+<record model='ir.ui.view' id='view_warehouses_received_details_list'>
+     <field name='name'>warehouses_received_details</field>
+     <field name='model'>warehouses_received_details</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- warehouses_received_details Search View  -->
+<record model='ir.ui.view' id='view_warehouses_received_details_search'>
+     <field name='name'>warehouses_received_details.search</field>
+     <field name='model'>warehouses_received_details</field>
+     <field name='arch' type='xml'>
+         <search string='warehouses_received_details'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- warehouses_received_details Form View  -->
+<record model='ir.ui.view' id='view_warehouses_received_details_form'>
+     <field name='name'>warehouses_received_details</field>
+     <field name='model'>warehouses_received_details</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- warehouses_received_details Window Action  -->
+<record model='ir.actions.act_window' id='acums.warehouses_received_details_action_window'>
+     <field name='name'>warehousesreceiveddetails</field>
+     <field name='res_model'>warehouses_received_details</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- warehouses_returns_details List View  -->
+<record model='ir.ui.view' id='view_warehouses_returns_details_list'>
+     <field name='name'>warehouses_returns_details</field>
+     <field name='model'>warehouses_returns_details</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- warehouses_returns_details Search View  -->
+<record model='ir.ui.view' id='view_warehouses_returns_details_search'>
+     <field name='name'>warehouses_returns_details.search</field>
+     <field name='model'>warehouses_returns_details</field>
+     <field name='arch' type='xml'>
+         <search string='warehouses_returns_details'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- warehouses_returns_details Form View  -->
+<record model='ir.ui.view' id='view_warehouses_returns_details_form'>
+     <field name='name'>warehouses_returns_details</field>
+     <field name='model'>warehouses_returns_details</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- warehouses_returns_details Window Action  -->
+<record model='ir.actions.act_window' id='acums.warehouses_returns_details_action_window'>
+     <field name='name'>warehousesreturnsdetails</field>
+     <field name='res_model'>warehouses_returns_details</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+
+<!-- warehouses_transfers_details List View  -->
+<record model='ir.ui.view' id='view_warehouses_transfers_details_list'>
+     <field name='name'>warehouses_transfers_details</field>
+     <field name='model'>warehouses_transfers_details</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- warehouses_transfers_details Search View  -->
+<record model='ir.ui.view' id='view_warehouses_transfers_details_search'>
+     <field name='name'>warehouses_transfers_details.search</field>
+     <field name='model'>warehouses_transfers_details</field>
+     <field name='arch' type='xml'>
+         <search string='warehouses_transfers_details'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field > 
+</record>
+
+<!-- warehouses_transfers_details Form View  -->
+<record model='ir.ui.view' id='view_warehouses_transfers_details_form'>
+     <field name='name'>warehouses_transfers_details</field>
+     <field name='model'>warehouses_transfers_details</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field > 
+</record>
+
+<!-- warehouses_transfers_details Window Action  -->
+<record model='ir.actions.act_window' id='acums.warehouses_transfers_details_action_window'>
+     <field name='name'>warehousestransfersdetails</field>
+     <field name='res_model'>warehouses_transfers_details</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+<!-- warehouses_transfers_details List View  -->
+<record model='ir.ui.view' id='view_items_categories_list'>
+     <field name='name'>Items Categories</field>
+     <field name='model'>items_categories</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- warehouses_transfers_details Search View  -->
+<record model='ir.ui.view' id='view_items_categories_search'>
+     <field name='name'>items_categories.search</field>
+     <field name='model'>items_categories</field>
+     <field name='arch' type='xml'>
+         <search string='warehouses_transfers_details'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- warehouses_transfers_details Form View  -->
+<record model='ir.ui.view' id='view_items_categories_form'>
+     <field name='name'>Items Categories</field>
+     <field name='model'>items_categories</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- warehouses_transfers_details Window Action  -->
+<record model='ir.actions.act_window' id='acums.items_categories_action_window'>
+     <field name='name'>Items Categories</field>
+     <field name='res_model'>items_categories</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+<!-- warehouses_transfers_details List View  -->
+<record model='ir.ui.view' id='view_items_attributes_list'>
+     <field name='name'>Items Attributes</field>
+     <field name='model'>items_attributes</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- warehouses_transfers_details Search View  -->
+<record model='ir.ui.view' id='view_items_attributes_search'>
+     <field name='name'>items_attributes.search</field>
+     <field name='model'>items_attributes</field>
+     <field name='arch' type='xml'>
+         <search string='warehouses_transfers_details'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- warehouses_transfers_details Form View  -->
+<record model='ir.ui.view' id='view_items_attributes_form'>
+     <field name='name'>Items Attributes</field>
+     <field name='model'>items_attributes</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- warehouses_transfers_details Window Action  -->
+<record model='ir.actions.act_window' id='acums.items_attributes_action_window'>
+     <field name='name'>Items Attributes</field>
+     <field name='res_model'>items_attributes</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+<!-- warehouses_transfers_details List View  -->
+<record model='ir.ui.view' id='view_items_list'>
+     <field name='name'>Items</field>
+     <field name='model'>items</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- warehouses_transfers_details Search View  -->
+<record model='ir.ui.view' id='view_items_search'>
+     <field name='name'>items.search</field>
+     <field name='model'>items</field>
+     <field name='arch' type='xml'>
+         <search string='warehouses_transfers_details'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- warehouses_transfers_details Form View  -->
+<record model='ir.ui.view' id='view_items_form'>
+     <field name='name'>Items</field>
+     <field name='model'>items</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="code" />
+                         <field name="code" />
+                         <field name="code" />
+
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- warehouses_transfers_details Window Action  -->
+<record model='ir.actions.act_window' id='acums.items_action_window'>
+     <field name='name'>Items</field>
+     <field name='res_model'>items</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<menuitem name='Logistics' parent='acums.menu_root' sequence='1' id='acums.menu_logistics' groups="group_it"/>
+<menuitem name ='Purchase Requisitions' id ='acums.menu_purchase_requisitions' parent ='acums.menu_logistics' action ='acums.purchase_requisitions_action_window' />
+<menuitem name ='Purchase Requisitions Items' id ='acums.menu_purchase_requisitions_items' parent ='acums.menu_logistics' action ='acums.purchase_requisitions_items_action_window' />
+<menuitem name ='Quotations' id ='acums.menu_quotations' parent ='acums.menu_logistics' action ='acums.quotations_action_window' />
+<menuitem name ='Purchase Orders' id ='acums.menu_purchase_orders' parent ='acums.menu_logistics' action ='acums.purchase_orders_action_window' />
+<menuitem name ='Suppliers' id ='acums.menu_suppliers' parent ='acums.menu_logistics' action ='acums.suppliers_action_window' />
+<menuitem name ='Purchase Invoices' id ='acums.menu_purchase_invoices' parent ='acums.menu_logistics' action ='acums.purchase_invoices_action_window' />
+<menuitem name ='Purchase Payments' id ='acums.menu_purchase_payments' parent ='acums.menu_logistics' action ='acums.purchase_payments_action_window' />
+<menuitem name ='Items Tests' id ='acums.menu_items_tests' parent ='acums.menu_logistics' action ='acums.items_tests_action_window' />
+<menuitem name ='Supply Orders' id ='acums.menu_supply_orders' parent ='acums.menu_logistics' action ='acums.supply_orders_action_window' />
+<menuitem name ='Stock Requisitions' id ='acums.menu_stock_requisitions' parent ='acums.menu_logistics' action ='acums.stock_requisitions_action_window' />
+<menuitem name ='Warehouses' id ='acums.menu_warehouses' parent ='acums.menu_logistics' action ='acums.warehouses_action_window' />
+<menuitem name ='Warehouses Stocks' id ='acums.menu_warehouses_stocks' parent ='acums.menu_logistics' action ='acums.warehouses_stocks_action_window' />
+<menuitem name ='Warehouses Transactions Types' id ='acums.menu_warehouses_transactions_types' parent ='acums.menu_logistics' action ='acums.warehouses_transactions_types_action_window' />
+<menuitem name ='Warehouses Transactions' id ='acums.menu_warehouses_transactions' parent ='acums.menu_logistics' action ='acums.warehouses_transactions_action_window' />
+<menuitem name ='Warehouses Issues Details' id ='acums.menu_warehouses_issues_details' parent ='acums.menu_logistics' action ='acums.warehouses_issues_details_action_window' />
+<menuitem name ='Warehouses Received Details' id ='acums.menu_warehouses_received_details' parent ='acums.menu_logistics' action ='acums.warehouses_received_details_action_window' />
+<menuitem name ='Warehouses Returns Details' id ='acums.menu_warehouses_returns_details' parent ='acums.menu_logistics' action ='acums.warehouses_returns_details_action_window' />
+<menuitem name ='Warehouses Transfers Details' id ='acums.menu_warehouses_transfers_details' parent ='acums.menu_logistics' action ='acums.warehouses_transfers_details_action_window' />
+<menuitem name ='Items Categories' id ='acums.menu_items_categories' parent ='acums.menu_logistics' action ='acums.items_categories_action_window' />
+<menuitem name ='Items Attributes' id ='acums.menu_items_attributes' parent ='acums.menu_logistics' action ='acums.items_attributes_action_window' />
+<menuitem name ='Items' id ='acums.menu_items' parent ='acums.menu_logistics' action ='acums.items_action_window' />
+    </data>
+</odoo>

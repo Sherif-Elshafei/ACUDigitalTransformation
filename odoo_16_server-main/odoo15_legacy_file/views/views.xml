@@ -1,0 +1,597 @@
+<odoo>
+  <data>
+
+            <!-- academic_years List View  -->
+<record model='ir.ui.view' id='view_academic_years_list'>
+     <field name='name'>academic_years</field>
+     <field name='model'>academic_years</field>
+     <field name='arch' type='xml'>
+         <tree>
+                <field name='code'/>
+                <field name='start_year'/>
+                <field name='end_year'/>
+                <field name='is_current'/>
+         </tree>
+     </field >
+</record>
+
+<!-- academic_years Search View  -->
+<record model='ir.ui.view' id='view_academic_years_search'>
+     <field name='name'>academic_years.search</field>
+     <field name='model'>academic_years</field>
+     <field name='arch' type='xml'>
+         <search string='academic_years'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- academic_years Form View  -->
+<record model='ir.ui.view' id='view_academic_years_form'>
+     <field name='name'>academic_years</field>
+     <field name='model'>academic_years</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="code" />
+                         <field name="start_year" />
+                         <field name="end_year" />
+                     </group>
+                     <group>
+                         <field name="is_current" />
+                         <field name="is_enrollment" />
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- academic_years Window Action  -->
+<record model='ir.actions.act_window' id='acums.academic_years_action_window'>
+     <field name='name'>Academic Years</field>
+     <field name='res_model'>academic_years</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- academic_semesters List View  -->
+<record model='ir.ui.view' id='view_academic_semesters_list'>
+     <field name='name'>Academic Semesters</field>
+     <field name='model'>academic_semesters</field>
+     <field name='arch' type='xml'>
+         <tree>
+            <field name='code'/>
+            <field name='name_ar'/>
+            <field name='type'/>
+            <field name='year'/>
+            <field name='graduation_month'/>
+            <field name='graduation_year'/>
+         </tree>
+     </field >
+</record>
+
+<!-- academic_semesters Search View  -->
+<record model='ir.ui.view' id='view_academic_semesters_search'>
+     <field name='name'>academic_semesters.search</field>
+     <field name='model'>academic_semesters</field>
+     <field name='arch' type='xml'>
+         <search string='academic_semesters'>
+                <field name='code' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- academic_semesters Form View  -->
+<record model='ir.ui.view' id='view_academic_semesters_form'>
+     <field name='name'>academic_semesters</field>
+     <field name='model'>academic_semesters</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="code" />
+                         <field name="name_en" />
+                         <field name="name_ar" />
+                         <field name="year" />
+                         <field name="type" />
+                     </group>
+
+                     <group>
+                         <field name="graduation_month" />
+                         <field name="graduation_year" />
+                         <field name="exam_approval_date" />
+                         <field name="is_current" />
+                         <field name="payment_deadline" />
+                     </group>
+               </group>
+                 <field name="payments" widget="one2many_tags">
+                     <tree>
+                                 <field name="account"/>
+                                 <field name="name_ar"/>
+                                 <field name="receipt_number"/>
+
+                     </tree>
+                 </field>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- academic_semesters Window Action  -->
+<record model='ir.actions.act_window' id='acums.academic_semesters_action_window'>
+     <field name='name'>Academic Semesters</field>
+     <field name='res_model'>academic_semesters</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- global_data List View  -->
+<record model='ir.ui.view' id='view_global_data_list'>
+     <field name='name'>global_data</field>
+     <field name='model'>global_data</field>
+     <field name='arch' type='xml'>
+         <tree>
+<field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- global_data Search View  -->
+<record model='ir.ui.view' id='view_global_data_search'>
+     <field name='name'>global_data.search</field>
+     <field name='model'>global_data</field>
+     <field name='arch' type='xml'>
+         <search string='global_data'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- global_data Form View  -->
+<record model='ir.ui.view' id='view_global_data_form'>
+     <field name='name'>global_data</field>
+     <field name='model'>global_data</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="stamp" />
+                         <field name="logo" />
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- global_data Window Action  -->
+<record model='ir.actions.act_window' id='acums.global_data_action_window'>
+     <field name='name'>Global Data</field>
+     <field name='res_model'>global_data</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- countries List View  -->
+<record model='ir.ui.view' id='view_countries_list'>
+     <field name='name'>countries</field>
+     <field name='model'>countries</field>
+     <field name='arch' type='xml'>
+         <tree>
+                <field name='code'/>
+                <field name='name_en'/>
+                <field name='name_ar'/>
+                <field name='nationality_name_en'/>
+                <field name='nationality_name_ar'/>
+         </tree>
+     </field >
+</record>
+
+<!-- countries Search View  -->
+<record model='ir.ui.view' id='view_countries_search'>
+     <field name='name'>countries.search</field>
+     <field name='model'>countries</field>
+     <field name='arch' type='xml'>
+         <search string='countries'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- countries Form View  -->
+<record model='ir.ui.view' id='view_countries_form'>
+     <field name='name'>countries</field>
+     <field name='model'>countries</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- countries Window Action  -->
+<record model='ir.actions.act_window' id='acums.countries_action_window'>
+     <field name='name'>Countries</field>
+     <field name='res_model'>countries</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- governorates List View  -->
+<record model='ir.ui.view' id='view_governorates_list'>
+     <field name='name'>governorates</field>
+     <field name='model'>governorates</field>
+     <field name='arch' type='xml'>
+         <tree>
+             <field name='code'/>
+             <field name='name_ar'/>
+             <field name='name_en'/>
+         </tree>
+     </field >
+</record>
+
+<!-- governorates Search View  -->
+<record model='ir.ui.view' id='view_governorates_search'>
+     <field name='name'>governorates.search</field>
+     <field name='model'>governorates</field>
+     <field name='arch' type='xml'>
+         <search string='governorates'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- governorates Form View  -->
+<record model='ir.ui.view' id='view_governorates_form'>
+     <field name='name'>Governorates</field>
+     <field name='model'>governorates</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- governorates Window Action  -->
+<record model='ir.actions.act_window' id='acums.governorates_action_window'>
+     <field name='name'>Governorates</field>
+     <field name='res_model'>governorates</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- locations_types List View  -->
+<record model='ir.ui.view' id='view_locations_types_list'>
+     <field name='name'>locations_types</field>
+     <field name='model'>locations_types</field>
+     <field name='arch' type='xml'>
+         <tree>
+<field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- locations_types Search View  -->
+<record model='ir.ui.view' id='view_locations_types_search'>
+     <field name='name'>locations_types.search</field>
+     <field name='model'>locations_types</field>
+     <field name='arch' type='xml'>
+         <search string='locations_types'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- locations_types Form View  -->
+<record model='ir.ui.view' id='view_locations_types_form'>
+     <field name='name'>locations_types</field>
+     <field name='model'>locations_types</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- locations_types Window Action  -->
+<record model='ir.actions.act_window' id='acums.locations_types_action_window'>
+     <field name='name'>Locations Types</field>
+     <field name='res_model'>locations_types</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- locations List View  -->
+<record model='ir.ui.view' id='view_locations_list'>
+     <field name='name'>locations</field>
+     <field name='model'>locations</field>
+     <field name='arch' type='xml'>
+         <tree>
+<field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- locations Search View  -->
+<record model='ir.ui.view' id='view_locations_search'>
+     <field name='name'>locations.search</field>
+     <field name='model'>locations</field>
+     <field name='arch' type='xml'>
+         <search string='locations'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- locations Form View  -->
+<record model='ir.ui.view' id='view_locations_form'>
+     <field name='name'>locations</field>
+     <field name='model'>locations</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- locations Window Action  -->
+<record model='ir.actions.act_window' id='acums.locations_action_window'>
+     <field name='name'>locations</field>
+     <field name='res_model'>locations</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+<!-- Graduation Party Info Window Action  -->
+<record model='ir.actions.act_window' id='acums.graduation_party_info_action_window'>
+     <field name='name'>graduation Party Info</field>
+     <field name='res_model'>graduation_party_info</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.auth_action_window'>
+     <field name='name'>Alumnus Data</field>
+     <field name='res_model'>auth</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.students_data_action_window'>
+     <field name='name'>Students Data</field>
+     <field name='res_model'>students_data</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.file_check_action_window'>
+     <field name='name'>files_check</field>
+     <field name='res_model'>files_check</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.file_numbers_action_window'>
+     <field name='name'>File Numbers</field>
+     <field name='res_model'>file_numbers</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+
+      <!-- locations List View  -->
+<record model='ir.ui.view' id='view_auth_list'>
+     <field name='name'>Alumnus Data</field>
+     <field name='model'>auth</field>
+     <field name='arch' type='xml'>
+         <tree>
+                    <field name='student_id'/>
+                    <field name='name'/>
+                    <field name='dob'/>
+         </tree>
+     </field >
+</record>
+
+
+      <!-- locations List View  -->
+<record model='ir.ui.view' id='view_graduation_party_info_list'>
+     <field name='name'>Graduation</field>
+     <field name='model'>graduation_party_info</field>
+     <field name='arch' type='xml'>
+         <tree>
+                    <field name='student_id'/>
+                    <field name='faculty'/>
+                    <field name='name_en'/>
+                    <field name='name_ar'/>
+                    <field name='gender'/>
+                    <field name='birth_date'/>
+                    <field name='gpa'/>
+                    <field name='grade'/>
+                    <field name='semester'/>
+                    <field name='will_attend'/>
+                    <field name='number_of_extra_tickets'/>
+                    <field name='email'/>
+                    <field name='mobile'/>
+                    <field name='create_date'/>
+         </tree>
+     </field >
+</record>
+
+
+
+      <!-- File Numbers List View  -->
+<record model='ir.ui.view' id='view_file_numbers_list'>
+     <field name='name'>Graduation</field>
+     <field name='model'>file_numbers</field>
+     <field name='arch' type='xml'>
+         <tree>
+                    <field name='student_id'/>
+                    <field name='file_number'/>
+                    <field name='by'/>
+         </tree>
+     </field >
+</record>
+
+
+      <!-- File Numbers List View  -->
+<record model='ir.ui.view' id='view_students_data_list'>
+     <field name='name'>Students Data</field>
+     <field name='model'>students_data</field>
+     <field name='arch' type='xml'>
+         <tree>
+                    <field name='student_id'/>
+                    <field name='file_number'/>
+                    <field name='name_ar'/>
+                    <field name='name_en'/>
+                    <field name='birth_date'/>
+                    <field name='gender'/>
+                    <field name='nationality'/>
+         </tree>
+     </field >
+</record>
+
+
+
+
+
+
+<!-- locations Form View  -->
+<record model='ir.ui.view' id='view_students_data_form'>
+     <field name='name'>students_data</field>
+     <field name='model'>students_data</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field  name="student_id"/>
+                         <field  name="name_ar"/>
+                         <field  name="name_en"/>
+                         <field widget="binary" name="image_1920" filename="student_id" />
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+
+
+<!-- graduation_party_info Form View  -->
+<record model='ir.ui.view' id='view_graduation_party_info_form'>
+     <field name='name'>students_data</field>
+     <field name='model'>graduation_party_info</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field  name="student_id"/>
+                         <field  name="name_ar"/>
+                         <field  name="name_en"/>
+                         <field widget="binary" name="image_1920" filename="student_id" />
+                     </group>
+
+                     <group>
+                         <field name="gpa" />
+                         <field name="grade" />
+                         <field name="semester" />
+                         <field name="birth_date" />
+                         <field name="gender" />
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+
+
+<menuitem name='ACU ERP' sequence='1' id='acums.menu_root'/>
+<menuitem name='Global Data' parent='acums.menu_root' sequence='1' id='acums.menu_global_data' groups="group_it"/>
+<menuitem name='Global' parent='acums.menu_root' sequence='1' id='acums.menu_global' action="acums.global_data_action_window"/>
+<menuitem name ='Academic Years' id ='acums.menu_academic_years' parent ='acums.menu_global_data' action = 'acums.academic_years_action_window' />
+<menuitem name ='Academic Semesters' id ='acums.menu_academic_semesters' parent ='acums.menu_global_data' action = 'acums.academic_semesters_action_window' />
+<menuitem name ='Countries' id ='acums.menu_countries' parent ='acums.menu_global_data' action = 'acums.countries_action_window' />
+<menuitem name ='Governorates' id ='acums.menu_governorates' parent ='acums.menu_global_data' action = 'acums.governorates_action_window' />
+<menuitem name ='Locations Types' id ='acums.menu_locations_types' parent ='acums.menu_global_data' action = 'acums.locations_types_action_window' />
+<menuitem name ='Locations' id ='acums.menu_locations' parent ='acums.menu_global_data' action = 'acums.locations_action_window' />
+<menuitem name ='Graduation Party Info' id ='acums.menu_graduation_party' parent ='acums.menu_global_data' action = 'acums.graduation_party_info_action_window' groups="group_it" />
+<menuitem name ='Students Uploaded Data' id ='acums.menu_students_data' parent ='acums.menu_root' action = 'acums.students_data_action_window' groups="group_it"/>
+<menuitem name ='Alumnus Data' id ='acums.menu_auth' parent ='acums.menu_global_data' action = 'acums.auth_action_window' />
+<menuitem name ='Updated File Numbers' id ='acums.menu_auth' parent ='acums.menu_global_data' action = 'acums.file_numbers_action_window' />
+
+
+
+  </data>
+</odoo>

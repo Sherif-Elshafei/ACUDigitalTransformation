@@ -1,0 +1,321 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+      <!--tree list view-->
+    <record model="ir.ui.view" id="acums.academic_years_list">
+      <field name="name">Academic Years List</field>
+      <field name="model">academic_years</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="code"/>
+          <field name="start_year"/>
+          <field name="end_year"/>
+          <field name="is_current"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="acums.academic_semesters_list">
+      <field name="name">Academic Semesters List</field>
+      <field name="model">academic_semesters</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="code"/>
+          <field name="name_en"/>
+          <field name="name_ar"/>
+          <field name="year"/>
+          <field name="type"/>
+          <field name="graduation_month"/>
+          <field name="is_current"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="acums.faculties_list">
+      <field name="name">Faculties</field>
+      <field name="model">faculties</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="code"/>
+          <field name="name_en"/>
+          <field name="name_ar"/>
+          <field name="receipts_counter"/>
+          <field name="levels"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="acums.faculties_semesters_list">
+      <field name="name">Faculties Semesters List</field>
+      <field name="model">faculties_semesters</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="code"/>
+          <field name="dean"/>
+          <field name="faculty"/>
+          <field name="semester"/>
+          <field name="students_academic_ids_counter"/>
+          <field name="exam_approval_date"/>
+          <field name="payment_deadline"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="acums.countries_list">
+      <field name="name">Countries List</field>
+      <field name="model">countries</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="code"/>
+          <field name="name_en"/>
+          <field name="name_ar"/>
+          <field name="nationality_name_en"/>
+          <field name="nationality_name_ar"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="acums.governorates_list">
+      <field name="name">Governorates List</field>
+      <field name="model">governorates</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="code"/>
+          <field name="name_en"/>
+          <field name="name_ar"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="acums.locations_types_list">
+      <field name="name">Locations Types List</field>
+      <field name="model">locations_types</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name_en"/>
+          <field name="name_ar"/>
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="acums.locations_list">
+      <field name="name">Locations List</field>
+      <field name="model">locations</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="code"/>
+          <field name="faculty"/>
+          <field name="type"/>
+          <field name="capacity"/>
+          <field name="biometric_device_ip"/>
+        </tree>
+      </field>
+</record>
+
+    <record model="ir.ui.view" id="acums.students_finance_account_list">
+      <field name="name">Student Finance Account</field>
+      <field name="model">students_finance_account</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="active"/>
+
+          <field name="national_id"/>
+          <field name="current_balance"/>
+          <field name="account_total_debts"/>
+          <field name="dont_send"/>
+        </tree>
+      </field>
+    </record>
+
+      <!-- form view-->
+    <record model="ir.ui.view" id="acums.academic_years_form">
+      <field name="name">Academic Years List</field>
+      <field name="model">academic_years</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+
+
+          </header>
+          <sheet>
+            <widget name="web_ribbon" title="Current Year" bg_color="bg-info" attrs="{'invisible': [('is_current', '!=', True)]}"/>
+
+            <h1>
+              <field name="code"/>
+            </h1>
+            <group>
+               <field name="start_year"/>
+          <field name="end_year"/>
+          <field name="is_current"/>
+            </group>
+          </sheet>
+
+
+        </form>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="acums.academic_semesters_form">
+      <field name="name">Academic semesters List</field>
+      <field name="model">academic_semesters</field>
+      <field name="arch" type="xml">
+         <form>
+          <header>
+
+          </header>
+          <sheet>
+            <widget name="web_ribbon" title="Current Year" bg_color="bg-info" attrs="{'invisible': [('is_current', '!=', True)]}"/>
+
+            <h1>
+              <field name="code"/>
+            </h1>
+            <group>
+              <field name="name_en"/>
+              <field name="name_ar"/>
+              <field name="year"/>
+              <field name="type"/>
+              <field name="graduation_month"/>
+              <field name="is_current"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="acums.locations_kanban">
+      <field name="name">Locations Kanban</field>
+      <field name="model">locations</field>
+      <field name="arch" type="xml">
+        <kanban>
+           <field name="code"/>
+          <field name="faculty"/>
+          <field name="type"/>
+          <field name="capacity"/>
+          <field name="biometric_device_ip"/>
+        <templates>
+           <t t-name="kanban-box">
+             <div class="oe_kanban_details">
+               <ul>
+                 <li><h3>Code: <field name="code"/></h3></li>
+                 <li><h4>Faculty: <field name="faculty"/></h4></li>
+                 <li><h4>Type: <field name="type"/></h4></li>
+                 <li>Capacity: <field name="capacity"/></li>
+                 <li>Biometric: <field name="biometric_device_ip"/></li>
+               </ul>
+             </div>
+           </t>
+        </templates>
+
+        </kanban>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="acums.academic_years_window_action">
+      <field name="name">Academic Years</field>
+      <field name="res_model">academic_years</field>
+      <field name="view_mode">tree,form,pivot,graph,search</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="acums.academic_semesters_window_action">
+      <field name="name">Academic Semesters</field>
+      <field name="res_model">academic_semesters</field>
+      <field name="view_mode">tree,form,pivot,graph,search</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="acums.faculties_window_action">
+      <field name="name">Faculties</field>
+      <field name="res_model">faculties</field>
+      <field name="view_mode">tree,form,pivot,graph,search</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="acums.faculties_semesters_window_action">
+      <field name="name">Faculties Semesters</field>
+      <field name="res_model">faculties_semesters</field>
+      <field name="view_mode">tree,form,pivot,graph,search</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="acums.countries_window_action">
+      <field name="name">Countries</field>
+      <field name="res_model">countries</field>
+      <field name="view_mode">tree,form,pivot,graph,search</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="acums.governorates_window_action">
+      <field name="name">Governorates</field>
+      <field name="res_model">governorates</field>
+      <field name="view_mode">tree,form,pivot,graph,search</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="acums.locations_types_window_action">
+      <field name="name">Locations Types</field>
+      <field name="res_model">locations_types</field>
+      <field name="view_mode">tree,form,pivot,graph,search</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="acums.locations_window_action">
+      <field name="name">Locations</field>
+      <field name="res_model">locations</field>
+      <field name="view_mode">tree,kanban,form,pivot,graph,search</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="acums.students_window_action">
+      <field name="name">Students</field>
+      <field name="res_model">students</field>
+      <field name="view_mode">tree,kanban,form,pivot,graph,search</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="acums.students_finance_account_window_action">
+      <field name="name">Student Finance Account</field>
+      <field name="res_model">students_finance_account</field>
+      <field name="view_mode">tree,kanban,form,pivot,graph,search</field>
+    </record>
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="acums.action_server">
+      <field name="name">acums server</field>
+      <field name="model_id" ref="model_acums_acums"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="ACU" id="acums.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Global Data" id="acums.menu_global_data" parent="acums.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="Academic Year" id="acums.menu_academic_years" parent="acums.menu_global_data"
+              action="acums.academic_years_window_action"/>
+
+   <menuitem name="Academic Semesters" id="acums.menu_academic_semesters" parent="acums.menu_global_data"
+              action="acums.academic_semesters_window_action"/>
+
+   <menuitem name="Faculties" id="acums.menu_faculties" parent="acums.menu_global_data"
+          action="acums.faculties_window_action"/>
+
+   <menuitem name="Faculties Semesters" id="acums.menu_faculties_semesters" parent="acums.menu_global_data"
+          action="acums.faculties_semesters_window_action"/>
+
+   <menuitem name="Countries" id="acums.menu_countries" parent="acums.menu_global_data"
+          action="acums.countries_window_action"/>
+
+   <menuitem name="Governorates" id="acums.menu_governorates" parent="acums.menu_global_data"
+          action="acums.governorates_window_action"/>
+
+   <menuitem name="Locations Types" id="acums.menu_locations_types" parent="acums.menu_global_data"
+          action="acums.locations_types_window_action"/>
+
+   <menuitem name="Locations" id="acums.menu_locations" parent="acums.menu_global_data"
+      action="acums.locations_window_action"/>
+
+    <menuitem name="Student Finance Account" id="acums.students_finance_account" parent="acums.menu_global_data"
+    action="acums.students_finance_account_window_action"/>
+  </data>
+</odoo>

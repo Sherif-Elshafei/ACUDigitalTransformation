@@ -1,0 +1,8 @@
+steps:
+    1- Create models
+    2- Create window action for each model
+    3- create access rights for each model
+    4- create menu item
+    5- view customization
+field attributes => https://www.cybrosys.com/odoo/odoo-books/odoo-15-development/ch3/field-attributes/
+

@@ -1,0 +1,218 @@
+<odoo>
+  <data>
+      <!-- bus_lines List View  -->
+<record model='ir.ui.view' id='view_bus_lines_list'>
+     <field name='name'>Bus Lines</field>
+     <field name='model'>bus_lines</field>
+     <field name='arch' type='xml'>
+         <tree>
+                <field name="line_number"/>
+                <field name="line_name" />
+                <field name="semester" />
+                <field name="driver" />
+                <field  name="bus" />
+         </tree>
+     </field >
+</record>
+
+<!-- bus_lines Search View  -->
+<record model='ir.ui.view' id='view_bus_lines_search'>
+     <field name='name'>bus_lines.search</field>
+     <field name='model'>bus_lines</field>
+     <field name='arch' type='xml'>
+         <search string='bus_lines'>
+                    <field name="line_number" />
+         <separator/>
+            <searchpanel>
+                <field name="driver" icon="fa-users" />
+         </searchpanel>
+
+         </search>
+     </field >
+</record>
+
+<!-- bus_lines Form View  -->
+<record model='ir.ui.view' id='view_bus_lines_form'>
+     <field name='name'>bus_lines</field>
+     <field name='model'>bus_lines</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="line_number" />
+                         <field name="line_name" />
+                         <field name="semester" />
+
+                     </group>
+                     <group>
+                         <field name="driver" />
+                        <field  name="bus" />
+                     </group>
+
+                    <field name="line_points"  widget="one2many_tags">
+                                          <tree editable="top">
+                                              <field name="point_name"/>
+                                              <field name="point_sequence"/>
+                                              <field name="point_time"/>
+                                          </tree>
+                    </field>
+
+                            <field name="line_students"  widget="one2many_tags">
+                                          <tree editable="top">
+                                              <field name="student" />
+                                              <field name="student_name" />
+                                              <field name="line_type" />
+                                              <field name="subscription_type" />
+                                              <field name="student_status" />
+                                          </tree>
+                    </field>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- bus_lines Window Action  -->
+<record model='ir.actions.act_window' id='acums.bus_lines_action_window'>
+     <field name='name'>Bus Lines</field>
+     <field name='res_model'>bus_lines</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- lines_points List View  -->
+<record model='ir.ui.view' id='view_lines_points_list'>
+     <field name='name'>Lines Points</field>
+     <field name='model'>lines_points</field>
+     <field name='arch' type='xml'>
+         <tree>
+              <field name="line" />
+              <field name="point_name" />
+              <field name="point_sequence" />
+              <field name="point_time" />
+         </tree>
+     </field >
+</record>
+
+<!-- lines_points Search View  -->
+<record model='ir.ui.view' id='view_lines_points_search'>
+     <field name='name'>lines_points.search</field>
+     <field name='model'>lines_points</field>
+     <field name='arch' type='xml'>
+         <search string='lines_points'>
+                   <field name="line" />
+                   <field name="point_name" />
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- lines_points Form View  -->
+<record model='ir.ui.view' id='view_lines_points_form'>
+     <field name='name'>lines_points</field>
+     <field name='model'>lines_points</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="line"/>
+                        <field name="point_name" />
+
+                     </group>
+
+                     <group>
+                         <field name="point_sequence" />
+                        <field name="point_time" />
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- lines_points Window Action  -->
+<record model='ir.actions.act_window' id='acums.lines_points_action_window'>
+     <field name='name'>Lines Points</field>
+     <field name='res_model'>lines_points</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- lines_students List View  -->
+<record model='ir.ui.view' id='view_lines_students_list'>
+     <field name='name'>lines_students</field>
+     <field name='model'>lines_students</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='student' />
+                     <field name='student_name' />
+                     <field name='student_station' />
+                     <field name='pickup_time' />
+                     <field name='line_type' />
+                     <field name='subscription_type'/>
+         </tree>
+     </field >
+</record>
+
+<!-- lines_students Search View  -->
+<record model='ir.ui.view' id='view_lines_students_search'>
+     <field name='name'>lines_students.search</field>
+     <field name='model'>lines_students</field>
+     <field name='arch' type='xml'>
+         <search string='lines_students'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- lines_students Form View  -->
+<record model='ir.ui.view' id='view_lines_students_form'>
+     <field name='name'>lines_students</field>
+     <field name='model'>lines_students</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name='student' />
+                         <field name='student_name' />
+                         <field name='subscription_type' />
+
+
+                     </group>
+
+                     <group>
+                         <field name='line_type' />
+                         <field name='student_station' />
+                         <field name='pickup_time' />
+
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- lines_students Window Action  -->
+<record model='ir.actions.act_window' id='acums.lines_students_action_window'>
+     <field name='name'>Lines Students</field>
+     <field name='res_model'>lines_students</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<menuitem name='Buses' parent='acums.menu_root' sequence='1' id='acums.menu_buses' groups="group_billing_user"/>
+<menuitem name ='Bus Lines' id ='acums.menu_bus_lines' parent ='acums.menu_buses' action ='acums.bus_lines_action_window' />
+<menuitem name ='Lines Points' id ='acums.menu_lines_points' parent ='acums.menu_buses' action ='acums.lines_points_action_window' />
+<menuitem name ='Lines Students' id ='acums.menu_lines_students' parent ='acums.menu_buses' action ='acums.lines_students_action_window' />
+  </data>
+</odoo>

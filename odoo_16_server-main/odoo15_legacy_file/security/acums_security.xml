@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record model="ir.module.category" id="module_category_acums">
+            <field name="name">ACUMS</field>
+            <field name="visible" eval="0" />
+        </record>
+
+       <record id="group_accounting_manager" model="res.groups">
+            <field name="name">Accounting Manager</field>
+            <field name="category_id" ref="module_category_acums"/>
+        </record>
+
+       <record id="group_accounting_user" model="res.groups">
+            <field name="name">Accounting User</field>
+            <field name="category_id" ref="module_category_acums"/>
+        </record>
+
+       <record id="group_billing_user" model="res.groups">
+            <field name="name">Billing User</field>
+            <field name="category_id" ref="module_category_acums"/>
+        </record>
+
+       <record id="group_academic_admin" model="res.groups">
+            <field name="name">Academic Admin</field>
+            <field name="category_id" ref="module_category_acums"/>
+        </record>
+
+       <record id="group_students_affairs_admin" model="res.groups">
+            <field name="name">Student Affairs Admin</field>
+            <field name="category_id" ref="module_category_acums"/>
+        </record>
+
+    <record id="group_it" model="res.groups">
+            <field name="name">IT</field>
+            <field name="category_id" ref="module_category_acums"/>
+     </record>
+
+     <record id="faculty_specialist" model="res.groups">
+            <field name="name">faculty_specialist</field>
+            <field name="category_id" ref="module_category_acums"/>
+     </record>
+
+
+     <record id="president_office" model="res.groups">
+            <field name="name">president_office</field>
+            <field name="category_id" ref="module_category_acums"/>
+     </record>
+
+     <record id="group_faculty_cs" model="res.groups">
+            <field name="name">group_faculty_cs</field>
+            <field name="category_id" ref="module_category_acums"/>
+     </record>
+    <record id="group_faculty_badmin" model="res.groups">
+            <field name="name">group_faculty_badmin</field>
+            <field name="category_id" ref="module_category_acums"/>
+     </record>
+    <record id="group_faculty_lang" model="res.groups">
+            <field name="name">group_faculty_lang</field>
+            <field name="category_id" ref="module_category_acums"/>
+     </record>
+
+    <record id="group_faculty_ph" model="res.groups">
+            <field name="name">group_faculty_phy</field>
+            <field name="category_id" ref="module_category_acums"/>
+     </record>
+
+    <record id="group_faculty_applied" model="res.groups">
+            <field name="name">group_faculty_applied</field>
+            <field name="category_id" ref="module_category_acums"/>
+     </record>
+
+    <record id="group_faculty_dentistry" model="res.groups">
+            <field name="name">group_faculty_dentistry</field>
+            <field name="category_id" ref="module_category_acums"/>
+     </record>
+
+    <record id="group_faculty_pharmacy" model="res.groups">
+            <field name="name">group_faculty_pharmacy</field>
+            <field name="category_id" ref="module_category_acums"/>
+     </record>
+
+     <record model="ir.rule" id="cs_user">
+             <field name="name">Faculty: CS</field>
+             <field name="model_id" ref="model_students"></field>
+             <field name="groups" eval="[(4,ref('acums.group_faculty_cs'))]"></field>
+             <field name="domain_force">[('faculty_code', '=', 4)]</field>
+             <field eval="0" name="perm_write"></field>
+             <field eval="1" name="perm_read"></field>
+             <field eval="0" name="perm_unlink"></field>
+             <field eval="0" name="perm_create"></field>
+    </record>
+
+     <record model="ir.rule" id="badmin_user">
+             <field name="name">Faculty: Business Admin</field>
+             <field name="model_id" ref="model_students"></field>
+             <field name="groups" eval="[(4,ref('acums.group_faculty_badmin'))]"></field>
+             <field name="domain_force">[('faculty_code', '=', 2)]</field>
+             <field eval="0" name="perm_write"></field>
+             <field eval="1" name="perm_read"></field>
+             <field eval="0" name="perm_unlink"></field>
+             <field eval="0" name="perm_create"></field>
+    </record>
+
+     <record model="ir.rule" id="lang_user">
+             <field name="name">Faculty: Languages</field>
+             <field name="model_id" ref="model_students"></field>
+             <field name="groups" eval="[(4,ref('acums.group_faculty_lang'))]"></field>
+             <field name="domain_force">[('faculty_code', '=', 9)]</field>
+             <field eval="0" name="perm_write"></field>
+             <field eval="1" name="perm_read"></field>
+             <field eval="0" name="perm_unlink"></field>
+             <field eval="0" name="perm_create"></field>
+    </record>
+     <record model="ir.rule" id="ph_user">
+             <field name="name">Faculty: Physical Thereby</field>
+             <field name="model_id" ref="model_students"></field>
+             <field name="groups" eval="[(4,ref('acums.group_faculty_ph'))]"></field>
+             <field name="domain_force">[('faculty_code', '=', 7)]</field>
+             <field eval="0" name="perm_write"></field>
+             <field eval="1" name="perm_read"></field>
+             <field eval="0" name="perm_unlink"></field>
+             <field eval="0" name="perm_create"></field>
+    </record>
+    <record model="ir.rule" id="applied_user">
+             <field name="name">Faculty: Applied Arts</field>
+             <field name="model_id" ref="model_students"></field>
+             <field name="groups" eval="[(4,ref('acums.group_faculty_applied'))]"></field>
+             <field name="domain_force">[('faculty_code', '=', 8)]</field>
+             <field eval="0" name="perm_write"></field>
+             <field eval="1" name="perm_read"></field>
+             <field eval="0" name="perm_unlink"></field>
+             <field eval="0" name="perm_create"></field>
+    </record>
+
+    <record model="ir.rule" id="dentistry_user">
+             <field name="name">Faculty: Dentistry </field>
+             <field name="model_id" ref="model_students"></field>
+             <field name="groups" eval="[(4,ref('acums.group_faculty_dentistry'))]"></field>
+             <field name="domain_force">[('faculty_code', '=', 6)]</field>
+             <field eval="0" name="perm_write"></field>
+             <field eval="1" name="perm_read"></field>
+             <field eval="0" name="perm_unlink"></field>
+             <field eval="0" name="perm_create"></field>
+    </record>
+
+    <record model="ir.rule" id="pharmacy_user">
+             <field name="name">Faculty: Pharmacy </field>
+             <field name="model_id" ref="model_students"></field>
+             <field name="groups" eval="[(4,ref('acums.group_faculty_pharmacy'))]"></field>
+             <field name="domain_force">[('faculty_code', '=', 1)]</field>
+             <field eval="0" name="perm_write"></field>
+             <field eval="1" name="perm_read"></field>
+             <field eval="0" name="perm_unlink"></field>
+             <field eval="0" name="perm_create"></field>
+    </record>
+
+
+</odoo>

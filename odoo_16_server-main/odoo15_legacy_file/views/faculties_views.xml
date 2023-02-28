@@ -1,0 +1,1263 @@
+<odoo>
+  <data>
+        <!-- faculties List View  -->
+<record model='ir.ui.view' id='view_faculties_list'>
+     <field name='name'>faculties</field>
+     <field name='model'>faculties</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+                     <field name='code'/>
+                     <field name='name_ar'/>
+                     <field name='name_en'/>
+                     <field name='current_financial_bylaw'/>
+                     <field name='current_financial_bylaw_non_egyptians'/>
+                     <field name='current_academic_bylaw'/>
+                     <field name='dean'/>
+                     <field name='students_academic_ids_counter'/>
+                     <field name='postgraduate_students_academic_ids_counter'/>
+                     <field name='receipts_counter'/>
+         </tree>
+     </field > 
+</record>
+
+<!-- faculties Search View  -->
+<record model='ir.ui.view' id='view_faculties_search'>
+     <field name='name'>faculties.search</field>
+     <field name='model'>faculties</field>
+     <field name='arch' type='xml'>
+         <search string='faculties'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- faculties Form View  -->
+<record model='ir.ui.view' id='view_faculties_form'>
+     <field name='name'>faculties</field>
+     <field name='model'>faculties</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                            <field name='code'/>
+                            <field name='name_ar'/>
+                            <field name='name_en'/>
+                            <field name='dean'/>
+                            <field name='levels'/>
+                            <field name='semester_payment_amount'/>
+
+                     </group>
+
+                     <group>
+                     <field name='current_financial_bylaw'/>
+                     <field name='current_financial_bylaw_non_egyptians'/>
+                     <field name='current_academic_bylaw'/>
+                     <field name='students_academic_ids_counter'/>
+                     <field name='postgraduate_students_academic_ids_counter'/>
+                     <field name='receipts_counter'/>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- faculties Window Action  -->
+<record model='ir.actions.act_window' id='acums.faculties_action_window'>
+     <field name='name'>Faculties</field>
+     <field name='res_model'>faculties</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- faculty_majors List View  -->
+<record model='ir.ui.view' id='view_faculty_majors_list'>
+     <field name='name'>faculty_majors</field>
+     <field name='model'>faculty_majors</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='code'/>
+                     <field name='name_en'/>
+                     <field name='name_ar'/>
+                     <field name='faculty'/>
+                     <field name='bylaw'/>
+                     <field name='can_be_major'/>
+                     <field name='can_be_minor'/>
+         </tree>
+     </field >
+</record>
+
+<!-- faculty_majors Search View  -->
+<record model='ir.ui.view' id='view_faculty_majors_search'>
+     <field name='name'>faculty_majors.search</field>
+     <field name='model'>faculty_majors</field>
+     <field name='arch' type='xml'>
+         <search string='faculty_majors'>
+             <field name='code' string='code'/>
+             <field name='name_en' string='name En'/>
+             <field name='name_ar' string='name Ar'/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- faculty_majors Form View  -->
+<record model='ir.ui.view' id='view_faculty_majors_form'>
+     <field name='name'>faculty_majors</field>
+     <field name='model'>faculty_majors</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+               <group>
+                     <group>
+                             <field name='code'/>
+                            <field name='name_en'/>
+                            <field name='name_ar'/>
+                            <field name='faculty'/>
+                            <field name='bylaw'/>
+                     </group>
+
+                     <group>
+                            <field name='can_be_major'/>
+                            <field name='can_be_minor'/>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- faculty_majors Window Action  -->
+<record model='ir.actions.act_window' id='acums.faculty_majors_action_window'>
+     <field name='name'>Faculty Majors</field>
+     <field name='res_model'>faculty_majors</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- faculties_semesters List View  -->
+<record model='ir.ui.view' id='view_faculties_semesters_list'>
+     <field name='name'>faculties_semesters</field>
+     <field name='model'>faculties_semesters</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- faculties_semesters Search View  -->
+<record model='ir.ui.view' id='view_faculties_semesters_search'>
+     <field name='name'>faculties_semesters.search</field>
+     <field name='model'>faculties_semesters</field>
+     <field name='arch' type='xml'>
+         <search string='faculties_semesters'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- faculties_semesters Form View  -->
+<record model='ir.ui.view' id='view_faculties_semesters_form'>
+     <field name='name'>faculties_semesters</field>
+     <field name='model'>faculties_semesters</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- faculties_semesters Window Action  -->
+<record model='ir.actions.act_window' id='acums.faculties_semesters_action_window'>
+     <field name='name'>facultiessemesters</field>
+     <field name='res_model'>faculties_semesters</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- academic_bylaws List View  -->
+<record model='ir.ui.view' id='view_academic_bylaws_list'>
+     <field name='name'>academic_bylaws</field>
+     <field name='model'>academic_bylaws</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='code'/>
+                     <field name='faculty'/>
+                     <field name='year'/>
+                     <field name='graduation_ch'/>
+                     <field name='graduation_gpa'/>
+         </tree>
+     </field >
+</record>
+
+<!-- academic_bylaws Search View  -->
+<record model='ir.ui.view' id='view_academic_bylaws_search'>
+     <field name='name'>academic_bylaws.search</field>
+     <field name='model'>academic_bylaws</field>
+     <field name='arch' type='xml'>
+         <search string='academic_bylaws'>
+                        <field name='code' string='code'/>
+                        <field name='year' string='year'/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- academic_bylaws Form View  -->
+<record model='ir.ui.view' id='view_academic_bylaws_form'>
+     <field name='name'>academic_bylaws</field>
+     <field name='model'>academic_bylaws</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="code" />
+                         <field name="name_en" />
+                         <field name="name_ar" />
+                         <field name="faculty" />
+
+                     </group>
+
+                     <group>
+                         <field name="year" />
+                         <field name="graduation_ch" />
+                         <field name="graduation_gpa" />
+                     </group>
+
+
+               </group>
+                 <group>
+                 <field name="courses"  widget="one2many_tags">
+                              <tree editable="top">
+                                  <field name="code"/>
+                                  <field name="name_en"/>
+                                  <field name="ch"/>
+
+                              </tree>
+                 </field>
+                 </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- academic_bylaws Window Action  -->
+<record model='ir.actions.act_window' id='acums.academic_bylaws_action_window'>
+     <field name='name'>Academic Bylaws</field>
+     <field name='res_model'>academic_bylaws</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- majors_requirements List View  -->
+<record model='ir.ui.view' id='view_majors_requirements_list'>
+     <field name='name'>majors_requirements</field>
+     <field name='model'>majors_requirements</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='major'/>
+                     <field name='course_group'/>
+                     <field name='required_type'/>
+                     <field name='required_ch'/>
+         </tree>
+     </field >
+</record>
+
+<!-- majors_requirements Search View  -->
+<record model='ir.ui.view' id='view_majors_requirements_search'>
+     <field name='name'>majors_requirements.search</field>
+     <field name='model'>majors_requirements</field>
+     <field name='arch' type='xml'>
+         <search string='majors_requirements'>
+             <field name='course_group' string='course group'/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- majors_requirements Form View  -->
+<record model='ir.ui.view' id='view_majors_requirements_form'>
+     <field name='name'>majors_requirements</field>
+     <field name='model'>majors_requirements</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="major" />
+                         <field name="course_group" />
+                     </group>
+
+                     <group>
+                         <field name="required_type" />
+                         <field name="required_ch" />
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- majors_requirements Window Action  -->
+<record model='ir.actions.act_window' id='acums.majors_requirements_action_window'>
+     <field name='name'>Majors Requirements</field>
+     <field name='res_model'>majors_requirements</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- course_groups List View  -->
+<record model='ir.ui.view' id='view_course_groups_list'>
+     <field name='name'>course_groups</field>
+     <field name='model'>course_groups</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='code'/>
+                     <field name='name_en'/>
+                     <field name='bylaw'/>
+         </tree>
+     </field >
+</record>
+
+<!-- course_groups Search View  -->
+<record model='ir.ui.view' id='view_course_groups_search'>
+     <field name='name'>course_groups.search</field>
+     <field name='model'>course_groups</field>
+     <field name='arch' type='xml'>
+         <search string='course_groups'>
+                    <field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- course_groups Form View  -->
+<record model='ir.ui.view' id='view_course_groups_form'>
+     <field name='name'>course_groups</field>
+     <field name='model'>course_groups</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="code" />
+                         <field name="bylaw" />
+
+                     </group>
+
+                     <group>
+                         <field name="name_en" />
+                         <field name="name_ar" />
+                     </group>
+               </group>
+                 <group>
+                     <field name="courses" widget="many2many">
+                         <tree>
+                             <field name="code" />
+                             <field name="name_en" />
+                             <field name="ch" />
+                         </tree>
+                     </field>
+                 </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- course_groups Window Action  -->
+<record model='ir.actions.act_window' id='acums.prerequisites_action_window'>
+     <field name='name'>Prerequisites</field>
+     <field name='res_model'>prerequisites</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- course_groups Window Action  -->
+<record model='ir.actions.act_window' id='acums.course_groups_action_window'>
+     <field name='name'>Course Groups</field>
+     <field name='res_model'>course_groups</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- courses List View  -->
+<record model='ir.ui.view' id='view_courses_list'>
+     <field name='name'>courses</field>
+     <field name='model'>courses</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='code'/>
+                     <field name='name_en'/>
+                     <field name='bylaw'/>
+                     <field name='faculty'/>
+                     <field name='ch'/>
+                     <field name='practical_ch'/>
+         </tree>
+     </field >
+</record>
+
+<!-- courses Search View  -->
+<record model='ir.ui.view' id='view_courses_search'>
+     <field name='name'>courses.search</field>
+     <field name='model'>courses</field>
+     <field name='arch' type='xml'>
+         <search string='courses'>
+             <field name='code' string='code'/>
+             <field name='name_en' string='name'/>
+         <separator/>
+         <searchpanel>
+             <field name="faculty" />
+             <field name="bylaw" />
+         </searchpanel>
+
+         </search>
+     </field >
+</record>
+
+<!-- courses Form View  -->
+<record model='ir.ui.view' id='view_courses_form'>
+     <field name='name'>courses</field>
+     <field name='model'>courses</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                            <field name='code'/>
+                            <field name='name_en'/>
+                            <field name='bylaw'/>
+                            <field name='faculty'/>
+                     </group>
+
+                     <group>
+                            <field name='ch'/>
+                            <field name='practical_ch'/>
+                            <field name='description'/>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+
+<!-- Offered courses Form View  -->
+<record model='ir.ui.view' id='view_offered_courses_form'>
+     <field name='name'>Offered courses</field>
+     <field name='model'>offered_courses</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                            <field name='user'/>
+                            <field name='academic_staff'/>
+                            <field name='faculty'/>
+                            <field name='bylaw'/>
+                     </group>
+                     <group>
+                            <field name='course'/>
+                            <field name='semester'/>
+                     </group>
+               </group>
+
+                 <field widget="one2many_tags" name="students" >
+                     <tree editable="bottom">
+                         <field name="student"/>
+                         <field name="student_name"/>
+
+                     </tree>
+                 </field>
+
+                 <field widget="one2many_tags" name="offered_courses_results" >
+                     <tree editable="bottom">
+                         <field name="student"/>
+                         <field name="student_name"/>
+                         <field name="semester_work"/>
+                         <field name="final"/>
+                         <field name="grade"/>
+                         <field name="gpa"/>
+                     </tree>
+                 </field>
+
+
+             </sheet>
+         </form>
+     </field >
+</record>
+
+
+
+<!-- offered courses List View  -->
+<record model='ir.ui.view' id='view_offered_courseslist'>
+     <field name='name'>Offered Courses</field>
+     <field name='model'>offered_courses</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='course'/>
+                     <field name='course_name'/>
+                     <field name='semester'/>
+
+         </tree>
+     </field >
+</record>
+<!-- offered courses List View  -->
+<record model='ir.ui.view' id='view_offered_courses_results_list'>
+     <field name='name'>Offered Courses Results</field>
+     <field name='model'>offered_courses_results</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='student'/>
+                     <field name='student_name'/>
+                     <field name='offered_course'/>
+                     <field name='semester'/>
+                     <field name='semester_work'/>
+                     <field name='final'/>
+                     <field name='total'/>
+                     <field name='grade'/>
+                     <field name='gpa'/>
+
+         </tree>
+     </field >
+</record>
+
+<!-- Offered courses Results Form View  -->
+<record model='ir.ui.view' id='view_offered_courses_results_form'>
+     <field name='name'>Offered courses</field>
+     <field name='model'>offered_courses_results</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                            <field name='user'/>
+                            <field name='academic_staff'/>
+                            <field name='offered_course'/>
+                            <field name='student'/>
+                            <field name='student_name'/>
+                     </group>
+                     <group>
+                            <field name='semester_work'/>
+                            <field name='final'/>
+                            <field name='total'/>
+                            <field name='grade'/>
+                            <field name='gpa'/>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!--<record id="view_offered_courses_results_pivot" model="ir.ui.view">-->
+<!--            <field name="name">pivot</field>-->
+<!--            <field name="model">offered_courses_results</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--             <pivot string="Pivot View">-->
+<!--                 <field name="student" type="row"/>-->
+<!--                 <field name="semester" type="row"/>-->
+<!--            </pivot>-->
+<!--            </field>-->
+<!--</record>-->
+
+<!--<record model="ir.ui.view" id="view_offered_courses_results_graph">-->
+<!--   <field name="name">Offered Courses Results</field>-->
+<!--   <field name="model">offered_courses_results</field>-->
+<!--   <field name="type">graph</field>-->
+<!--   <field name="arch" type="xml">-->
+<!--         <graph string="">-->
+<!--              <field name="student" />-->
+<!--         </graph>-->
+<!--    </field>-->
+<!--</record>-->
+
+
+
+<!-- courses Window Action  -->
+<record model='ir.actions.act_window' id='acums.courses_action_window'>
+     <field name='name'>Courses</field>
+     <field name='res_model'>courses</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+<!-- grades_schema List View  -->
+<record model='ir.ui.view' id='view_grades_schema_list'>
+     <field name='name'>grades_schema</field>
+     <field name='model'>grades_schema</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='bylaw'/>
+                     <field name='code'/>
+                     <field name='grade_assessment'/>
+                     <field name='mark_lower_bound'/>
+                     <field name='mark_upper_bound'/>
+                     <field name='gpa'/>
+         </tree>
+     </field >
+</record>
+
+<!-- grades_schema Search View  -->
+<record model='ir.ui.view' id='view_grades_schema_search'>
+     <field name='name'>grades_schema.search</field>
+     <field name='model'>grades_schema</field>
+     <field name='arch' type='xml'>
+         <search string='grades_schema'>
+                <field name='bylaw' string='bylaw'/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- grades_schema Form View  -->
+<record model='ir.ui.view' id='view_grades_schema_form'>
+     <field name='name'>grades_schema</field>
+     <field name='model'>grades_schema</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name='bylaw'/>
+                        <field name='code'/>
+                        <field name='grade_assessment'/>
+                     </group>
+
+                     <group>
+                        <field name='mark_lower_bound'/>
+                        <field name='mark_upper_bound'/>
+                        <field name='gpa'/>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- grades_schema Window Action  -->
+<record model='ir.actions.act_window' id='acums.grades_schema_action_window'>
+     <field name='name'>Grades Schema</field>
+     <field name='res_model'>grades_schema</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- course_evaluations List View  -->
+<record model='ir.ui.view' id='view_course_evaluations_list'>
+     <field name='name'>course_evaluations</field>
+     <field name='model'>course_evaluations</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='semester'/>
+                     <field name='offered_course'/>
+                     <field name='type'/>
+         </tree>
+     </field >
+</record>
+
+
+
+
+
+<!-- course_evaluations Search View  -->
+<record model='ir.ui.view' id='view_course_evaluations_search'>
+     <field name='name'>course_evaluations.search</field>
+     <field name='model'>course_evaluations</field>
+     <field name='arch' type='xml'>
+         <search string='course_evaluations'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- course_evaluations Form View  -->
+<record model='ir.ui.view' id='view_course_evaluations_form'>
+     <field name='name'>course_evaluations</field>
+     <field name='model'>course_evaluations</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name='semester'/>
+                         <field name='offered_course'/>
+                         <field name='semester'/>
+                     </group>
+
+                     <group>
+                         <field name='type'/>
+                         <field name='parent'/>
+                         <field name='maximum_mark'/>
+                     </group>
+               </group>
+                 <field widget="one2many_tags" name="marks">
+                     <tree editable="bottom">
+                         <field name="registered_student" />
+                         <field name="mark" />
+                         <field name="by" />
+                         <field name="on" />
+                     </tree>
+                 </field>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- course_evaluations Window Action  -->
+<record model='ir.actions.act_window' id='acums.course_evaluations_action_window'>
+     <field name='name'>Course Evaluations</field>
+     <field name='res_model'>course_evaluations</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- transcripts List View  -->
+<record model='ir.ui.view' id='view_transcripts_list'>
+     <field name='name'>transcripts</field>
+     <field name='model'>transcripts</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='student'/>
+                     <field name='semester'/>
+                     <field name="class_work" />
+                     <field name="final" />
+                     <field name="total_mark" />
+                     <field name="grade" />
+                     <field name="gpa" />
+
+         </tree>
+     </field >
+</record>
+
+<!-- transcripts Search View  -->
+<record model='ir.ui.view' id='view_transcripts_search'>
+     <field name='name'>transcripts.search</field>
+     <field name='model'>transcripts</field>
+     <field name='arch' type='xml'>
+         <search string='transcripts'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- transcripts Form View  -->
+<record model='ir.ui.view' id='view_transcripts_form'>
+     <field name='name'>transcripts</field>
+     <field name='model'>transcripts</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="student" />
+                         <field name="semester" />
+
+                     </group>
+
+                     <group>
+                          <field name="class_work" />
+                          <field name="final" />
+                          <field name="total_mark" />
+                          <field name="grade" />
+                          <field name="gpa" />
+
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- transcripts Window Action  -->
+<record model='ir.actions.act_window' id='acums.transcripts_action_window'>
+     <field name='name'>transcripts</field>
+     <field name='res_model'>transcripts</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- semester_schedule List View  -->
+<record model='ir.ui.view' id='view_semester_schedule_list'>
+     <field name='name'>semester_schedule</field>
+     <field name='model'>semester_schedule</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- semester_schedule Search View  -->
+<record model='ir.ui.view' id='view_semester_schedule_search'>
+     <field name='name'>semester_schedule.search</field>
+     <field name='model'>semester_schedule</field>
+     <field name='arch' type='xml'>
+         <search string='semester_schedule'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- semester_schedule Form View  -->
+<record model='ir.ui.view' id='view_semester_schedule_form'>
+     <field name='name'>semester_schedule</field>
+     <field name='model'>semester_schedule</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- semester_schedule Window Action  -->
+<record model='ir.actions.act_window' id='acums.semester_schedule_action_window'>
+     <field name='name'>Semester Schedule</field>
+     <field name='res_model'>semester_schedule</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- registrations List View  -->
+<record model='ir.ui.view' id='view_registrations_list'>
+     <field name='name'>Registrations</field>
+     <field name='model'>registrations</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='semester'/>
+                     <field name='student'/>
+                     <field name='student_name'/>
+                     <field name='offered_course'/>
+         </tree>
+     </field >
+</record>
+
+<!-- registrations Search View  -->
+<record model='ir.ui.view' id='view_registrations_search'>
+     <field name='name'>registrations.search</field>
+     <field name='model'>registrations</field>
+     <field name='arch' type='xml'>
+         <search string='registrations'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- registrations Form View  -->
+<record model='ir.ui.view' id='view_registrations_form'>
+     <field name='name'>Registrations</field>
+     <field name='model'>registrations</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="student" />
+                         <field name="offered_course" />
+                         <field name="semester" />
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- registrations Window Action  -->
+<record model='ir.actions.act_window' id='acums.registrations_action_window'>
+     <field name='name'>Registrations</field>
+     <field name='res_model'>registrations</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- time_schema List View  -->
+<record model='ir.ui.view' id='view_time_schema_list'>
+     <field name='name'>time_schema</field>
+     <field name='model'>time_schema</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- time_schema Search View  -->
+<record model='ir.ui.view' id='view_time_schema_search'>
+     <field name='name'>time_schema.search</field>
+     <field name='model'>time_schema</field>
+     <field name='arch' type='xml'>
+         <search string='time_schema'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- time_schema Form View  -->
+<record model='ir.ui.view' id='view_time_schema_form'>
+     <field name='name'>time_schema</field>
+     <field name='model'>time_schema</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- time_schema Window Action  -->
+<record model='ir.actions.act_window' id='acums.time_schema_action_window'>
+     <field name='name'>timeschema</field>
+     <field name='res_model'>time_schema</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- transcripts List View  -->
+<record model='ir.ui.view' id='view_transcripts_list'>
+     <field name='name'>transcripts</field>
+     <field name='model'>transcripts</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- transcripts Search View  -->
+<record model='ir.ui.view' id='view_transcripts_search'>
+     <field name='name'>transcripts.search</field>
+     <field name='model'>transcripts</field>
+     <field name='arch' type='xml'>
+         <search string='transcripts'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- transcripts Form View  -->
+<record model='ir.ui.view' id='view_transcripts_form'>
+     <field name='name'>transcripts</field>
+     <field name='model'>transcripts</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- transcripts Window Action  -->
+<record model='ir.actions.act_window' id='acums.transcripts_action_window'>
+     <field name='name'>transcripts</field>
+     <field name='res_model'>transcripts</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- semester_schedule List View  -->
+<record model='ir.ui.view' id='view_semester_schedule_list'>
+     <field name='name'>semester_schedule</field>
+     <field name='model'>semester_schedule</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- semester_schedule Search View  -->
+<record model='ir.ui.view' id='view_semester_schedule_search'>
+     <field name='name'>semester_schedule.search</field>
+     <field name='model'>semester_schedule</field>
+     <field name='arch' type='xml'>
+         <search string='semester_schedule'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- semester_schedule Form View  -->
+<record model='ir.ui.view' id='view_semester_schedule_form'>
+     <field name='name'>semester_schedule</field>
+     <field name='model'>semester_schedule</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- semester_schedule Window Action  -->
+<record model='ir.actions.act_window' id='acums.semester_schedule_action_window'>
+     <field name='name'>semesterschedule</field>
+     <field name='res_model'>semester_schedule</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+
+
+<!-- registrations Window Action  -->
+<record model='ir.actions.act_window' id='acums.registrations_action_window'>
+     <field name='name'>registrations</field>
+     <field name='res_model'>registrations</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- time_schema List View  -->
+<record model='ir.ui.view' id='view_time_schema_list'>
+     <field name='name'>time_schema</field>
+     <field name='model'>time_schema</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- time_schema Search View  -->
+<record model='ir.ui.view' id='view_time_schema_search'>
+     <field name='name'>time_schema.search</field>
+     <field name='model'>time_schema</field>
+     <field name='arch' type='xml'>
+         <search string='time_schema'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- time_schema Form View  -->
+<record model='ir.ui.view' id='view_time_schema_form'>
+     <field name='name'>time_schema</field>
+     <field name='model'>time_schema</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- time_schema Window Action  -->
+<record model='ir.actions.act_window' id='acums.time_schema_action_window'>
+     <field name='name'>timeschema</field>
+     <field name='res_model'>time_schema</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- students_attendance List View  -->
+<record model='ir.ui.view' id='view_students_attendance_list'>
+     <field name='name'>students_attendance</field>
+     <field name='model'>students_attendance</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- students_attendance Search View  -->
+<record model='ir.ui.view' id='view_students_attendance_search'>
+     <field name='name'>students_attendance.search</field>
+     <field name='model'>students_attendance</field>
+     <field name='arch' type='xml'>
+         <search string='students_attendance'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- students_attendance Form View  -->
+<record model='ir.ui.view' id='view_students_attendance_form'>
+     <field name='name'>students_attendance</field>
+     <field name='model'>students_attendance</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- students_attendance Window Action  -->
+<record model='ir.actions.act_window' id='acums.students_attendance_action_window'>
+     <field name='name'>studentsattendance</field>
+     <field name='res_model'>students_attendance</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+<record model='ir.actions.act_window' id='acums.offered_courses_results_action_window'>
+     <field name='name'>Offered Courses Results</field>
+     <field name='res_model'>offered_courses_results</field>
+     <field name='view_mode'>tree,form,pivot,graph</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.offered_courses_action_window'>
+     <field name='name'>Offered Courses</field>
+     <field name='res_model'>offered_courses</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.academic_staff_action_window'>
+     <field name='name'>Academic Staff</field>
+     <field name='res_model'>academic_staff</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.academic_staff_courses_action_window'>
+     <field name='name'>Academic Staff Courses</field>
+     <field name='res_model'>academic_staff_courses</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.course_evaluations_results_action_window'>
+     <field name='name'>Course Semester Works</field>
+     <field name='res_model'>course_evaluations_results</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+<menuitem name='Faculties And Academic' parent='acums.menu_root' sequence='1' id='acums.menu_academic' groups="group_academic_admin"/>
+<menuitem name ='Faculties' sequence="1" id ='acums.menu_faculties' parent ='acums.menu_academic' action ='acums.faculties_action_window' />
+<menuitem name ='Faculty Majors' sequence="2" id ='acums.menu_faculty_majors' parent ='acums.menu_academic' action ='acums.faculty_majors_action_window' />
+<menuitem name ='Faculties Semesters' sequence="9" id ='acums.menu_faculties__semesters' parent ='acums.menu_academic' action ='acums.faculties_semesters_action_window' />
+<menuitem name ='Academic Bylaws' sequence="3" id ='acums.menu_academic_bylaws' parent ='acums.menu_academic' action ='acums.academic_bylaws_action_window' />
+<menuitem name ='Majors Requirements' sequence="6" id ='acums.menu_majors_requirements' parent ='acums.menu_academic' action ='acums.majors_requirements_action_window' />
+<menuitem name ='Course Groups' sequence="5" id ='acums.menu_course_groups' parent ='acums.menu_academic' action ='acums.course_groups_action_window' />
+<menuitem name ='Courses' sequence="4" id ='acums.menu_courses' parent ='acums.menu_academic' action ='acums.courses_action_window' />
+<menuitem name ='Grades Schema' sequence="7" id ='acums.menu_grades_schema' parent ='acums.menu_academic' action ='acums.grades_schema_action_window' />
+<menuitem name ='Course Evaluations' sequence="8" id ='acums.menu_course_evaluations' parent ='acums.menu_academic' action ='acums.course_evaluations_action_window' />
+<menuitem name ='Course Evaluations Results' id ='acums.menu_course_evaluations_results' parent ='acums.menu_academic' action ='acums.course_evaluations_results_action_window' />
+<menuitem name ='Transcripts' sequence="9" id ='acums.menu_transcripts' parent ='acums.menu_academic' action ='acums.transcripts_action_window' />
+<menuitem name ='Semester Schedule' sequence="10" id ='acums.menu_semester_schedule' parent ='acums.menu_academic' action ='acums.semester_schedule_action_window' />
+<menuitem name ='Registrations' id ='acums.menu_registrations' parent ='acums.menu_academic' action ='acums.registrations_action_window' />
+<menuitem name ='Time Schema' id ='acums.menu_time_schema' parent ='acums.menu_academic' action ='acums.time_schema_action_window' />
+<menuitem name ='Students Attendance' id ='acums.menu_students_attendance' parent ='acums.menu_academic' action ='acums.students_attendance_action_window' />
+<menuitem name ='prerequisites' id ='acums.menu_prerequisites' parent ='acums.menu_academic' action ='acums.prerequisites_action_window' />
+<menuitem name ='Offered Courses' id ='acums.menu_offered_courses' parent ='acums.menu_academic' action ='acums.offered_courses_action_window' />
+<menuitem name ='Offered Courses Results' id ='acums.menu_offered_courses_results' parent ='acums.menu_academic' action ='acums.offered_courses_results_action_window' />
+<menuitem name ='Academic Staff' id ='acums.menu_academic_staff' parent ='acums.menu_academic' action ='acums.academic_staff_action_window' />
+<menuitem name ='Academic Staff Courses' id ='acums.menu_academic_staff_courses' parent ='acums.menu_academic' action ='acums.academic_staff_courses_action_window' />
+  </data>
+</odoo>

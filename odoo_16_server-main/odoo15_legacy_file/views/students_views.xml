@@ -1,0 +1,1358 @@
+<odoo>
+  <data>
+
+      <!-- students List View  -->
+<record model='ir.ui.view' id='view_students_list'>
+     <field name='name'>students</field>
+     <field name='model'>students</field>
+     <field name='arch' type='xml'>
+         <tree >
+                     <field name='student_id'/>
+
+                     <field name='name_ar'/>
+                     <field name='name_en'/>
+                     <field name='citizenship'/>
+                     <field name='status'/>
+                     <field name='application_type'/>
+                     <field name='high_school_certificate_type'/>
+                     <field name='high_school_certificate_major'/>
+                     <field name='academic_email'/>
+<!--                    <field name='total_payments'/>-->
+<!--                     <field name='total_debts'/>-->
+         </tree>
+     </field >
+</record>
+
+<!-- students Search View  -->
+<record model='ir.ui.view' id='view_students_search'>
+     <field name='name'>students.search</field>
+     <field name='model'>students</field>
+     <field name='arch' type='xml'>
+         <search string='students'>
+                <field name='student_id' string='' />
+                <field name='name_ar' string=''/>
+                <field name='name_en' string=''/>
+                <field name='file_number' string=''/>
+                <field name='national_id' string=''/>
+         <separator/>
+              <filter name="id" string="العام الحالي" domain="[('academic_year.is_current', '=', True)]" />
+              <filter name="id" string="الفصل الدراسي الحالي" domain="[('academic_semester.is_current', '=', True)]" />
+              <filter name="id" string="الطلاب" domain="[('status', '=', 3)]" />
+              <filter name="id" string="بدون صورة" domain="[('image_1920', '=', False)]" />
+
+             <separator />
+               <group expand="0" string="Group by">
+                  <filter name="faculty" string="الكلية" domain="[]" context="{'group_by':'faculty'}" />
+                  <filter name="academic_year" string="العام الدراسي" domain="[]" context="{'group_by':'academic_year'}" />
+                  <filter name="status" string="حالة الطالب" domain="[]" context="{'group_by':'status'}" />
+                  <filter name="candidate_by" string="نوع الترشيح" domain="[]" context="{'group_by':'candidate_by'}" />
+              </group>
+
+            <searchpanel>
+                <field name="faculty" />
+                <field name="status" />
+                <field name="gender" />
+                <field name="citizenship" />
+                <field name="application_type" />
+                <field name="candidate_by" />
+                <field name="high_school_certificate_type" />
+                <field name="high_school_certificate_major" />
+                <field name="academic_year" />
+                <field name="high_school_type" />
+                <field name="high_school_certificate_name" />
+
+
+
+            </searchpanel>
+
+         </search>
+     </field >
+</record>
+
+<!-- students Form View  -->
+<record model='ir.ui.view' id='view_students_form'>
+     <field name='name'>students</field>
+     <field name='model'>students</field>
+     <field name='arch' type='xml'>
+          <form>
+              <field name="active" invisible="1"/>
+                  <header>
+                      <field name="status"  widget="statusbar"   />
+                      <field name="citizenship"  widget="statusbar"  />
+                      <field name="enrollment_status"  widget="statusbar"  />
+                      <button name="%(acums.action_students_certificates_wizard)d" widget="statinfo" icon="fa-print" string="طباعة الشهادات"  type="action"></button>
+<!--                      <button name="%(acums.student_departure_action)d" widget="statinfo"  string="غلق الحساب"  icon="fa-lock" type="action"></button>-->
+                  </header>
+                  <sheet>
+                       <widget name="web_ribbon" title="الحساب مغلق" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                      <field name="image_1920" widget='image' class="oe_avatar" />
+                      <div class="oe_title">
+                            <h3>
+                                <field name="student_id"  placeholder="Student ID" style="color: record.color;" />
+                            </h3>
+
+                            <h3>
+                                <field name="name_en" placeholder="Student's Name English" />
+                            </h3>
+                           <h3>
+                                <field name="name_ar" placeholder="Student's Name Arabic" required="True"/>
+                            </h3>
+                          <field name="category_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
+                        </div>
+                      <group>
+                            <group>
+                                <field name="gender" />
+                                <field name="nationality" />
+<!--                                <field name="work_email" widget="email"/>-->
+                                <field name="birth_country" />
+                                <field name="birth_governorate"  />
+                                <field name="birth_date" required="0" />
+<!--                                <field name="company_id" groups="base.group_multi_company"/>-->
+                            </group>
+                            <group>
+                                <field name="faculty"  widget="selection" required="1"/>
+                                <field name="faculty_major" />
+                                <field name="study_language" required="1"/>
+                                <field name="application_type" required="1"/>
+                                <field name="candidate_by" required="1"/>
+                                <field name="academic_semester" required="1"/>
+
+
+                            </group>
+                      </group>
+                            <group>
+                             <group>
+                                  <field name="admission_revision_status"/>
+                                  <field name="revision_notes" string="Revision Notes" />
+                                  <field name="revised_by" readonly="1"/>
+                                  <field name="withdrawal_date" attrs="{'invisible': [('status', '!=', '7')]}" readonly="1"/>
+                              </group>
+                            <group string="اسباب اغلاق صفحة الطالب" attrs="{'invisible': [('active', '=', True)]}">
+                                    <field name="departure_reason"/>
+                                    <field name="departure_description"/>
+                                     <field name="departure_date"/>
+                             </group>
+                            </group>
+
+                      <notebook>
+                          <page string="High School And Personal Information">
+                              <group>
+                                  <group string="High School Information">
+                                      <field name="high_school_certificate_type" />
+                                      <field name="high_school_certificate_year" string="Year" required="1"/>
+                                      <field name="high_school_certificate_country"  />
+                                      <field name="high_school_certificate_major"  />
+                                      <field name="seat_number" attrs="{'invisible': [('high_school_certificate_type', '!=', '1')]}"/>
+                                      <field name="total_mark" required="1"/>
+                                      <field name="second_language_exemption" string="370 ?" />
+                                      <field name="total_percentage" string="Percentage" required="1"/>
+                                      <field name="finance_bylaw" widget="many2onebutton" />
+                                      <field name="file_number" required="1" />
+                                      <field name="high_school_certificate_name"  />
+
+                                  </group>
+                                  <group string="Personal Information">
+                                      <field name="national_id" string="National ID"  />
+                                      <field name="passport_id" string="Passport ID"/>
+                                      <field name="address" />
+                                      <field name="email_address" />
+                                      <field name="academic_email" />
+                                      <field name="phone_number" />
+                                      <field name="mobile_number" required="0" />
+                                      <field name="religion" />
+
+                                  </group>
+
+                              </group>
+
+                          </page>
+
+                          <page string="Academic Information">
+                              <group>
+                                  <group>
+                                      <field name="current_date" />
+                                      <field name="age_class" />
+                                      <field name="age" />
+
+
+                                  </group>
+                                  <group>
+                                  </group>
+                              </group>
+                          </page>
+
+                          <page string="Transference Information"  attrs="{'invisible': [('application_type', '=', '1')]}" >
+                              <group >
+                                      <field name="transference_information"  widget="one2many_tags">
+                                          <tree editable="top">
+                                              <field name="country"/>
+                                              <field name="university"/>
+                                              <field name="faculty"/>
+                                              <field name="major"/>
+                                              <field name="level"/>
+                                              <field name="faculty_approved_credit_hours"/>
+                                              <field name="ministry_approved_credit_hours"/>
+                                          </tree>
+                                      </field>
+                                  </group>
+                          </page>
+
+                          <page string="Military Service" attrs="{'invisible': [('gender', '=', '2')]}">
+                                <group>
+                                      <field name="military_service"  widget="one2many_tags">
+                                          <tree editable="top">
+                                              <field name="birth_year" string="سنة الميلاد"/>
+                                              <field name="region" string="المركز"/>
+                                              <field name="serial" string="المسلسل"/>
+                                              <field name="number" string="Military Number"/>
+                                              <field name="decision_number"/>
+                                              <field name="decision"/>
+                                              <field name="military_paper_status"/>
+                                              <field name="papers"/>
+                                          </tree>
+                                      </field>
+                                  </group>
+                          </page>
+
+                          <page string="Military Courses" attrs="{'invisible': [('gender', '=', '2')]}">
+                                <group>
+                                      <field name="military_courses"  widget="one2many_tags">
+                                          <tree editable="top">
+                                              <field name="course" string="رقم الدورة"/>
+                                              <field name="registration_date" string="تاريخ التسجيل"/>
+                                              <field name="registration_receipt" string="رقم ايصال الدفع"/>
+                                              <field name="attendance" string="الحضور"/>
+                                              <field name="result" string="النتيجة"/>
+                                          </tree>
+                                      </field>
+                                  </group>
+                          </page>
+                         <page string="Alumnus Information" domain="[('status', '!=', 'alumni')]">
+                                 <group >
+                                      <field name="graduation_information"  widget="one2many_tags">
+                                          <tree>
+                                              <field name="semester"/>
+                                              <field name="month"/>
+                                              <field name="year"/>
+                                              <field name="gpa"/>
+                                              <field name="assessment"/>
+                                          </tree>
+                                      </field>
+                                  </group>
+
+                          </page>
+                         <page string="Punishments">
+
+                              <group >
+                                      <field name="punishments"  widget="one2many_tags">
+                                          <tree editable="top">
+                                              <field name="semester"/>
+                                              <field name="date"/>
+                                              <field name="number"/>
+                                              <field name="case"/>
+                                              <field name="punishment"/>
+                                          </tree>
+                                      </field>
+                                  </group>
+                          </page>
+
+                         <page string="Administrative Requirements">
+                              <group>
+                                 <field name="administrative_requirements" string="Missed-Requirements" widget="many2many_tags" ></field>
+                              </group>
+                          </page>
+
+                            <page string="Notes">
+
+                                 <field name="notes" string="Notes" widget="one2many_tags" >
+                                     <tree editable="bottom">
+                                         <field name="note" />
+                                         <field name="by" readonly="1"/>
+                                         <field name="date" readonly="1"/>
+                                     </tree>
+
+                                 </field>
+
+                           </page>
+
+
+                            <page string="Withdrawal Information" attrs="{'invisible': [('status', '!=', '7')]}">
+
+                                 <field name="withdrawal_info"  string="withdrawal info" widget="one2many_tags" readonly="1">
+                                     <tree editable="bottom">
+                                         <field name="reason" string="سبب الانسحاب"/>
+                                         <field name="request_date"  />
+                                         <field name="date" readonly="1" string="تاريخ السحب"/>
+                                         <field name="by" string="القائم بالسحب"/>
+                                     </tree>
+
+                                 </field>
+
+                           </page>
+
+
+
+                          <page string="Documents Images">
+                              <group>
+                                 <field name="certificate_image" widget='image' string="Certificate Image" ></field>
+                              </group>
+                               <group>
+                                 <field name="birth_image" widget='image' string="Birth Certificate Image" ></field>
+                              </group>
+                               <group>
+                                 <field name="non_egyptians_certificates_docs" widget='file' string="Non Egyptians Certificate File" ></field>
+                              </group>
+                          </page>
+
+
+                      </notebook>
+                  </sheet>
+              </form>
+     </field >
+</record>
+
+<record id="view_students_pivot" model="ir.ui.view">
+            <field name="name">pivot</field>
+            <field name="model">students</field>
+            <field name="arch" type="xml">
+             <pivot string="Pivot View">
+                 <field name="faculty" type="row"/>
+            </pivot>
+            </field>
+</record>
+
+<record model="ir.ui.view" id="view_students_graph">
+   <field name="name">Students</field>
+   <field name="model">students</field>
+   <field name="type">graph</field>
+   <field name="arch" type="xml">
+         <graph string="">
+              <field name="faculty" />
+         </graph>
+    </field>
+</record>
+
+
+
+<!-- students Window Action  -->
+<record model='ir.actions.act_window' id='acums.students_action_window'>
+     <field name='name'>Students</field>
+     <field name='res_model'>students</field>
+     <field name='view_mode'>tree,form,pivot,graph</field>
+</record>
+
+<!-- transferred_students List View  -->
+<record model='ir.ui.view' id='view_transferred_students_list'>
+     <field name='name'>transferred_students</field>
+     <field name='model'>transferred_students</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='student'/>
+                     <field name='student_name'/>
+                     <field name='country'/>
+                     <field name="university" />
+                     <field name="faculty" />
+                     <field name="major" />
+                     <field name="level" />
+                     <field name="faculty_approved_credit_hours" />
+                     <field name="ministry_approved_credit_hours" />
+                      <field name="gpa" />
+         </tree>
+     </field >
+</record>
+
+<!-- transferred_students Search View  -->
+<record model='ir.ui.view' id='view_transferred_students_search'>
+     <field name='name'>transferred_students.search</field>
+     <field name='model'>transferred_students</field>
+     <field name='arch' type='xml'>
+         <search string='transferred_students'>
+            <field name='student' string='ID'/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- transferred_students Form View  -->
+<record model='ir.ui.view' id='view_transferred_students_form'>
+     <field name='name'>transferred_students</field>
+     <field name='model'>transferred_students</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+
+               <group>
+                     <group>
+                         <field name="student" />
+                         <field name="student_name" />
+                         <field name="country" />
+                         <field name="university" />
+                         <field name="faculty" />
+                         <field name="major" />
+                     </group>
+
+                     <group>
+                         <field name="level" />
+                         <field name="faculty_approved_credit_hours" />
+                         <field name="ministry_approved_credit_hours" />
+                         <field name="gpa" />
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- transferred_students Window Action  -->
+<record model='ir.actions.act_window' id='acums.transferred_students_action_window'>
+     <field name='name'>Transferred Students</field>
+     <field name='res_model'>transferred_students</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+<!-- withdrawals List View  -->
+<record model='ir.ui.view' id='view_withdrawals_list'>
+     <field name='name'>withdrawals</field>
+     <field name='model'>withdrawals</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='student'/>
+                     <field name='student_name'/>
+                     <field name='withdrawal_semester'/>
+                     <field name='reason'/>
+         </tree>
+     </field >
+</record>
+
+<!-- withdrawalsSearch View  -->
+<record model='ir.ui.view' id='view_withdrawals_search'>
+     <field name='name'>withdrawals.search</field>
+     <field name='model'>withdrawals</field>
+     <field name='arch' type='xml'>
+         <search string='transferred_students'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- transferred_students Form View  -->
+<record model='ir.ui.view' id='view_withdrawals_form'>
+     <field name='name'>withdrawals</field>
+     <field name='model'>withdrawals</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="student" />
+                         <field name="student_name" />
+                         <field name="student_faculty" />
+                         <field name="student_status" />
+                     </group>
+
+                     <group>
+                         <field name="withdrawal_semester" />
+                         <field name="reason" />
+                         <field name="request_date" />
+                         <field name="date" />
+                         <field name="by" readonly="1"/>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- transferred_students Window Action  -->
+<record model='ir.actions.act_window' id='acums.withdrawals_action_window'>
+     <field name='name'>Withdrawals</field>
+     <field name='res_model'>withdrawals</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- alumnus List View  -->
+<record model='ir.ui.view' id='view_alumnus_list'>
+     <field name='name'>alumnus</field>
+     <field name='model'>alumnus</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='student'/>
+
+         </tree>
+     </field >
+</record>
+
+<!-- alumnus Search View  -->
+<record model='ir.ui.view' id='view_alumnus_search'>
+     <field name='name'>alumnus.search</field>
+     <field name='model'>alumnus</field>
+     <field name='arch' type='xml'>
+         <search string='alumnus'>
+<field name='student' string='ID'/>
+         <separator/>
+<!--            <searchpanel>-->
+<!--            </searchpanel>-->
+
+         </search>
+     </field >
+</record>
+
+<!-- alumnus Form View  -->
+<record model='ir.ui.view' id='view_alumnus_form'>
+     <field name='name'>alumnus</field>
+     <field name='model'>alumnus</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="student" />
+                         <field name="name_ar" />
+                         <field name="name_en" />
+                         <field name="faculty" />
+                     </group>
+
+                     <group>
+                         <field name="semester" />
+                         <field name="major" />
+                         <field name="minor" />
+                         <field name="gpa" />
+                         <field name="assessment" />
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- alumnus Window Action  -->
+<record model='ir.actions.act_window' id='acums.alumnus_action_window'>
+     <field name='name'>alumnus</field>
+     <field name='res_model'>alumnus</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- administrative_requirements List View  -->
+<record model='ir.ui.view' id='view_administrative_requirements_list'>
+     <field name='name'>administrative_requirements</field>
+     <field name='model'>administrative_requirements</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- administrative_requirements Search View  -->
+<record model='ir.ui.view' id='view_administrative_requirements_search'>
+     <field name='name'>administrative_requirements.search</field>
+     <field name='model'>administrative_requirements</field>
+     <field name='arch' type='xml'>
+         <search string='administrative_requirements'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- administrative_requirements Form View  -->
+<record model='ir.ui.view' id='view_administrative_requirements_form'>
+     <field name='name'>administrative_requirements</field>
+     <field name='model'>administrative_requirements</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- administrative_requirements Window Action  -->
+<record model='ir.actions.act_window' id='acums.administrative_requirements_action_window'>
+     <field name='name'>administrativerequirements</field>
+     <field name='res_model'>administrative_requirements</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- students_punishments List View  -->
+<record model='ir.ui.view' id='view_students_punishments_list'>
+     <field name='name'>students_punishments</field>
+     <field name='model'>students_punishments</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- students_punishments Search View  -->
+<record model='ir.ui.view' id='view_students_punishments_search'>
+     <field name='name'>students_punishments.search</field>
+     <field name='model'>students_punishments</field>
+     <field name='arch' type='xml'>
+         <search string='students_punishments'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- students_punishments Form View  -->
+<record model='ir.ui.view' id='view_students_punishments_form'>
+     <field name='name'>students_punishments</field>
+     <field name='model'>students_punishments</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="student" />
+                         <field name="semester" />
+                         <field name="number" />
+                     </group>
+
+                     <group>
+                         <field name="date" />
+                         <field name="case" />
+                     </group>
+               </group>
+                 <group>
+                 </group>
+                <field name="punishment" widget="many2many">
+                    <tree>
+                        <field name="code"/>
+                        <field name="name_ar"/>
+                        <field name="details"/>
+                    </tree>
+                    </field>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- students_punishments Window Action  -->
+<record model='ir.actions.act_window' id='acums.students_punishments_action_window'>
+     <field name='name'>Students Punishments</field>
+     <field name='res_model'>students_punishments</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- punishments List View  -->
+<record model='ir.ui.view' id='view_punishments_list'>
+     <field name='name'>punishments</field>
+     <field name='model'>punishments</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='id'/>
+         </tree>
+     </field >
+</record>
+
+<!-- punishments Search View  -->
+<record model='ir.ui.view' id='view_punishments_search'>
+     <field name='name'>punishments.search</field>
+     <field name='model'>punishments</field>
+     <field name='arch' type='xml'>
+         <search string='punishments'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- punishments Form View  -->
+<record model='ir.ui.view' id='view_punishments_form'>
+     <field name='name'>punishments</field>
+     <field name='model'>punishments</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- punishments Window Action  -->
+<record model='ir.actions.act_window' id='acums.punishments_action_window'>
+     <field name='name'>punishments</field>
+     <field name='res_model'>punishments</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- military_service List View  -->
+<record model='ir.ui.view' id='view_military_service_list'>
+     <field name='name'>military_service</field>
+     <field name='model'>military_service</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='student'/>
+                     <field name='number' string="الرقم الثلاثي"/>
+                     <field name='student_name'/>
+                      <field name="birth_year" string="سنة الميلاد"/>
+                      <field name="region" string="كود المركز"/>
+                      <field name="serial" string="المسلسل"/>
+                      <field name="center_name_ar" string="المركز"/>
+                      <field name="military_region" string="منطقة التجنيد"/>
+                      <field name="level" string="المستوى الدراسي"/>
+                     <field name='decision_state'/>
+                     <field name='decision_number'/>
+
+         </tree>
+     </field >
+</record>
+
+<!-- military_service Search View  -->
+<record model='ir.ui.view' id='view_military_service_search'>
+     <field name='name'>military_service.search</field>
+     <field name='model'>military_service</field>
+     <field name='arch' type='xml'>
+         <search string='military_service'>
+            <field name='student' string='رقم الطالب'/>
+            <field name='student_name' string='الاسم بالعربي'/>
+            <field name='region' string='المركز'/>
+         <separator/>
+          <searchpanel>
+                <field name="faculty" />
+                <field name="military_paper_status" />
+                <field name="decision_state" />
+                <field name="student_status" />
+                <field name="academic_year" />
+        </searchpanel>
+
+         </search>
+     </field >
+</record>
+
+<!-- military_service Form View  -->
+<record model='ir.ui.view' id='view_military_service_form'>
+     <field name='name'>military_service</field>
+     <field name='model'>military_service</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                          <field name="student" />
+                          <field name="student_name" />
+                          <field name="level" />
+
+                          <field name="birth_year" string="سنة الميلاد"/>
+                          <field name="region" string="المركز"/>
+                          <field name="serial" string="المسلسل"/>
+                         <field name='number' string="الرقم الثلاثي" readonly="1"/>
+                          <field name="center_name_ar" string="اسم المركز"/>
+                          <field name="military_region" string="منطقة التجنيد"/>
+                          <field name="governorate" string="المحافظة"/>
+
+
+                     </group>
+
+                     <group>
+                          <field name="decision_number" />
+                          <field name="decision" />
+                          <field name="decision_state" />
+                          <field name="military_paper_status" />
+                          <field name="papers" />
+
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- military_service Window Action  -->
+<record model='ir.actions.act_window' id='acums.military_service_action_window'>
+     <field name='name'>Military Service</field>
+     <field name='res_model'>military_service</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- military_service_regions List View  -->
+<record model='ir.ui.view' id='view_military_service_regions_list'>
+     <field name='name'>military_service_regions</field>
+     <field name='model'>military_service_regions</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='code'/>
+                     <field name='center_name_ar'/>
+                     <field name='region'/>
+                     <field name='governorate'/>
+         </tree>
+     </field >
+</record>
+
+<!-- military_service_regions Search View  -->
+<record model='ir.ui.view' id='view_military_service_regions_search'>
+     <field name='name'>military_service_regions.search</field>
+     <field name='model'>military_service_regions</field>
+     <field name='arch' type='xml'>
+         <search string='military_service_regions'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- military_service_regions Form View  -->
+<record model='ir.ui.view' id='view_military_service_regions_form'>
+     <field name='name'>military_service_regions</field>
+     <field name='model'>military_service_regions</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="code" />
+                         <field name="center_name_ar" />
+                         <field name="center_name_en" />
+
+                     </group>
+
+                     <group>
+                         <field name="region" />
+                         <field name="governorate" />
+
+                     </group>
+               </group>
+
+                  <field name="students"  widget="one2many_tags">
+                                          <tree editable="top">
+                                              <field name="student"/>
+                                              <field name="student_name"/>
+                                              <field name="number"/>
+                                          </tree>
+                 </field>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- military_service_regions Window Action  -->
+<record model='ir.actions.act_window' id='acums.military_service_regions_action_window'>
+     <field name='name'>Military Regions</field>
+     <field name='res_model'>military_service_regions</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<!-- military_decisions List View  -->
+<record model='ir.ui.view' id='view_military_decisions_list'>
+     <field name='name'>military_decisions</field>
+     <field name='model'>military_decisions</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='code'/>
+                     <field name='state'/>
+                     <field name='text'/>
+         </tree>
+     </field >
+</record>
+
+<!-- military_decisions Search View  -->
+<record model='ir.ui.view' id='view_military_decisions_search'>
+     <field name='name'>military_decisions.search</field>
+     <field name='model'>military_decisions</field>
+     <field name='arch' type='xml'>
+         <search string='military_decisions'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- military_decisions Form View  -->
+<record model='ir.ui.view' id='view_military_decisions_form'>
+     <field name='name'>military_decisions</field>
+     <field name='model'>military_decisions</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="code"/>
+                         <field name="state"/>
+                         <field name="text"/>
+                     </group>
+
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- military_decisions Window Action  -->
+<record model='ir.actions.act_window' id='acums.military_decisions_action_window'>
+     <field name='name'>Military Decisions</field>
+     <field name='res_model'>military_decisions</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+
+
+<!-- military_Courses List View  -->
+<record model='ir.ui.view' id='view_military_courses_list'>
+     <field name='name'>military_courses</field>
+     <field name='model'>military_courses</field>
+     <field name='arch' type='xml'>
+         <tree>
+                          <field name="number" />
+                          <field name="year" />
+                          <field name="semester" />
+                          <field name="location" />
+                          <field name="date_from" />
+                          <field name="date_to" />
+         </tree>
+     </field >
+</record>
+
+<!-- military_decisions Search View  -->
+<record model='ir.ui.view' id='view_military_courses_search'>
+     <field name='name'>military_courses.search</field>
+     <field name='model'>military_courses</field>
+     <field name='arch' type='xml'>
+         <search string='military_decisions'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- military_courses Form View  -->
+<record model='ir.ui.view' id='view_military_courses_form'>
+     <field name='name'>military_courses</field>
+     <field name='model'>military_courses</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="number" />
+                         <field name="year" />
+                         <field name="semester" />
+                     </group>
+
+                     <group>
+                         <field name="location" />
+                         <field name="date_from" />
+                         <field name="date_to" />
+                     </group>
+               </group>
+                           <field name="students"  widget="one2many_tags">
+                                          <tree editable="bottom">
+                                              <field name="student"/>
+                                              <field name="student_name"/>
+                                              <field name="faculty"/>
+                                              <field name="national_id"/>
+                                              <field name="registration_date"/>
+                                              <field name="registration_receipt"/>
+                                              <field name="attendance"/>
+                                              <field name="result"/>
+                                          </tree>
+                                      </field>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- military_courses Window Action  -->
+<record model='ir.actions.act_window' id='acums.military_courses_action_window'>
+     <field name='name'>Military Courses</field>
+     <field name='res_model'>military_courses</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+<!-- students_military_courses List View  -->
+<record model='ir.ui.view' id='view_students_military_courses_list'>
+     <field name='name'>students_military_courses</field>
+     <field name='model'>students_military_courses</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='student'/>
+                     <field name='student_name'/>
+                     <field name='national_id'/>
+                     <field name='course'/>
+                     <field name='attendance'/>
+                     <field name='result'/>
+         </tree>
+     </field >
+</record>
+
+<!-- students_military_courses Search View  -->
+<record model='ir.ui.view' id='view_students_military_courses_search'>
+     <field name='name'>students_military_courses.search</field>
+     <field name='model'>students_military_courses</field>
+     <field name='arch' type='xml'>
+         <search string='military_decisions'>
+<field name='id' string=''/>
+         <separator/>
+<!--         <searchpanel>
+         </searchpanel> -->
+
+         </search>
+     </field >
+</record>
+
+<!-- students_military_courses Form View  -->
+<record model='ir.ui.view' id='view_students_military_courses_form'>
+     <field name='name'>Students military courses</field>
+     <field name='model'>students_military_courses</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="student" />
+                         <field name="student_name" />
+                         <field name="faculty" />
+                         <field name="national_id" />
+                     </group>
+
+                     <group>
+                         <field name="course" />
+                         <field name="registration_date" />
+                         <field name="registration_receipt" />
+                         <field name="attendance" />
+                         <field name="result" />
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- high_schools_names List View  -->
+<record model='ir.ui.view' id='view_high_schools_names_list'>
+     <field name='name'>high_schools_names</field>
+     <field name='model'>high_schools_names</field>
+     <field name='arch' type='xml'>
+         <tree>
+                     <field name='code'/>
+                     <field name='name_ar'/>
+                     <field name='name_en'/>
+                     <field name='type'/>
+         </tree>
+     </field >
+</record>
+
+<!-- high_schools_names Search View  -->
+<record model='ir.ui.view' id='view_high_schools_names_search'>
+     <field name='name'>high_schools_names.search</field>
+     <field name='model'>high_schools_names</field>
+     <field name='arch' type='xml'>
+         <search string='high_schools_names'>
+<field name='id' string=''/>
+         <separator/>
+         <searchpanel>
+             <field name="type" />
+         </searchpanel>
+
+         </search>
+     </field >
+</record>
+
+<!-- high_schools_names Form View  -->
+<record model='ir.ui.view' id='view_high_schools_names_form'>
+     <field name='name'>high_schools_names</field>
+     <field name='model'>high_schools_names</field>
+     <field name='arch' type='xml'>
+         <form>
+             <sheet>
+
+               <group>
+                     <group>
+                         <field name="code" />
+                         <field name="type" />
+                         <field name="name_ar" />
+                         <field name="name_en" />
+                     </group>
+                     <group>
+                     </group>
+               </group>
+             </sheet>
+         </form>
+     </field >
+</record>
+
+<!-- military_decisions Window Action  -->
+<record model='ir.actions.act_window' id='acums.students_military_courses_action_window'>
+     <field name='name'>Students Military Courses</field>
+     <field name='res_model'>students_military_courses</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+<!-- military_decisions Window Action  -->
+<record model='ir.actions.act_window' id='acums.military_states_action_window'>
+     <field name='name'>Military States</field>
+     <field name='res_model'>military_states</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.notes_lines_action_window'>
+     <field name='name'>notes_lines</field>
+     <field name='res_model'>notes_lines</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.students_notes_action_window'>
+     <field name='name'>Students Notes</field>
+     <field name='res_model'>students_notes</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.students_category_action_window'>
+     <field name='name'>Students Category</field>
+     <field name='res_model'>students_category</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+
+<record model='ir.actions.act_window' id='acums.expected_students_action_window'>
+     <field name='name'>Expected Students</field>
+     <field name='res_model'>expected_students</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.accepted_students_action_window'>
+     <field name='name'>accepted_students</field>
+     <field name='res_model'>accepted_students</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.english_exams_action_window'>
+     <field name='name'>english_exams</field>
+     <field name='res_model'>english_exams</field>
+     <field name='view_mode'>tree,form</field>
+</record>
+
+<record model='ir.actions.act_window' id='acums.high_schools_names_action_window'>
+     <field name='name'>High Schools Names</field>
+     <field name='res_model'>high_schools_names</field>
+     <field name='view_mode'>tree,form,search</field>
+</record>
+
+<!--&lt;!&ndash; students_military_courses List View  &ndash;&gt;-->
+<!--<record model='ir.ui.view' id='view_expected_students_list'>-->
+<!--     <field name='name'>expected_students</field>-->
+<!--     <field name='model'>Expected Students</field>-->
+<!--     <field name='arch' type='xml'>-->
+<!--         <tree>-->
+<!--                     <field name='student'/>-->
+<!--                     <field name='date'/>-->
+<!--                     <field name='user'/>-->
+
+<!--         </tree>-->
+<!--     </field >-->
+<!--</record>-->
+
+<menuitem name='Students Affairs' parent='acums.menu_root' sequence='0' id='acums.menu_students_affairs' />
+<menuitem name='Students' parent='acums.menu_root' sequence='0' id='acums.menu_students_root' action ='acums.students_action_window'/>
+<menuitem name ='Students' sequence="1" id ='acums.menu_students' parent ='acums.menu_students_affairs' action ='acums.students_action_window' />
+<menuitem name ='Transferred Students' id ='acums.menu_transferred_students' parent ='acums.menu_students_affairs' action ='acums.transferred_students_action_window' />
+<menuitem name ='Alumnus' id ='acums.menu_alumnus' parent ='acums.menu_students_affairs' action ='acums.alumnus_action_window' />
+<menuitem name ='Administrative Requirements' id ='acums.menu_administrative_requirements' parent ='acums.menu_students_affairs' action ='acums.administrative_requirements_action_window' />
+<menuitem name ='Students Punishments' id ='acums.menu_students_punishments' parent ='acums.menu_students_affairs' action ='acums.students_punishments_action_window' />
+<menuitem name ='Punishments' id ='acums.menu_punishments' parent ='acums.menu_students_affairs' action ='acums.punishments_action_window' />
+<menuitem name ='Withdrawals' id ='acums.menu_withdrawals' parent ='acums.menu_students_affairs' action ='acums.withdrawals_action_window' />
+<menuitem name ='Military Service' id ='acums.menu_military_service' parent ='acums.menu_students_affairs' action ='acums.military_service_action_window' />
+<menuitem name ='Military Service Regions' id ='acums.menu_military_service_regions' parent ='acums.menu_students_affairs' action ='acums.military_service_regions_action_window' />
+<menuitem name ='Military Decisions' id ='acums.menu_military_decisions' parent ='acums.menu_students_affairs' action ='acums.military_decisions_action_window' />
+<menuitem name ='Military States' id ='acums.menu_military_states' parent ='acums.menu_students_affairs' action ='acums.military_states_action_window' />
+<menuitem name ='Military Courses' id ='acums.menu_military_courses' parent ='acums.menu_students_affairs' action ='acums.military_courses_action_window' />
+<menuitem name ='Military Courses' id ='acums.menu_military_courses' parent ='acums.menu_students_affairs' action ='acums.military_courses_action_window' />
+<menuitem name ='Students Military Courses' id ='acums.menu_students_military_courses' parent ='acums.menu_students_affairs' action ='acums.students_military_courses_action_window'/>
+<menuitem name ='Students Category' id ='acums.menu_students_category' parent ='acums.menu_students_affairs' action ='acums.students_category_action_window'/>
+<menuitem name ='Expected Students' id ='acums.menu_expected_students' parent ='acums.menu_root' action ='acums.expected_students_action_window' groups="group_it"/>
+<menuitem name ='Accepted Students' id ='acums.menu_accepted_students' parent ='acums.menu_root' action ='acums.accepted_students_action_window' groups="group_it"/>
+<menuitem name ='English Exam' id ='acums.menu_english_exams' parent ='acums.menu_root' action ='acums.english_exams_action_window' groups="group_it"/>
+<menuitem name ='High Schools Names' id ='acums.menu_high_schools_names' parent ='acums.menu_students_affairs' action ='acums.high_schools_names_action_window' groups="group_it"/>
+
+
+<record id="students_certificates_report_view" model="ir.ui.view">
+    <field name="name">Student Certificate</field>
+    <field name="model">students_certificates</field>
+    <field name="arch" type="xml">
+       <form>
+           <group>
+           <group>
+                    <field name="type" string="اسم الشهادة"/>
+                    <field name="level" string="المستوى الدراسي"/>
+           </group>
+               <group>
+             <field name="to" string="الجهة"/>
+             <field name="military" string="بيانات التجنيد"/>
+             <field name="gpa" string="المعدل التراكمي"/>
+
+               </group>
+           </group>
+           <group>
+                    <field name="notes" string="ملاحظات"/>
+           </group>
+           <footer>
+               <button name="print_report" string="طباعة التقرير" type="object" class="oe_highlight" />
+           </footer>
+       </form>
+    </field>
+</record>
+
+
+<record id="acums.action_students_certificates_wizard" model="ir.actions.act_window">
+    <field name="name">Student Certificate Report</field>
+    <field name="res_model">students_certificates</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="students_certificates_report_view"/>
+    <field name="target">new</field>
+</record>
+
+<record id="student_departure_form" model="ir.ui.view">
+            <field name="name">student_departure</field>
+            <field name="model">student_departure</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group id="info" string="Departure Info" >
+                            <field name="student_id" invisible="1"/>
+                            <field name="departure_reason" />
+                            <field name="departure_description"/>
+                            <field name="archive_private_address"/>
+                        </group>
+                        <group id="date" string="Departure Date">
+                            <field name="departure_date" />
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_register_departure" string="Save" type="object" class="oe_highlight"/>
+<!--                        <button string="Only Employee" class="btn-secondary" special="cancel"/>-->
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="student_departure_action" model="ir.actions.act_window">
+            <field name="name">Deactivate Student</field>
+            <field name="res_model">student_departure</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+<!--          <record id="ministry_report_wizard_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Ministry Report</field>-->
+<!--            <field name="res_model">ministry_report_wizard</field>-->
+<!--            <field name="view_mode">form</field>-->
+<!--            <field name="target">new</field>-->
+<!--        </record>-->
+
+
+
+<!--<record id="ministry_report_form" model="ir.ui.view">-->
+<!--            <field name="name">Ministry Report Wizard</field>-->
+<!--            <field name="model">ministry_report_wizard</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form>-->
+<!--                    <sheet>-->
+<!--                        <group id="info" string="Report Info" >-->
+<!--                            <field name="faculty" invisible="1"/>-->
+<!--                            <field name="high_school_type" />-->
+<!--                            <field name="application_type"/>-->
+<!--                            <field name="nationality"/>-->
+<!--                        </group>-->
+
+<!--                    </sheet>-->
+<!--                    <footer>-->
+<!--                        <button name="action_register_departure" string="Save" type="object" class="oe_highlight"/>-->
+<!--&lt;!&ndash;                        <button string="Only Employee" class="btn-secondary" special="cancel"/>&ndash;&gt;-->
+<!--                    </footer>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<record id="student_departure_form" model="ir.ui.view">
+            <field name="name">student_departure</field>
+            <field name="model">student_departure</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group id="info" string="Departure Info" >
+                            <field name="student_id" invisible="1"/>
+                            <field name="departure_reason" />
+                            <field name="departure_description"/>
+                            <field name="archive_private_address"/>
+                        </group>
+                        <group id="date" string="Departure Date">
+                            <field name="departure_date" />
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_register_departure" string="Save" type="object" class="oe_highlight"/>
+<!--                        <button string="Only Employee" class="btn-secondary" special="cancel"/>-->
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="student_departure_action" model="ir.actions.act_window">
+            <field name="name">Deactivate Student</field>
+            <field name="res_model">student_departure</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+  </data>
+</odoo>

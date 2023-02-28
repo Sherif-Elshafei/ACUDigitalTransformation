@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+
+        <!-- Window Actions Start -->
+        <record model="ir.actions.act_window" id="acums.students_window_action">
+          <field name="name">Students</field>
+          <field name="res_model">students</field>
+          <field name="view_mode">tree,kanban,form,pivot,graph,search</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="acums.punishments_window_action">
+          <field name="name">students_punishments</field>
+          <field name="res_model">students_punishments</field>
+          <field name="view_mode">tree,kanban,form,pivot,graph,search</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="acums.students_punishments_window_action">
+          <field name="name">Punishments</field>
+          <field name="res_model">punishments</field>
+          <field name="view_mode">tree,kanban,form,pivot,graph,search</field>
+        </record>
+        <!-- Window actions end -->
+
+        <!-- menu items start-->
+        <menuitem name="Student View" id="acums.menu_student_view" parent="acums.menu_root"/>
+        <menuitem name="Students" id="acums.students" parent="acums.menu_student_view" action="acums.students_window_action"/>
+        <menuitem name="Students Punishments" id="acums.students_punishments" parent="acums.menu_student_view" action="acums.students_punishments_window_action"/>
+        <menuitem name="Punishments" id="acums.punishments" parent="acums.menu_student_view" action="acums.punishments_window_action"/>
+
+        <!-- menu items end-->
+
+  </data>
+</odoo>

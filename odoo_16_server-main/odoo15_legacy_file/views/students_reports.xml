@@ -1,0 +1,1034 @@
+<odoo>
+    <data>
+        <report
+            id="report_student_certificate"
+            model="students"
+            string="Certification"
+            report_type="qweb-pdf"
+            name="acums.student_certificate"
+            file="acums.student_certificate"
+            attachment_use="True"
+        />
+
+
+
+
+   <template id="student_certificate">
+       <t t-call="web.html_container">
+                   تأسست بالقرار الجمهوري رقم 393 لسنة 2004
+                   إدارة شئون التعليم و الطلاب
+
+           <t t-foreach="docs" t-as="doc">
+               <t t-set="my_dict" t-value="{'1': 'بيان حالة' , '2': 'شهادة قيد'  , '3': 'شهادة قبول مبدئي', '4': 'شهادة حسن سير وسلوك', '5': 'افادة سحب', '6': 'شهادة تدريب',  '7': 'حافظة تجنيد',  '8': 'شهادة قيد بالانجليزية',  '9': 'طلب تدريب بالانجليزية'}"/>
+               <t t-set="levels" t-value="{ 'الخامس': 'Fifth', 'الرابع': 'Fourth',  'الثالث': 'Third',  'الثاني': 'Second',  'الاول': 'First'}"/>
+
+
+                <t t-if="doc['type'] in ['1','2','3','4']">
+
+
+               <center style="line-height:1.0;padding:20px;">
+               <h1 t-esc="my_dict[doc['type']]" style=" text-decoration: underline;"></h1>
+               </center>
+
+                <div style="text-align: right; padding:15px;line-height:1.6;direction:rtl;float: right; font-size: 20px;">
+
+
+
+                         <div style="text-align: right; padding:15px;line-height:1.6;direction:rtl;float: right;">
+                        <table style="float: right; margin-right: 1em;">
+                            <tr>
+                                <td style="width: 120px; font-weight: bold; height: 50px;" >اسم الطالب : </td>
+                                <td style="width: 380px; height: 50px; margin: 0;" ><t t-esc="doc['student'].name_ar" /></td>
+                                 <td style="width: 160px; font-weight: bold; height: 50px;" >رقم الطالب : </td>
+                                <td style="width: 100px; height: 50px;" ><t t-esc="doc['student'].student_id" /></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 120px; font-weight: bold; height: 50px;" >الكلية : </td>
+                                <td style="width: 380px; height: 50px;" ><t t-esc="doc['student'].faculty.name_ar" /></td>
+                                 <td style="width: 160px; font-weight: bold; height: 50px;" > المستوى الجامعي : </td>
+                                <td style="width: 100px; height: 50px;" ><t t-esc="doc['level']" /></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 120px; font-weight: bold; height: 50px;" >الجنسية : </td>
+                                <td style="width: 380px; height: 50px;" ><t t-esc="doc['student'].nationality.nationality_name_ar" /></td>
+                                 <td style="width: 160px; font-weight: bold; height: 50px;" >العام الدراسي :</td>
+                                <td style="width: 100px; height: 50px;" ><t t-esc="doc['academic_year']" /></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 120px; font-weight: bold; height: 50px;" >تاريخ الميلاد :  </td>
+                                <td style="width: 380px; height: 50px;" ><t t-esc="doc['student'].birth_date" /></td>
+                                 <td style="width: 160px; font-weight: bold; height: 50px;" >النوع :</td>
+                                <td style="width: 100px; height: 50px;" ><t t-esc="{'1':'ذكر','2':'أنثى'}[doc['student'].gender]" /></td>
+                            </tr>
+                              <t t-if="doc['military'] == True">
+                                   <tr>
+                                        <td style="width: 120px; font-weight: bold; height: 50px;" >الرقم الثلاثي :  </td>
+                                        <td style="width: 380px; height: 50px;" ><t t-esc="doc['student'].military_service.number" /></td>
+                                    </tr>
+                                  <tr>
+                                    <td style="width: 120px; font-weight: bold; height: 50px;" >موقف التجنيد :  </td>
+                                    <td style="width: 380px; height: 50px;" ><t t-esc="doc['student'].military_service.decision.state.name" /></td>
+                                    <td style="width: 160px; font-weight: bold; height: 50px;" >قرار رقم :</td>
+                                    <td style="width: 100px; height: 50px;" ><t t-esc="doc['student'].military_service.decision_number" /></td>
+                                    </tr>
+                                   <tr>
+                                         <td style="width: 125px; font-weight: bold; height: 50px;" >منطوق القرار :  </td>
+                                    <td style="width: 100px; height: 50px;" ><t t-esc="doc['student'].military_service.decision.text" /></td>
+
+                                    </tr>
+
+                              </t>
+
+                        </table>
+                         </div>
+
+
+               <t t-if="doc['notes'] != False">
+                   <div style="text-align: right; padding:15px;line-height:1.6;direction: rtl;">
+                   <t t-foreach="doc['notes']" t-as="line">
+                       <span t-esc="line" style="direction: rtl;"></span><br />
+                   </t>
+                   </div>
+
+               </t>
+
+
+                <div style="text-align: right; padding:15px;line-height:3; font-weight: bold;">
+                            <t t-if="doc['type'] == '4' ">
+                                     كان حسن السير والسلوك طوال فترة الدراسة بالجامعة ولم يصدر ضده اي عقوبات تأديبية.<br />
+                            </t>
+                    <span>وقد حررت هذه الشهادة لتقديمها الى  : </span> <span t-esc="doc['to']"></span><br />
+                    <span>مسئول الكلية</span>
+                    <span style="margin-right: 3.5em;">رئيس القسم</span>
+                    <span style="margin-right: 3.5em;">مدير الادارة</span>
+                    <br />
+
+                     <span style="margin-right: 28em;">يعتمد</span>
+                     <span style="margin-right: 28em;">رئيس الجامعة</span><br/><br/>
+                     <span style="margin-right: 25em;">أ.د /صديق عبد السلام توفيق</span>
+                </div>
+
+                    <div style="text-align: right; padding:15px;line-height:1.6;direction:rtl;float: right; font-size: 10px;">
+                    <span >تحريرا في  : </span> <span t-esc="doc['date']"></span><br />
+                        </div>
+
+
+                </div>
+                    </t>
+
+               <t t-if="doc['type'] == '5' ">
+                      <center style="line-height:1.0;padding:20px;">
+                            <h1 t-esc="my_dict[doc['type']]" style=" text-decoration: underline;"></h1>
+                      </center>
+                   <div style="text-align: justify;text-justify: inter-word; padding:15px;line-height:3.0; direction:rtl;float: right;font-size: 20px;margin-right: 1.5em;margin-left: 1.5em;word-wrap: break-word;">
+                       تفيد جامعة الاهرام الكندية بأن الطالب /
+                       <t t-esc="doc['student'].name_ar" style="font-weight: bold;"/> <t t-esc="doc['student'].nationality.nationality_name_ar" style="font-weight: bold;"/>
+                       الجنسية كان مقيد على المستوى
+                       <t t-esc="doc['level']" style="font-weight: bold;"/>
+                       لكلية
+                       <t t-esc="doc['student'].faculty.name_ar" style="font-weight: bold;" />
+                       للعام الجامعي
+                       <t t-esc="doc['student'].academic_year.code" />
+                       وقد قام بسحب أوراقه من الجامعة بناءا على رغبته واستلم كافة المستندات والشهادات الخاصة بها من الجامعة وقد أخلى طرفه لدى جامعة الأهرام الكندية دون ادنى مسئولية على الجامعة وذلك اعتبارا من
+                         <t t-foreach="doc['notes']" t-as="line" style="font-size: 18px;font-weight: bold;">
+                       <span t-esc="line" style="direction: rtl;"></span>
+                   </t>
+
+                   </div>
+                   <br />
+                   <div style="text-align: right; padding:15px;line-height:3; font-weight: bold;margin-right: 1.5em;">
+                    <span>مسئول الكلية</span>
+                    <span style="margin-right: 15em;">رئيس القسم</span>
+                    <span style="margin-right: 12em;">مدير الادارة</span>
+                   </div>
+
+               </t>
+
+               <t t-if="doc['type'] == '7' ">
+
+                    <div class="header" style="float: left;">
+                        <img src="/acums/static/src/img/logo.jpeg" style="max-width: 200px; max-height: 120px; margin-top: 140px; text-align: left;"/>
+                            </div>
+
+                   <br />
+                   <br />
+
+                     <div style="text-align: right;margin-right: 1em;">
+                          <span style=" direction:rtl;">منطقة تجنيد وتعبئة  :  </span>
+                          <span style="width: 380px; height: 50px;" ><t t-esc="doc['student'].military_service.region.region" /></span>
+                      </div>
+                      <center style="line-height:2.0;padding:20px;">
+                          <h3>
+                              <span style="direction:rtl;">أسماء وبيانات الطلاب التابعين لمحافظة:    </span>
+                              <span style="width: 380px; height: 50px;" ><t t-esc="doc['student'].military_service.region.governorate.name_ar" /></span><br />
+                              <span style="direction:rtl;">منطقة تجنيد و تعبئة :    </span>
+                              <span style="width: 380px; height: 50px;" ><t t-esc="doc['student'].military_service.region.region" /></span> <br />
+                              <span style="width: 380px; height: 50px;" ><t t-esc="doc['academic_year']" /></span>
+                              <hr style="width :50%%; "/>
+                          </h3>
+
+                      </center>
+
+                    <div style="text-align: right;margin-right: 5em;">
+                          <h4><span style="direction:rtl;">كلية  :  </span>
+                        <span ><t t-esc="doc['student'].faculty.name_ar" /></span></h4>
+                    </div>
+
+                   <div style="text-align: right;margin-right: 5em;">
+                          <h4><span style="direction:rtl;">الفرقة  :  </span>
+                              <span style="width: 380px; height: 50px;" ><t t-esc="doc['student'].military_service.level" /></span></h4>
+                    </div>
+
+
+
+                   <div style="text-align: right;margin-right: 2.5em; font-size: medium;">
+                       <table style="direction:rtl;text-align: center;border-collapse: collapse; border: 1px solid black;font-size: medium;width:100%;height:70px;">
+                           <tr style="direction:rtl; background-color:#9d9fa1;border-collapse: collapse; border: 1px solid black;">
+                               <td style="text-align: center;border: 1px solid black;height:70px;">رقم قرار التجنيد</td>
+                               <td style="text-align: center;border: 1px solid black;" >اسم الطالب</td>
+                               <td style="text-align: center;border: 1px solid black;"> تاريخ الميلاد</td>
+                               <td style="text-align: center;border: 1px solid black;">الرقم القومي</td>
+                               <td style="text-align: center;border: 1px solid black;">سجل مدني</td>
+                               <td style="text-align: center;border: 1px solid black;">الرقم الثلاثي</td>
+                               <td style="text-align: center;border: 1px solid black;">منطوق القرار</td>
+                           </tr>
+                            <tr style="direction:rtl;border-collapse: collapse; border: 1px solid black;font-weight: bold;line-height: 70px;overflow:hidden;">
+                                <td style="text-align: center;border: 1px solid black;height: 70px; overflow:hidden;"><t t-esc="doc['student'].military_service.decision_number"  /></td>
+                                <td style="text-align: center;border: 1px solid black;"><t t-esc="doc['student'].name_ar" /></td>
+                                <td style="text-align: center;border: 1px solid black;"><t t-esc="doc['student'].birth_date" /></td>
+                                <td style="text-align: center;border: 1px solid black;"><t t-esc="doc['student'].national_id" /></td>
+                                <td style="text-align: center;border: 1px solid black;"><t t-esc="doc['student'].military_service.region.center_name_ar" /></td>
+                                <td style="text-align: center;border: 1px solid black;"><t t-esc="doc['student'].military_service.number" /></td>
+                                <td style="text-align: center;border: 1px solid black;"><t t-esc="doc['student'].military_service.decision.state.name" /></td>
+
+                           </tr>
+                       </table>
+                   </div>
+
+                   <div style="text-align: right; padding:10px;line-height:3; font-weight: bold;">
+
+                    <span style="margin-right: 2em;">مسئول الكلية</span>
+                    <span style="margin-right: 7em;">رئيس القسم</span>
+                    <span style="margin-right: 7em;">مدير الادارة</span>
+                    <span style="margin-right: 7em;">مفتش مكتب الاتصال</span>
+                    <span style="margin-right: 7em;">رئيس الجامعة</span>
+                       <br />
+                       <br />
+                       <span style="margin-right: 57em;">أ.د / صديق عبد السلام توفيق</span>
+                        <span style="margin-right: 5em;font-weight: bold;text-align: right;" t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"></span>
+
+                   </div>
+
+
+               </t>
+
+
+
+
+                <t t-if="doc['type'] == '6' ">
+                      <center style="line-height:1.0;padding:20px;">
+                            <h1 t-esc="my_dict[doc['type']]" style=" text-decoration: underline;"></h1>
+                      </center>
+                   <div style="text-align: right; padding:15px;line-height:2.0; direction:rtl; float: right; font-size: 20px;width:100%%;">
+                       السادة /
+                       <t t-esc="doc['to']" />
+                       <center style="line-height:2.0;padding:15px;">
+                            تحية طيبة وبعد ...
+                      </center>
+                       تهدي جامعة الاهرام الكندية أطيب تحياتها الى سيادتكم ، ونتوجه بخالص الشكر على إمكانية ان تقوم هيئتكم الموقرة بالسماح للطالب /
+                        <t t-esc="doc['student'].name_ar" style="font-weight: bold;" /><br />
+                       المقيد بالرقم الجامعي /
+                        <t t-esc="doc['student'].student_id" />
+                        بالمستوى
+                       <t t-esc="doc['level']" />
+                       بكلية
+                       <t t-esc="doc['student'].faculty.name_ar" />
+
+                        <t t-if="doc['gpa'] != 0.0 ">
+/ المعدل التراكمي :
+                       <t t-esc="doc['gpa']" />
+                        </t>
+                       <br />
+                        بالتدريب لديكم
+                       ونحن إذ نشكر لسيادتكم كريم تفضلكم بالموافقة ، ونتمنى لسيادتكم و لمؤسستكم الموقر دوام الرقي والأذدهار.
+
+                        <center style="line-height:1.0;padding:15px;">
+                            وتفضلوا سيادتكم بقبول فائق الشكر والاحترام  ...
+
+                      </center>
+
+                   </div>
+                    <div style="text-align: right; padding:15px;line-height:1.6;direction:rtl;float: right;">
+                       <table style="float: right; margin-right: 2em;">
+                           <tr>
+                                <td  style="width: 500px; font-weight: bold; height: 75px;">عميد الكلية</td>
+                           </tr>
+                           <tr>
+                                <td style="width: 500px; font-weight: bold; height: 75px;">أ.د / <t t-esc="doc['student'].faculty.dean" /></td>
+                           </tr>
+                       </table>
+                    </div>
+                    <div style="text-align: right; padding:10px;line-height:1.0;direction:rtl;float: right;">
+                       <table style="float: right; margin-right: 30em;">
+                           <tr>
+                                <td style="width: 500px; font-weight: bold; height: 100px;">رئيس الجامعة</td>
+                           </tr>
+                           <tr>
+                                <td style="width: 500px; font-weight: bold; height: 50px;">أ.د / صديق عبد السلام توفيق</td><br /><br /><br />
+                           </tr>
+                       </table>
+                    </div>
+
+
+               </t>
+
+
+                  <t t-if="doc['type'] == '8' ">
+                      <center style="line-height:1.0;padding:20px;">
+                            <h1  style=" text-decoration: underline;"> Enrollment Certificate</h1>
+                      </center>
+                   <div style="text-align: left; padding:15px;line-height:1.6; float: left; font-size: 18px;width:100%%;">
+
+                      <div style=" text-align: left;line-height:2.5;font-size: 17.9px;margin-left: 1em;font-family: serif;margin-top: 30px;">
+                         <span style="margin-left: 1em;">- This is certify that : </span> <span style="margin-left: 1em;font-weight: bold;" t-esc="doc['student'].name_en"></span>
+                         <span style="margin-left: 3em;">ID Number : </span> <span style="margin-left: 1em;font-weight: bold;" t-esc="doc['student'].student_id"></span>
+                      </div>
+
+
+                        <div style=" text-align: left;line-height:2.5;font-size: 17.9px;margin-left: 1em;font-family: serif;margin-top: 30px;">
+                         <span style="margin-left: 1em;">- Birth Date : </span> <span style="margin-left: 1em;font-weight: bold;" t-esc="doc['student'].birth_date.strftime('%d/%m/%Y')"></span>
+                         <span style="margin-left: 14em;">Gender : </span> <span style="margin-left: 1em;font-weight: bold;" t-esc="{'1':'Male','2':'Female'}[doc['student'].gender]"></span>
+                         </div>
+
+
+                        <div style=" text-align: left;line-height:2.5;font-size: 17.9px;margin-left: 1em;font-family: serif;margin-top: 30px;">
+                            <span style="margin-left: 1em;">- Faculty of :  </span> <span style="margin-left: 1em;font-weight: bold;" t-esc="doc['student'].faculty.name_en"></span>
+                         </div>
+                        <div style=" text-align: left;line-height:2.5;font-size: 17.9px;margin-left: 1em;font-family: serif;margin-top: 30px;">
+                            <span style="margin-left: 1em;"> Country of Nationality : </span> <span style="margin-left: 1em;font-weight: bold;" t-esc="doc['student'].nationality.name_en"></span>
+                         </div>
+
+
+                        <div style=" text-align: left;line-height:2.5;font-size: 17.9px;margin-left: 1em;font-family: serif;margin-top: 30px;">
+                            <span style="margin-left: 1em;">- the student is enrolled in level :  </span> <span style="margin-left: 1em;font-weight: bold;" t-esc="levels[doc['level']]"></span>
+                            <span style="margin-left: 5em;"> academic year : </span> <span style="margin-left: 1em;font-weight: bold;" t-esc="doc['academic_year']"></span>
+                         </div>
+
+
+                    <div style=" text-align: left;line-height:2.5;font-size: 17.9px;margin-left: 1em;font-family: serif;margin-top: 30px;">
+                            <span style="margin-left: 1em;">*The Certificate issued upon the student request to be given to:   </span> <span style="margin-left: 1em;font-weight: bold;" t-esc="doc['to']"></span>
+                     </div>
+
+
+                          <div style=" text-align: left;line-height:2.5;font-size: 15px;margin-left: 3em;font-family: serif;margin-top: 50px;font-weight: bold;">
+                             <span>Students Affairs Specialist</span><span style="margin-left: 16em;">Director of Students Affairs</span>
+                              <br /><br /><br /><span style="margin-left: 18em;">University President </span><br/><br/><br/>
+                             <span style="margin-left: 16em;">Dr.Seddik Abdelsalam Tawfik</span> <br/>
+<!--                             <span style="margin-left: 26em;" t-esc="doc['today']"></span>-->
+
+                         </div>
+                         <span style="margin-left: 6em;font-size: medium" t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/>
+
+
+
+
+<!--                    <table style="float: left; margin-left: 1em;table-layout: fixed;">-->
+<!--                            <tr>-->
+<!--                                <td style="width:30%; font-weight: bold; height: 50px;" > - This is certify that : <t t-esc="doc['student'].name_en" />  </td>-->
+<!--                                <td style="width: 50%; height: 50px; text-align: left; margin: 0;" ><t t-esc="doc['student'].name_en" /></td>-->
+<!--                                <td style="width: 15%; height: 50px; margin: 0;font-weight: bold; " >Country of Nationality: </td>-->
+<!--                                <td style="width: 15%; height: 50px; margin: 0;" ><t t-esc="doc['student'].student_id" /></td>-->
+<!--                            </tr>-->
+
+<!--                            <tr>-->
+<!--                                <td style="width: 30%; font-weight: bold; height: 50px;" > - Birth Date :  </td>-->
+<!--                                <td style="width: 50%; height: 50px;" ><t t-esc="doc['student'].birth_date" /></td>-->
+<!--                                <td style="width: 15%; font-weight: bold; height: 50px;" > Gender :   </td>-->
+<!--                                <td style="width: 15%; height: 50px;" ><t t-esc="{'1':'Male','2':'Female'}[doc['student'].gender]" /></td>-->
+<!--                            </tr>-->
+
+<!--                             <tr>-->
+<!--                                <td style="width: 30%; font-weight: bold; height: 50px;" > - Faculty of :  </td>-->
+<!--                                <td style="width: 50%; height: 50px;" ><t t-esc="doc['student'].faculty.name_en" /></td>-->
+<!--                                <td style="width: 15%; font-weight: bold; height: 50px;" > Country of Nationality:   </td>-->
+
+<!--                                <td style="width: 15%; height: 50px;" ><t t-esc="doc['student'].nationality.name_en" /></td>-->
+<!--                            </tr>-->
+
+
+
+<!--                               <tr>-->
+<!--                                <td colspan="1" style="width: 50%; font-weight: bold; height: 50px;" > - the student is enrolled in level :  </td>-->
+<!--                                <td style="width: 10%; height: 50px;" ><t t-esc="levels[doc['level']]" /></td>-->
+<!--                                <td style="width: 30%; font-weight: bold; height: 50px;" >academic year :    </td>-->
+<!--                                <td style="width: 10%; height: 50px;" ><t t-esc="doc['academic_year']" /></td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                 <td colspan="4" style="width: 600px; font-weight: bold; height: 50px;" > *The Certificate issued upon the student request to be given to:  </td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                 <td colspan="4" style="width: 600px; font-weight: bold; height: 50px;text-align: center;" > <span t-esc="doc['to']"></span>  </td>-->
+<!--                            </tr>-->
+
+<!--                             <tr>-->
+<!--                                 <td style="width: 5px;" ></td>-->
+<!--                                 <td colspan="2" style="margin-right: 2em;width: 600px; font-weight: bold; height: 50px;text-align: left;" > Students Affairs Specialist  </td>-->
+<!--                                 <td colspan="2" style="width: 600px; font-weight: bold; height: 50px;text-align: left;" > Director of Student Affairs  </td>-->
+<!--                            </tr>-->
+<!--                    </table>-->
+
+                   </div>
+                      <br /><br /><br /><br />
+<!--                    <div style="text-align: center; padding:15px;line-height:1.6;float: center;">-->
+
+<!--                           <center style="line-height:1.0;padding:20px;">-->
+<!--                            <h4  > University President</h4> <br /><br />-->
+<!--                            <h4  > Dr. Sadik Abdel Salam Tawfik</h4> <br /><br />-->
+<!--                            </center>-->
+<!--                         <br /><br /><br /><br />-->
+
+<!--                         <div style="text-align: right; padding:15px;line-height:1.6;direction:rtl;float: right; font-size: 10px;">-->
+<!--                                 <span t-esc="doc['date']"></span><br />-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+
+
+
+
+
+
+               </t>
+
+
+           </t>
+       </t>
+
+    </template>
+
+             <template id="acums.detailed_info_request">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+
+                    <div style="text-align: right;margin-right: 1em;">
+                        <span style="margin-right: 1em;">اسم الطالب :  </span> <span style="margin-right: 0.1em;" t-esc="doc['account'].student.name_ar"></span><br />
+                        <span style="margin-right: 1em;">الرقم الجامعي :  </span> <span style="margin-right: 0.1em;" t-esc="doc['account'].student.student_id"></span><br /><br />
+                    </div>
+
+                    <div style="direction:rtl;text-align: right;margin-right: 1em;">
+                        <p>
+
+برجاء سداد رسوم  الفصل الدراسي الثاني (فصل الربيع 2021) طبقا لما هو موضح بالجدول التالي.                         </p>
+                    </div>
+
+                    <div>
+
+                        <table border="1px solid black" style="width: 100%; font-family: arial; direction:rtl;text-align: center;border-collapse: collapse;font-size: x-medium; border: 1px solid black;width: 80%; margin-left: 10%">
+                            <tr bgcolor="gray"><th>اسم الاستحقاق</th><th>قيمة الاستحقاق</th><th>العملة</th><th>الفصل الدراسي</th></tr>
+                        <t t-foreach="doc['account'].debts.sorted(key=lambda r: r.to_pay_amount, reverse=True)" t-as="debt">
+                            <tr>
+                                <td ><span t-esc="debt.debt_name"/></td>
+                                <td ><span t-esc="debt.to_pay_amount"/></td>
+                                <td ><span t-esc="{'1':'جنيه مصري','2':'دولار'}[debt.debt_currency]"/></td>
+                                <td ><span t-esc="debt.semester.name_ar"/></td>
+                            </tr>
+                        </t>
+                        </table><br /><br />
+                        <center style="margin-right: 1em;direction:rtl; ">اجمالي الاستحقاقات   </center> <center style="margin-right: 0.1em;" t-esc="doc['account'].total_debts"></center><br />
+                    </div>
+
+                        <div style="margin-right: 5em;direction:rtl;">
+على ان تسدد تلك الرسوم بأحد فروع البنك الاهلي المصري في أي يوم عمل بنكي اعتبارا من 25/01/2021 حتى 14/02/2021
+                             وسوف تطبق غرامة التأخير بواقع 2% اسبوعيا بدءا من هذا التاريخ
+                            <br /> <br />
+                            <strong> تأكد من طباعة الرقم الجامعي داخل الاشعار البنكي لتأكيد عملية الدفع</strong>
+                            <br /> <br />
+                            <t t-if="doc['account'].citizenship == '1'">
+                              رقم الحساب : 1833070751367000027
+                            </t>
+                             <t t-if="doc['account'].student.citizenship == 'وافد'">
+                              رقم الحساب (جامعة الاهرام الكندية ) دولار أمريكي: 1833060751367000016
+                            </t>
+                        </div> <br />
+
+
+
+                </t>
+            </t>
+        </template>
+
+
+
+           <template id="acums.students_affairs_payment">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <br />
+                    <br />
+                    <h2><center style="margin-right: 1em;direction:rtl; ">جامعة الاهرام الكندية   </center></h2>
+                    <h3><center style="margin-right: 1em;direction:rtl; ">اذن دفع مصروفات   </center></h3>
+                    <h4><center style="margin-right: 1em;direction:rtl; ">الفصل الربيعي 2022-2021</center></h4>
+                    <br />
+
+                    <div style="text-align: right;margin-right: 1em;">
+                        <span style="margin-right: 1em;">اسم الطالب :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].name_ar"></span><br /><br />
+                        <span style="margin-right: 1em;">الرقم الجامعي :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].student_id"></span><br /><br />
+                        <span style="margin-right: 1em;">الكلية :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].faculty.name_ar"></span><br /><br />
+                        <span style="margin-right: 1em;">الجنسية :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].nationality.name_ar"></span><br /><br />
+                        <span style="margin-right: 1em;">العام الاكاديمي :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].academic_year.code"></span><br /><br />
+                        <span style="margin-right: 1em;">نوع التقديم :  </span>
+                        <t t-set="values" t-value="dict([('1','مستجد'),('2','محول'), ('3','محول مستجد')])"/>
+                        <span t-esc="values[doc['student'].application_type]"></span>
+                        <br /><br />
+                        <span style="margin-right: 1em;">مجموع الدرجات :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].total_mark"></span><br /><br />
+                    </div>
+
+                    <div style="direction:rtl;text-align: right;margin-right: 1em;">
+                        <p>
+
+                         </p>
+                        <t t-if="doc['student'].application_type != '1' " >
+                        <h4><center style="margin-right: 1em;direction:rtl; "> برجاء التوجه للادارة المالية لدفع رسوم مقاصة علمية   </center></h4>
+                        </t>
+                        <t t-if="doc['student'].application_type == '1' " >
+                        <h4><center style="margin-right: 1em;direction:rtl; ">الطالب تم قبوله ... برجاء التوجه للادارة المالية لاستكمال باقي الاجراءات   </center></h4>
+                        </t>
+                        </div>
+
+                           <div style="direction:rtl;text-align: right;margin-right: 1em;">
+                        <p>
+
+التوقيع                         </p>
+                    </div>
+
+         <div style="direction:rtl;text-align: right;margin-right: 1em;">
+                        <p>
+التاريخ                         </p>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+
+           <template id="acums.file_payment_request">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <br />
+                    <br />
+                    <h2><center style="margin-right: 1em;direction:rtl; ">جامعة الاهرام الكندية   </center></h2>
+                    <h3><center style="margin-right: 1em;direction:rtl; ">اذن دفع ملف تقديم   </center></h3>
+                    <h4><center style="margin-right: 1em;direction:rtl; ">الفصل الربيعي 2021-2022</center></h4>
+                    <br />
+
+                    <div style="text-align: right;margin-right: 1em;">
+                        <span style="margin-right: 1em;">اسم الطالب :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].name_ar"></span><br /><br />
+                        <span style="margin-right: 1em;">رقم التقديم :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].id"></span><br /><br />
+                        <span style="margin-right: 1em;">الكلية :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].faculty.name_ar"></span><br /><br />
+                        <span style="margin-right: 1em;">الجنسية :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].nationality.name_ar"></span><br /><br />
+                        <span style="margin-right: 1em;">نوع الثانوية :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].high_school_certificate_type"></span><br /><br />
+                        <span style="margin-right: 1em;">العام الاكاديمي :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].academic_year.code"></span><br /><br />
+                        <span style="margin-right: 1em;">نوع التقديم :  </span>
+                        <t t-set="values" t-value="dict([('1','مستجد'),('2','محول'), ('3','محول مستجد')])"/>
+                        <span t-esc="values[doc['student'].application_type]"></span>
+                        <br /><br />
+                        <span style="margin-right: 1em;">مجموع الدرجات :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].total_mark"></span><br /><br />
+                    </div>
+
+                    <div style="direction:rtl;text-align: right;margin-right: 1em;">
+                        <p>
+
+                         </p>
+                        <t t-if="doc['student'].application_type != '1' " >
+                        <h4><center style="margin-right: 1em;direction:rtl; "> برجاء التوجه للادارة المالية لدفع رسوم مقاصة علمية   </center></h4>
+                        </t>
+                        <t t-if="doc['student'].application_type == '1' " >
+                        <h4><center style="margin-right: 1em;direction:rtl; ">برجاء التوجه للادارة المالية لاستكمال باقي الاجراءات </center></h4>
+                        </t>
+                        </div>
+
+                           <div style="direction:rtl;text-align: right;margin-right: 1em;">
+                        <p>
+
+التوقيع                         </p>
+                    </div>
+
+         <div style="direction:rtl;text-align: right;margin-right: 1em;">
+                        <p>
+التاريخ                         </p>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+
+           <template id="acums.students_temp_id">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <br />
+                    <br />
+                    <h2><center style="margin-right: 1em;direction:rtl; ">Ahram Canadian University </center></h2>
+                    <h3><center style="margin-right: 1em;direction:rtl; ">Temporary ID  </center></h3>
+                    <h4><center style="margin-right: 1em;direction:rtl; ">Spring 2020 - 2021 </center></h4>
+                    <br />
+                     <center >
+                    <img t-attf-src="data:image/*;base64,{{doc['student'].image_1920}}" style="max-height: 150px;"/>
+                     </center>
+                    <br />
+
+                    <div style="text-align: left;margin-left: 1em;">
+
+                        <strong><span style="margin-right: 1em;">Name Ar:  </span></strong> <span style="margin-right: 0.1em;" t-esc="doc['student'].name_ar"></span><br /><br />
+                        <strong><span style="margin-right: 1em;">Academic ID :  </span></strong>  <span style="margin-right: 0.1em;" t-esc="doc['student'].student_id"></span><br /><br />
+                        <strong><span style="margin-right: 1em;">Faculty :  </span></strong> <span style="margin-right: 0.1em;" t-esc="doc['student'].faculty.name_en"></span><br /><br />
+                        <strong><span style="margin-right: 1em;">Temporary ID :  </span></strong> <span style="margin-right: 0.1em;" t-esc="doc['student'].id"></span><br /><br />
+                        <strong><span style="margin-right: 1em;">National ID :  </span></strong> <span style="margin-right: 0.1em;" t-esc="doc['student'].national_id"></span><br /><br />
+                        <strong><span style="margin-right: 1em;">English Exam Date :  </span></strong> <span style="margin-right: 0.1em;" t-esc="doc['exam'].date"></span><br /><br />
+                        <strong><span style="margin-right: 1em;">English Exam Time :  </span></strong> <span style="margin-right: 0.1em;" t-esc="doc['exam'].time"></span><br /><br />
+                        <strong><span style="margin-right: 1em;">Building :  </span></strong> <span style="margin-right: 0.1em;" t-esc="doc['exam'].building"></span><br /><br />
+                        <strong><span style="margin-right: 1em;">Class :  </span></strong> <span style="margin-right: 0.1em;" t-esc="doc['exam'].room"></span><br /><br />
+                    </div>
+
+                    <br />
+
+                       <center style="font-style: italic;">
+                        <span style="font-size: 16px;">This temporary ID is used to enter the Exams with a Personal ID until the actual Academic ID is received</span><br/>
+
+                    </center>
+
+
+
+                </t>
+            </t>
+        </template>
+
+
+
+
+
+
+    <template id="acums.student_academic_id">
+        <t t-call="web.basic_layout">
+            <div class="page">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="col-md-6">
+                        <table style="width:243pt; height:153pt; border: 1pt solid black; border-collapse:separate; border-radius:8pt; margin:5pt">
+                            <td style="width:33%;" valign="center">
+                                <table style="width:77pt; height:150pt">
+<!--                                    <tr style="height:30%">-->
+<!--                                        <td align="center" valign="center">-->
+<!--                                            <img t-if="student.company_id.logo" t-att-src="image_data_uri(employee.company_id.logo)" style="max-height:45pt;max-width:90%" alt="Company Logo"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+                                    <tr style="height:70%;">
+                                        <td align="center" valign="center">
+                                            <img t-if="doc['student'].image_1920" t-att-src="image_data_uri(doc['student'].image_1920)" style="max-height:85pt;max-width:90%" alt="Employee Image"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width:67%" valign="center">
+                                <table style="width:155pt; height:85pt">
+                                    <tr><th><div style="font-size:15pt; margin-bottom:0pt;margin-top:0pt;" align="center"><t t-esc="doc['student'].name_en"/></div></th></tr>
+                                    <tr><td><div align="center" style="font-size:12pt;margin-bottom:5pt;"><t t-esc="doc['student'].student_id"/></div></td></tr>
+                                    <tr><td><div align="center" style="font-size:13pt;margin-bottom:5pt;"><t t-esc="doc['student'].faculty.name_en"/></div></td></tr>
+                                    <tr><td><div align="center" style="font-size:10pt;margin-bottom:5pt;"><t t-esc="doc['student'].academic_email"/></div></td></tr>
+                                    <tr><td><div align="center" style="font-size:10pt;margin-bottom:5pt;"><t t-esc="doc['student'].national_id"/></div></td></tr>
+
+<!--                                    <tr><td><img alt="barcode" t-if="employee.barcode" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', employee.barcode, 600, 120)" style="max-height:50pt;max-width:100%;" align="center"/></td></tr>-->
+                                </table>
+                            </td>
+                        </table>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </template>
+
+
+
+                <report
+    id="application_form"
+    model="students"
+    string="Application Form"
+    report_type="qweb-pdf"
+    name="acums.students_application_form"
+    file="acums.students_application_form"
+    attachment_use="True"
+        />
+
+       <template id="acums.students_application_form">
+   <t t-call="web.html_container">
+       <t t-foreach="docs" t-as="doc">
+
+                    <div style="padding:10px; text-align: center;">
+                        <img t-attf-src="data:image/*;base64,{{doc['global_data'].logo}}" style="max-height: 100px;"/><br/>
+                        <h8> <span >جامعة الأهرام الكندية</span></h8><br/>
+                        <h8>طلب التحاق بكلية <span t-esc="doc['students'].faculty.name_ar"></span></h8><br/>
+                        <h8>الفصل الدراسي :  <span t-esc="doc['students'].academic_semester.name_ar" /></h8>
+                    </div>
+
+                    <div style="border-style: solid; text-align: center; padding:10px;line-height:0.7">
+                        <t t-set="values" t-value="dict([('1','مستجد'),('2','محول'), ('3','محول مستجد')])"/>
+                        <span t-esc="values[doc['students'].application_type]"></span>
+                    </div>
+
+                    <div style="text-align: center;"><h8>بيانات الطالب الشخصية</h8></div>
+                    <div style="border-style: solid; text-align: right; padding:15px;line-height:1.6;direction:rtl;">
+
+                        <span>اسم الطالب : </span> <span t-esc="doc['students'].name_ar"></span>
+                        <span style="padding-left:50px"></span>
+                        <span style="" >النوع : </span> <span t-esc="{'1':'ذكر','2':'أنثى'}[doc['students'].gender]"></span><br/>
+                        <span>الجنسية : </span> <span t-esc="doc['students'].nationality.nationality_name_ar"></span>
+                        <span style="padding-right:150px"></span>
+                        <span>محل الميلاد : </span> <span t-esc="doc['students'].birth_governorate.name_ar"></span>
+                        <span style="padding-right:150px"></span>
+                        <span>تاريخ الميلاد : </span> <span t-esc="doc['students'].birth_date"></span><br/>
+                        <span>الرقم القومي أو رقم جواز السفر : </span>
+                        <t t-if="doc['students'].nationality.code == '1'">
+                        <span t-esc="doc['students'].national_id"></span>
+                        </t>
+                        <t t-if="doc['students'].nationality.code != '1'">
+                        <span t-esc="doc['students'].passport_id"></span>
+                        </t>
+                        <span style="padding-right:100px"></span>
+                        <span>تاريخ الاصدار : </span> <span t-esc="doc['students'].national_id_date"></span>
+                        <span style="padding-right:100px"></span>
+                        <span>جهة صدوره : </span> <span t-esc="doc['students'].national_id_place"></span><br/>
+                    </div>
+                    <div style="text-align: center;"><h8>بيانات الشهادة الحاصل عليها الطالب </h8></div>
+                            <div style="border-style: solid; text-align: center; padding:10px;line-height:0.7">
+                                <t t-set="values" t-value="dict([('1','مصرية'),('2','عربية'), ('3','عربية'),('4','أجنبية') ,(False,'')])"/>
+                                <span t-esc="values[doc['students'].high_school_certificate_type]"></span>
+                            </div>
+           <br />
+                    <div style="border-style: solid; text-align: right; padding:15px;line-height:1.6;direction:rtl;">
+                        <span>اسم الشهادة : </span>
+                        <t t-set="values" t-value="dict([('1','ثانوية عامة'),('2','أزهرية'), ('3','عربية'), ('4','أجنبية'), (False,'')])"/>
+                        <span t-esc="values[doc['students'].high_school_certificate_type]"></span>
+                        <span style="padding-right:50px"></span>
+                        <span> بلد صدور الشهادة :</span> <span t-esc="doc['students'].high_school_certificate_country.name_ar"></span>
+
+                        <span style="padding-right:50px"></span>
+                        <span>تاريخ الحصول عليها : </span> <span t-esc="doc['students'].high_school_certificate_year"></span><br />
+
+                        <t t-if="doc['students'].high_school_certificate_type== '1'" style="direction:rtl;">
+                        <span>رقم الجلوس للحاصلين على الثانوية العامة : </span> <span t-esc="doc['students'].seat_number"></span>
+                        </t>
+                        <span style="padding-right:50px"></span>
+                        <span>مجموع الدرجات : </span> <span t-esc="doc['students'].total_mark"></span>
+                        <span style="padding-right:50px"></span>
+                        <span>النسبة المئوية : </span> <span t-esc="doc['students'].total_percentage"></span><br />
+
+                        <span>الشعبة : </span>
+                         <t t-set="values" t-value="dict([('1','علمي علوم'),('2','علمي رياضيات'), ('3','أدبي'), (False,'')])"/>
+                        <span t-esc="values[doc['students'].high_school_certificate_major]"></span>
+                        <br/>
+                        <span>المؤهل الجامعي ان وجد : </span> <span ></span>
+                        <span style="padding-right:50px"></span>
+                        <span>تاريخ الحصول عليه : </span> <span ></span>
+                        <span style="padding-right:50px"></span>
+                        <span>اسم الكلية أو المعهد : </span> <span ></span>
+                        <span style="padding-right:50px"></span>
+                        <span>اسم الجامعة : </span> <span ></span><br/>
+                    </div>
+
+                    <div style="text-align: center;"><h8>بيانات خاصة بالطلاب المحولين </h8></div>
+                    <div style="border-style: solid; text-align: right; padding:15px;line-height:1.6;direction:rtl">
+                        <span>اسم الجامعة أو المعهد : </span> <span t-esc="doc['students'].transference_information.university"></span>
+                        <span style="padding-right:75px"></span>
+                        <span>الدولة : </span>
+                        <span style="padding-right:50px"></span><br />
+
+                        <span>اسم الكلية : </span>
+                        <span style="padding-right:50px"></span>
+                        <span>التخصص : </span>
+                        <span style="padding-right:50px"></span>
+                        <span> أخر فرقة دراسية وتاريخها :</span><br />
+                        <span>عدد الساعات التي اعتمدتها لجنة المقاصات بالجامعة : </span> <span t-esc="doc['students'].transference_information.faculty_approved_credit_hours"></span>
+                        <span style="padding-right:20px"></span>
+                        <span>المعدل التراكمي للطالب : </span> <br/>
+                    </div>
+                       <div style="text-align: center;"><h8>استلام وفحص الاوراق بالجامعة</h8></div>
+
+
+                            <div style="border-style: solid; text-align: right; padding:13px;line-height:1.3">
+
+<!--                                <img src="/acums/static/src/img/logo.jpeg" style="max-height: 60px;"/>-->
+<!--                                <img t-att-src="'/acums/static/src/img/logo.jpeg'" />-->
+<!--                                <img t-att-src="'/acums/static/src/img/stamp.png'" />-->
+<!--                                <span t-esc="doc['global_data'].id "/>-->
+                                <span style="margin-left: 3em">مسئول الفحص بالجامعة </span>
+                                <span style="padding-right:250px"></span>
+                                <span style="margin-left: 3em">مدير شئون الطلاب </span><br />
+
+<img t-attf-src="data:image/*;base64,{{doc['global_data'].stamp}}" style="max-height: 100px;border: 2px solid #555;"/>
+
+                               <span t-esc="user.name" style="margin-left: 3em"></span>
+                                <span style="padding-right:350px"></span>
+                                <span style="margin-left: 3em">هبة رمضان</span>
+
+                            </div>
+
+
+            <div style="text-align: center;"><h8>رأي لجنة الفحص والمراجعة الفنية  </h8></div>
+
+                    <div>
+                        <span style="border-style: solid; float:right;width: 42.00%;padding: 10px;height: 120px;text-align: right; ">
+                            قبول الأوراق تحت الفحص والمراجعة
+                            <br />
+
+                            فرض مادة (..............) مؤهلة
+                            <br />
+                            فرض مادتي (.........../...........) مكملة -مجموع
+                            <br />
+                             فرض مواد (....../......../......../.......) مكملة للشهادة
+                            <br /><br />
+                            اسم المراجع
+                            <br />
+                            التوقيع
+                        </span>
+
+                        <span style="border-style: solid; float:right;width: 20%;padding: 10px;height: 120px; text-align: right;">
+                            تحت الاستيفاء ولا يعد قبول نهائي
+                                    <br/><br/><br/>
+                            اسم المراجع
+                            <br />
+                            التوقيع
+                        </span>
+
+                        <span style="border-style: solid; float:right;width: 25.33%;padding: 10px;height: 120px; text-align: right;">
+                            رفض قبول الأوراق للأسباب التالية
+                            <br /><input type="checkbox" /><br />
+                            <input type="checkbox" /><br />
+                              اسم المراجع
+                            <br />
+                            التوقيع /
+                        </span>
+                </div>
+           <br/><br/><br/><br/><br/><br/><br/><br />
+            <div style="text-align: center;"><h8>التسجيل ومراجعة البيانات  </h8></div>
+                    <span style="border-style: solid; float:right;width: 40.0%;padding: 10px;height: 80px;text-align: right; ">
+                            تسجيل البيانات
+                            <br/>
+                            الاسم /
+                            <br />
+                            التوقيع /
+                        </span>
+
+                               <span style="border-style: solid; float:right;width: 50.0%;padding: 10px;height: 80px;text-align: right; ">
+                            يعتمد
+                            <br/>
+                          مدير مكتب القبول بالجامعات الخاصة والأهلية
+
+                        </span>
+
+
+
+
+                </t>
+           <div style="page-break-after: always;">
+
+                    </div>
+            </t>
+
+        </template>
+
+
+
+
+<record id="paperformat_report_landscape" model="report.paperformat">
+<field name="name">Landscape Report</field>
+<field name="default" eval="True"/>
+<field name="format">A4</field>
+<field name="page_height">0</field>
+<field name="page_width">0</field>
+<field name="orientation">Landscape</field>
+<field name="margin_top">10</field>
+<field name="margin_bottom">15</field>
+<field name="margin_left">7</field>
+<field name="margin_right">7</field>
+<field name="header_line" eval="False"/>
+<field name="header_spacing">3</field>
+<field name="dpi">90</field>
+</record>
+
+<report
+id="report_acums_ministry_report"
+model="students"
+string="Ministry Report"
+report_type="qweb-pdf"
+name="acums.ministry_report"
+file="acums.ministry_report"
+paperformat="paperformat_report_landscape"
+/>
+
+
+
+<template id="acums.ministry_report">
+            <t t-call="web.html_container">
+
+                 <t t-set="high_school_types" t-value="{'1': 'ثانوية عامة' , '2': 'ثانوية ازهرية'  , '3': 'عربية' , '4': 'أجنبية'}"/>
+                  <t t-set="application_types" t-value="{'1': 'مستجد' , '2': 'محول'}"/>
+                <t t-set="count" t-value="0" />
+            <t t-foreach="docs" t-as="doc_">
+                     <img t-attf-src="data:image/*;base64,{{global_data.logo}}" style="max-height: 100px;"/><br/>
+                        <div style="text-align: left; padding:15px;line-height:1.6;direction:rtl;margin-right: 2em;font-size: 16px;">
+                                <span style="font-weight: bold;">العام الجامعي : </span> 2021-2022<br />
+                         </div>
+                <center>
+                                <span style="font-weight: bold;">كلية : </span> <span t-esc="faculty"></span><br />
+                                 <span >الفصل الدراسي الثاني</span><br />
+                </center>
+                       <table border="1px groove gray" style="width: 100%; font-family: arial; direction:rtl;text-align: center;border-collapse: collapse;font-size: 15px; border: 1px solid black;">
+                 <tr style="line-height: 20px; height: 70px;border-style:double;"><th>م</th>
+                     <t t-if="certificate_type == '1'" >
+                     <th>رقم الجلوس</th>
+                     </t>
+                     <th>الاسم</th><th>الجنسية</th><th>بلد المؤهل</th><th>سنة المؤهل</th><th>المجموع</th><th>النسبة</th><th>الرقم القومي</th>
+                      <t t-if="application_type == '2'" >
+                     <th>عدد الساعات</th>
+                     <th>الجامعة المحول منها</th>
+                     </t>
+                     <th>ملاحظات</th></tr>
+              <t t-set="gender" t-value="{'1': 'ذكر' , '2': 'أنثى'}"/>
+                <t t-foreach="doc_['student']" t-as="doc">
+                    <t t-set="count" t-value="count+1" />
+                <tr>
+                <td><span t-esc="count"></span></td>
+                    <t t-if= "certificate_type == '1' " >
+                        <td><span t-esc="doc.seat_number"></span></td>
+                    </t>
+                <td><span t-esc="doc.name_ar"></span></td>
+                <td><span t-esc="doc.nationality.name_ar"></span></td>
+                <td><span t-esc="doc.high_school_certificate_country.name_ar"></span></td>
+               <td><span t-esc="doc.high_school_certificate_year"></span></td>
+                <td><span t-esc="(doc.total_mark)"></span></td>
+                <td><span t-esc="((doc.total_mark)/410)*100" t-options='{"widget": "float", "precision": 2}'></span></td>
+
+                <td><span t-esc="doc.national_id"></span>
+                    <t t-if="application_type == '2'" >
+                        <td><span t-esc="doc.transference_information.faculty_approved_credit_hours"></span></td>
+                        <td><span t-esc="doc.transference_information.university"></span></td>
+                    </t>
+                </td><td></td>
+                </tr>
+                </t>
+
+
+                </table>
+
+
+        <div style="text-align: right; padding:15px;line-height:3; font-weight: bold;font-size: 16px;">
+                    <span style="margin-right: 10em;">مسئول الكلية</span>
+                    <span style="margin-right: 10em;">رئيس قسم القبول</span>
+                    <span style="margin-right: 10em;">مدير شئون الطلاب</span>
+                            <br />
+                    <span style="margin-right: 60em;">رئيس الجامعة</span>
+                       <br />
+                       <span style="margin-right: 55em;">أ.د / صديق عبد السلام توفيق</span>
+       </div>
+                    <div style="page-break-before: always;">
+                  </div>
+                <br /><br /><br/>
+
+            </t>
+
+
+         </t>
+        </template>
+
+
+
+
+
+
+
+
+
+
+
+
+        <template id="acums.miliatry_report">
+            <t t-call="web.html_container">
+<!--                <div class="header" style="float: left;">-->
+<!--                        <img src="/acums/static/src/img/logo.jpeg" style="max-width: 200px; max-height: 130px; margin-top: 100px; text-align: left;margin-left: 4em;"/>-->
+<!--                 </div><br/><br/>-->
+
+
+                <div style="text-align: right; padding:15px;line-height:1.6;direction:rtl;margin-right: 2em;font-size: 16px;">
+
+                                <span style="font-weight: bold;">جامعة الاهرام الكندية </span> <br />
+                                <span style="font-weight: bold;">كلية  : </span> <span t-esc="faculty"></span><br />
+                                <span style="font-weight: bold;">الحالة : </span> <span t-esc="state"></span><br />
+                                <span style="font-weight: bold;"> سنوات الدراسة : </span> <span t-esc="level"></span><br />
+                    </div>
+                <hr />
+
+                <div style="padding:15px;">
+
+
+          <table border="1px groove gray" style="margin-top: 3em; width: 100%; font-family: arial; direction:rtl;text-align: center;border-collapse: collapse;font-size: 13px; border: 1px solid black;">
+
+
+                <tr style="line-height: 20px;">
+                    <th>م</th><th>الاسم</th><th>الرقم القومي</th><th>الرقم الثلاثي</th><th>رقم القرار</th><th>عدد سنوات الدراسة</th>
+                </tr>
+                <t t-set="count" t-value="1" />
+
+                <t t-foreach="docs" t-as="doc">
+                    <tr>
+                    <td><span t-esc="count"></span></td>
+                    <td><span t-esc="doc['student'].student.name_ar"></span></td>
+                    <td><span t-esc="doc['student'].student.national_id"></span></td>
+                    <td><span t-esc="doc['student'].number"></span></td>
+                    <td><span t-esc="doc['student'].decision_number"></span></td>
+                    <td><span t-esc="doc['student'].level"></span></td>
+                    </tr>
+                    <t t-set="count" t-value="count+1" />
+
+                </t>
+                 </table>
+                </div>
+
+            </t>
+
+
+        </template>
+
+
+
+
+                   <template id="acums.detailed_payment_request_students">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+
+                    <div style="text-align: right;margin-right: 1em;">
+                        <span style="margin-right: 1em;">اسم الطالب :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].name_ar"></span><br />
+                        <span style="margin-right: 1em;">الرقم الجامعي :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].student_id"></span><br /><br />
+                        <span style="margin-right: 1em;">الكلية :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].faculty"></span><br /><br />
+                        <span style="margin-right: 1em;">المصروفات المطلوبة :  </span> <span style="margin-right: 0.1em;" t-esc="doc['student'].semester_payment_amount"></span><br /><br />
+                    </div>
+
+                    <div style="direction:rtl;text-align: right;margin-right: 1em;">
+                        <p>
+
+برجاء سداد رسوم  الفصل الدراسي الأول بأحد الوسائل الاتية :
+                            1 - في أحد فروع البنك الاهلي المصري على حساب رقم 1833070751367000027 على ان يتم كتابة الرقم الجامعي داخل الاشعار.
+                            2- داخل مقر الجامعة باستخدام كروت الدفع الالكترونية
+                        </p>
+                    </div>
+
+
+
+                </t>
+            </t>
+        </template>
+
+
+
+
+
+
+
+
+    </data>
+</odoo>

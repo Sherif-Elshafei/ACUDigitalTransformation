@@ -1,0 +1,339 @@
+<odoo>
+    <data>
+
+        <template id="acums.daily_payments_details">
+            <t t-call="web.html_container">
+
+                <t t-foreach="debts_types" t-as="debt_type">
+                    <t t-set="debt_type_total" t-value="0" />
+
+                        <t t-foreach="faculties" t-as="faculty" >
+                            <t t-set="records_count" t-value="0" />
+                                <t t-foreach="docs" t-as="doc">
+                                    <t t-if="(doc['payment'].faculty.name_ar == faculty) and (doc['payment'].debt_type_name == debt_type)" >
+                                        <t t-set="records_count" t-value="records_count+1" />
+                                    </t>
+                                </t>
+                            <t t-if="records_count != 0" >
+                                <div style="text-align: right;font-family: arial;"><span style="">اسم البند :   </span><span><t t-esc="debt_type"/></span></div>
+
+                            <t t-set="faculty_debt_type_total" t-value="0" />
+                            <div style="text-align: right;font-family: arial;"><span style="">اسم الكلية :   </span><span><t t-esc="faculty"/></span></div><br />
+                            <table border="1px solid black" style="width: 100%; font-family: arial; direction:rtl;text-align: center;border-collapse: collapse;font-size: x-small; border: 1px solid black;width: 80%; margin-left: 10%">
+                            <tr bgcolor="gray"><th>م</th><th>رقم الإيصال</th><th>رقم الطالب</th><th>الاسم</th><th>اسم المصروفات</th><th>الفصل الدراسي</th><th>المبلغ المسدد</th></tr>
+                            <t t-foreach="docs" t-as="doc">
+                                <t t-if="(doc['payment'].faculty.name_ar == faculty) and (doc['payment'].debt_type_name == debt_type)" >
+                                <t t-set="faculty_debt_type_total" t-value="faculty_debt_type_total+doc['payment'].payment_amount" />
+                                <tr>
+                                    <td></td>
+                                    <td><t t-esc="doc['payment'].payment.receipt_number" /></td>
+                                    <td><t t-esc="doc['payment'].account.student.student_id" /></td>
+                                    <td><t t-esc="doc['payment'].name" /></td>
+                                    <td><t t-esc="doc['payment'].debt_name" /></td>
+                                    <td><t t-esc="doc['payment'].semester.name_ar" /></td>
+                                    <td><t t-esc="doc['payment'].payment_amount" /></td>
+                                </tr>
+                                </t>
+                            </t>
+                                <tr bgcolor="gray"> <td colspan="2"> اجمالي</td><td colspan="2"><t t-esc="debt_type"/></td><td colspan="2"><t t-esc="faculty"/></td><td><strong t-esc="faculty_debt_type_total"/></td></tr>
+                            </table>
+                                </t>
+                        <div style="page-break-after: always;" />
+
+                        </t>
+                </t>
+                <table border="1px solid black" style="width: 50%; font-family: arial; direction:rtl;text-align: center;border-collapse: collapse;font-size: x-small; border: 1px solid black;width: 80%; margin-left: 10%">
+                        <t t-set="total_payments" t-value="0" />
+                        <t t-foreach="debts_types" t-as="debt_type">
+                                    <t t-set="type_total" t-value="0" />
+                                <t t-foreach="docs" t-as="doc">
+                                    <t t-if="(doc['payment'].debt_type_name == debt_type)" >
+                                        <t t-set="type_total" t-value="type_total+(doc['payment'].payment_amount)" />
+                                    </t>
+                                </t>
+                            <tr style="line-height: 30px;"><td>اجمالي <t t-esc="debt_type"/></td><td><strong t-esc="type_total"/></td></tr>
+                            <t t-set="total_payments" t-value="total_payments+type_total" />
+                        </t>
+                    <h2><tr bgcolor="gray" style="line-height: 30px;"><td >اجمالي التحصيلات </td><td><strong t-esc="total_payments"/></td></tr></h2>
+                </table>
+
+                <table border="1px solid black" style="width: 50%; font-family: arial; direction:rtl;text-align: center;border-collapse: collapse;font-size: x-small; border: 1px solid black;width: 80%; margin-left: 10%">
+                        <t t-foreach="payments_methods" t-as="payment_method">
+                                    <t t-set="method_total" t-value="0" />
+                                <t t-foreach="docs" t-as="doc">
+                                    <t t-if="(doc['payment'].method.name_ar== payment_method)" >
+                                        <t t-set="method_total" t-value="method_total+(doc['payment'].payment_amount)" />
+                                    </t>
+                                </t>
+                            <tr style="line-height: 30px;"><td>اجمالي <t t-esc="payment_method"/></td><td><strong t-esc="method_total"/></td></tr>
+                        </t>
+                </table>
+
+            </t>
+
+        </template>
+
+        <report
+    id="payment_receipt"
+    model="students_payments"
+    string="Receipt"
+    report_type="qweb-pdf"
+    name="acums.students_payments_receipt"
+    file="acums.students_payments_receipt"
+    attachment_use="True"
+
+/>
+
+          <template id="acums.students_payments_receipt">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <center style="line-height:1.0">
+                        <h4>ايصال استلام قيمة رسوم  </h4>
+                        <h5 style="text-decoration: underline;"> الفصل الدراسي :  <span t-esc="doc['payments'].semester.name_ar" /></h5>
+                    </center>
+                    <div style="text-align: right;margin-right: 1em;font-weight: bold;">
+                        <span style="margin-right: 1em;">كلية :  </span> <span style="margin-right: 0.1em; text-decoration: underline;font-weight: bold;" t-esc="doc['payments'].faculty.name_ar"></span>
+                        <span style="margin-right: 1em;">رقم الطالب :  </span> <span style="margin-right: 0.1em;font-weight: bold;" t-esc="doc['payments'].account.student.student_id"></span>
+                        <span style="margin-right: 1em;">رقم الملف :  </span> <span style="margin-right: 0.1em;font-weight: bold;" t-esc="doc['payments'].file_number"></span>
+                        <span style="margin-right: 1em;">رقم الايصال :  </span> <span style="margin-right: 0.1em;font-weight: bold;" t-esc="doc['payments'].receipt_number"></span>
+                    </div><br />
+                    <div style="margin-right: 1em;direction: rtl;font-weight: bold;">
+                        <span style="margin-right: 1em;direction: rtl;;">استلمنا من الطالب :  </span> <span style="margin-right: 1em;direction: rtl;;" t-esc="doc['payments'].name_ar"></span>
+                        <span style="margin-right: 6em;text-align: right">  </span> <span style="margin-right:4em;text-align: right;" t-esc="doc['payments'].name_en"></span>
+                    </div><br />
+                    <div style="margin-right: 1em;direction: rtl;font-weight: bold;">
+                        <span style="margin-right: 1em;direction: rtl;;">مبلغ وقدره :    </span> <span style="margin-right: 1em;direction: rtl;;" t-esc="doc['payments'].amount"></span><span style="margin-right: 1em;direction: rtl;;" t-esc="doc['curr']"></span>
+                        <span style="margin-right: 2em;text-align: right"> </span> <span style="margin-right:1em;text-align: right;font-weight: bold;" t-esc="doc['arabic_amount']"></span>
+                    </div>
+                    <div style="margin-right: 1em;direction: rtl;">
+                        <table>
+                            <tr style="border: 1px solid black;">
+                                <td>
+                        <span>
+
+                            <table style="direction: rtl; width: 60%; margin-left: 40%;  border-collapse: collapse; border: 1px solid black;" >
+                                <tr style="border: 1px solid black; width: 60%; margin-left: 40%;"><td style="border: 1px solid black;  table-layout:fixed;width:600px;overflow:hidden;word-wrap:break-word">البيان</td><td style="border: 1px solid black;">المبلغ</td></tr>
+                                <tr t-foreach="doc['payments'].payment_debts" t-as='debt' style="border: 1px solid black; width: 60%; margin-left: 40%;">
+                                    <td style="border: 1px solid black;width: 250px"><span t-esc="debt.debt_name"/></td>
+                                    <td style="border: 1px solid black;width: 100px"><span t-esc="debt.payed"/></td>
+                                </tr>
+                                <tr>
+                                </tr>
+
+                            </table>
+                        </span>
+                            </td>
+
+
+                        <t t-if="doc['payments'].method.code == 1">
+                        <td >
+                        <span>
+                           <table  style="direction:rtl;text-align: center;border-collapse: collapse; border: 1px solid black;font-size: 15px;">
+                              <tr style="border: 1px solid black;">
+                                <th rowspan="2"  style="border: 1px solid black;">الفئة</th>
+                                <th colspan="2"  style="border: 1px solid black;">المبلغ المسدد</th>
+                                <th colspan="2"  style="border: 1px solid black;">الباقي</th>
+                              </tr>
+                              <tr style="border: 1px solid black;">
+                                <td style="border: 1px solid black;">عدد</td>
+                                <td style="border: 1px solid black;">قيمة</td>
+                                <td style="border: 1px solid black;">عدد</td>
+                                <td style="border: 1px solid black;">قيمة</td>
+                              </tr>
+                               <span t-foreach="doc['payments'].cash_payments_details" t-as='cash'>
+                              <tr style="border: 1px solid black;">
+                                <td style="border: 1px solid black;">200</td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.payment_200"/></td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.payment_200"/></td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.remaning_200"/></td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.remaning_200"/></td>
+                              </tr>
+
+                                  <tr style="border: 1px solid black;">
+                                <td style="border: 1px solid black;">100</td>
+                                 <td style="border: 1px solid black;"><span t-esc="cash.payment_100"/></td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.payment_100"/></td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.remaning_100"/></td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.remaning_100"/></td>
+                              </tr>
+                                <tr style="border: 1px solid black;">
+                                <td style="border: 1px solid black;">50</td>
+                                 <td style="border: 1px solid black;"><span t-esc="cash.payment_50"/></td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.payment_50"/></td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.remaning_50"/></td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.remaning_50"/></td>
+                              </tr>
+                               <tr style="border: 1px solid black;">
+                                <td style="border: 1px solid black;">20</td>
+                                 <td style="border: 1px solid black;"><span t-esc="cash.payment_20"/></td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.payment_20"/></td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.remaning_20"/></td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.remaning_20"/></td>
+                              </tr>
+                               <tr style="border: 1px solid black;">
+                                <td style="border: 1px solid black;">10</td>
+                                 <td style="border: 1px solid black;"><span t-esc="cash.payment_10"/></td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.payment_10"/></td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.remaning_10"/></td>
+                                <td style="border: 1px solid black;"><span t-esc="cash.remaning_10"/></td>
+                              </tr>
+                              <tr style="border: 1px solid black;">
+                                    <td style="border: 1px solid black;">5</td>
+                                     <td style="border: 1px solid black;"><span t-esc="cash.payment_5"/></td>
+                                    <td style="border: 1px solid black;"><span t-esc="cash.payment_5"/></td>
+                                    <td style="border: 1px solid black;"><span t-esc="cash.remaning_5"/></td>
+                                    <td style="border: 1px solid black;"><span t-esc="cash.remaning_5"/></td>
+                              </tr>
+                               <tr style="border: 1px solid black;">
+                                    <td style="border: 1px solid black;">1</td>
+                                    <td style="border: 1px solid black;"><span t-esc="cash.payment_1"/></td>
+                                    <td style="border: 1px solid black;"><span t-esc="cash.payment_1"/></td>
+                                    <td style="border: 1px solid black;"><span t-esc="cash.remaning_1"/></td>
+                                    <td style="border: 1px solid black;"><span t-esc="cash.remaning_1"/></td>
+                              </tr>
+                               </span>
+
+                            </table>
+                   </span>
+                             </td>
+                                </t>
+                            <t t-if="doc['payments'].method.code == 2">
+                                 <td >
+                        <span>
+                       <table style="direction:rtl;text-align: center;border-collapse: collapse; border: 1px solid black;font-size: 15px;">
+                               <tr><td style="width: 200px;font-weight: bold;">طريقة السداد</td> <td><span t-esc="doc['payments'].method.name_ar"/></td></tr>
+                               <tr><td style="width: 200px;font-weight: bold;">الرقم</td> <td><span t-esc="doc['bank_notice'].numbering"/></td></tr>
+                               <tr><td style="width: 200px;font-weight: bold;">التاريخ</td> <td><span t-esc="doc['bank_notice'].date"/></td></tr>
+                               <tr><td style="width: 200px;font-weight: bold;"> البنك</td><td style="width: 300px"><span t-esc="doc['bank_notice'].bank_name"/></td></tr>
+                               <tr><td style="width: 200px;font-weight: bold;">الفرع</td><td style="width: 300px"><span t-esc="doc['bank_notice'].bank.branch"/></td></tr>
+                               <tr><td style="width: 200px;font-weight: bold;">الحساب</td> <td><span t-esc="doc['bank_notice'].account_number"/></td></tr>
+
+                       </table>
+                        </span>
+                                 </td>
+                            </t>
+
+
+                            </tr>
+
+                        </table>
+                           <div style="text-align: right;margin-right: 1em;">
+
+                        <span style="margin-right: 1em;">تحريرا في :  </span><span style="margin-right: 0.2em;font-weight: bold;" t-esc="doc['payments'].date"></span>
+                        <span style="margin-right: 1em;">المستلم :  </span><span style="margin-right: 0.2em;font-weight: bold;" t-esc="doc['payments'].user.name"></span>
+                        <span style="margin-right: 1em;">التوقيع :  </span><span style="margin-right: 0.2em;font-weight: bold;" ></span>
+                    </div><br />
+
+                    </div><br /><br />
+                     <t t-if="(doc['payments'].notes) != False">
+                         <div style="text-align: right;margin-right: 1em;">
+                     <span style="font-weight: bold;font-size: 12px;" t-esc="doc['payments'].notes"></span>
+                         </div>
+                     </t>
+
+                    <div style="text-align: right;margin-right: 1em;">
+                        <span style="font-size: 12px;">لا يعتد بالايصال حال وجود كشط أو تعديل بالبيانات الاساسية </span><br/>
+                        <span style="font-size: 12px;">لا يعتد بالايصال كمستند دل على حالة السداد الا اذا كان مختوما بختم ادارة الحسابات وموقع عليه من الموظف المختص </span><br/>
+                        <span style="font-size: 12px;">مصروفات ملف التقديم و اختبارات القبول غير مستردة </span>
+
+                    </div>
+
+                    <div>
+<!--                   <img alt="barcode" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', doc['payments'].barcode, 600, 120)" style="max-height:50pt;max-width:100%;" align="center"/>-->
+
+                    </div>
+
+                    <div>
+                    <p style="page-break-after:always"></p>
+                    </div>
+
+                </t>
+
+            </t>
+
+        </template>
+
+           <template id="acums.detailed_payment_request">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+
+                    <div style="text-align: right;margin-right: 1em;">
+                        <span style="margin-right: 1em;">اسم الطالب :  </span> <span style="margin-right: 0.1em;" t-esc="doc['account'].student.name_ar"></span><br />
+                        <span style="margin-right: 1em;">الرقم الجامعي :  </span> <span style="margin-right: 0.1em;" t-esc="doc['account'].student.student_id"></span><br /><br />
+                    </div>
+
+                    <div style="direction:rtl;text-align: right;margin-right: 1em;">
+                        <p>
+
+برجاء سداد رسوم  الفصل الدراسي الثاني (فصل الربيع 2021) طبقا لما هو موضح بالجدول التالي.                         </p>
+                    </div>
+
+
+                    <div>
+
+                        <table border="1px solid black" style="width: 100%; font-family: arial; direction:rtl;text-align: center;border-collapse: collapse;font-size: x-medium; border: 1px solid black;width: 80%; margin-left: 10%">
+                            <tr bgcolor="gray"><th>اسم الاستحقاق</th><th>قيمة الاستحقاق</th><th>العملة</th><th>الفصل الدراسي</th></tr>
+                        <t t-foreach="doc['account'].debts.sorted(key=lambda r: r.to_pay_amount, reverse=True)" t-as="debt">
+                            <tr>
+                                <td ><span t-esc="debt.debt_name"/></td>
+                                <td ><span t-esc="debt.to_pay_amount"/></td>
+                                <td ><span t-esc="{'1':'جنيه مصري','2':'دولار'}[debt.debt_currency]"/></td>
+                                <td ><span t-esc="debt.semester.name_ar"/></td>
+                            </tr>
+                        </t>
+                        </table><br /><br />
+                        <center style="margin-right: 1em;direction:rtl; ">اجمالي الاستحقاقات   </center> <center style="margin-right: 0.1em;" t-esc="doc['account'].total_debts"></center><br />
+                    </div>
+
+                        <div style="margin-right: 5em;direction:rtl;">
+على ان تسدد تلك الرسوم بأحد فروع البنك الاهلي المصري في أي يوم عمل بنكي اعتبارا من 25/01/2021 حتى 14/02/2021
+                             وسوف تطبق غرامة التأخير بواقع 2% اسبوعيا بدءا من هذا التاريخ
+                            <br /> <br />
+                            <strong> تأكد من طباعة الرقم الجامعي داخل الاشعار البنكي لتأكيد عملية الدفع</strong>
+                            <br /> <br />
+                               <t t-if="doc['account'].citizenship == '1'">
+                              رقم الحساب : 1833070751367000027
+                            </t>
+                             <t t-if="doc['account'].student.citizenship == '0'">
+                              رقم الحساب ( جامعة الاهرام الكندية  دولار أمريكي )  :  1833060751367000016
+                            </t>
+                        </div> <br />
+
+                </t>
+            </t>
+        </template>
+
+           <template id="acums.students_accounting_reports">
+            <t t-call="web.html_container">
+
+                    <table border="1px solid black" style="width: 100%; font-family: arial; direction:rtl;text-align: center;border-collapse: collapse;font-size: x-small; border: 1px solid black;width: 80%; margin-left: 10%">
+                            <tr bgcolor="gray"><th>رقم الطالب</th><th>اسم الطالب</th><th>الاستحقاقات الدراسية</th><th>المدفوع</th><th>استحقاقات متنوعة</th><th>المدفوع</th><th>الرصيد</th><th>حالة الحساب</th></tr>
+                        <t t-foreach="docs" t-as="doc">
+                            <tr>
+                                <td ><span t-esc="doc['account'].student.student_id"/></td>
+                                <td ><span t-esc="doc['account'].name_ar"/></td>
+                                <td ><span t-esc="doc['mandatory_debts']"/></td>
+                                <td ><span t-esc="doc['mandatory_payments']"/></td>
+                                <td ><span t-esc="doc['extra_debts']"/></td>
+                                <td ><span t-esc="doc['extra_payments']"/></td>
+                                <td ><span t-esc="doc['balance']"/></td>
+                                <td ><span t-esc="doc['status']"/></td>
+
+                            </tr>
+
+
+
+
+                </t>
+                 </table>
+            </t>
+        </template>
+
+
+
+
+
+
+
+    </data>
+</odoo>
